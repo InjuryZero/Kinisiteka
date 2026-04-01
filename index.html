@@ -6,7 +6,7 @@
   <title>Kinisiteca</title>
   <meta name="description" content="Biblioteca premium de ejercicios para fisioterapia, rehabilitación y rendimiento." />
 
-  //api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -396,12 +396,12 @@
         <div class="search-panel">
           <div class="search-grid">
             <div class="field">
-              abel for="searchInput">Buscar ejercicio</label>
+              <label for="searchInput">Buscar ejercicio</label>
               <input id="searchInput" type="text" placeholder="Ej. press banca, glúteo, tobillo..." />
             </div>
 
             <div class="field">
-              abel for="filterMuscle">Músculo</label>
+              <label for="filterMuscle">Músculo</label>
               <select id="filterMuscle">
                 <option value="">Todos</option>
                 <option>Pectoral</option>
@@ -429,17 +429,17 @@
 
           <div class="library-row__track">
             <button class="exercise-card" onclick="openExerciseModal('Press banca', 'docs/press-banca.pdf', 'videos/press-banca-ia.mp4', 'videos/press-banca-real.mp4')">
-              <img src="images/press-banca-miniatura.png" alt="Miniatura del ejercicio press banca." loading="lazy">
+              <img src="PB.png" alt="Press banca" loading="lazy">
               <span>Press banca</span>
             </button>
 
             <button class="exercise-card" onclick="openExerciseModal('Sentadilla Goblet', 'docs/sentadilla-goblet.pdf', 'videos/sentadilla-goblet-ia.mp4', 'videos/sentadilla-goblet-real.mp4')">
-              <img src="images/sentadilla-goblet.jpg" alt="Miniatura del ejercicio sentadilla goblet." loading="lazy">
+              <img src="images/sentadilla-goblet.jpg" alt="Sentadilla Goblet" loading="lazy">
               <span>Sentadilla Goblet</span>
             </button>
 
             <button class="exercise-card" onclick="openExerciseModal('Peso muerto rumano', 'docs/peso-muerto-rumano.pdf', 'videos/peso-muerto-rumano-ia.mp4', 'videos/peso-muerto-rumano-real.mp4')">
-              <img src="images/peso-muerto-rumano.jpg" alt="Miniatura del ejercicio peso muerto rumano." loading="lazy">
+              <img src="images/peso-muerto-rumano.jpg" alt="Peso muerto rumano" loading="lazy">
               <span>Peso muerto rumano</span>
             </button>
           </div>
@@ -452,17 +452,17 @@
 
           <div class="library-row__track">
             <button class="exercise-card" onclick="openExerciseModal('Thruster', 'docs/thruster.pdf', 'videos/thruster-ia.mp4', 'videos/thruster-real.mp4')">
-              <img src="images/thruster.jpg" alt="Miniatura del ejercicio thruster." loading="lazy">
+              <img src="images/thruster.jpg" alt="Thruster" loading="lazy">
               <span>Thruster</span>
             </button>
 
             <button class="exercise-card" onclick="openExerciseModal('Wall Ball', 'docs/wall-ball.pdf', 'videos/wall-ball-ia.mp4', 'videos/wall-ball-real.mp4')">
-              <img src="images/wall-ball.jpg" alt="Miniatura del ejercicio wall ball." loading="lazy">
+              <img src="images/wall-ball.jpg" alt="Wall Ball" loading="lazy">
               <span>Wall Ball</span>
             </button>
 
             <button class="exercise-card" onclick="openExerciseModal('Burpee over bar', 'docs/burpee-over-bar.pdf', 'videos/burpee-over-bar-ia.mp4', 'videos/burpee-over-bar-real.mp4')">
-              <img src="images/burpee-over-bar.jpg" alt="Miniatura del ejercicio burpee over bar." loading="lazy">
+              <img src="images/burpee-over-bar.jpg" alt="Burpee over bar" loading="lazy">
               <span>Burpee over bar</span>
             </button>
           </div>
@@ -475,17 +475,17 @@
 
           <div class="library-row__track">
             <button class="exercise-card" onclick="openExerciseModal('Estiramiento de isquios', 'docs/estiramiento-isquios.pdf', 'videos/estiramiento-isquios-ia.mp4', 'videos/estiramiento-isquios-real.mp4')">
-              <img src="images/estiramiento-isquios.jpg" alt="Miniatura del ejercicio estiramiento de isquios." loading="lazy">
+              <img src="images/estiramiento-isquios.jpg" alt="Estiramiento de isquios" loading="lazy">
               <span>Estiramiento de isquios</span>
             </button>
 
             <button class="exercise-card" onclick="openExerciseModal('Movilidad torácica', 'docs/movilidad-toracica.pdf', 'videos/movilidad-toracica-ia.mp4', 'videos/movilidad-toracica-real.mp4')">
-              <img src="images/movilidad-toracica.jpg" alt="Miniatura del ejercicio movilidad torácica." loading="lazy">
+              <img src="images/movilidad-toracica.jpg" alt="Movilidad torácica" loading="lazy">
               <span>Movilidad torácica</span>
             </button>
 
             <button class="exercise-card" onclick="openExerciseModal('Estiramiento de psoas', 'docs/estiramiento-psoas.pdf', 'videos/estiramiento-psoas-ia.mp4', 'videos/estiramiento-psoas-real.mp4')">
-              <img src="images/estiramiento-psoas.jpg" alt="Miniatura del ejercicio estiramiento de psoas." loading="lazy">
+              <img src="images/estiramiento-psoas.jpg" alt="Estiramiento de psoas" loading="lazy">
               <span>Estiramiento de psoas</span>
             </button>
           </div>
@@ -498,8 +498,116 @@
 
           <div class="library-row__track">
             <button class="exercise-card" onclick="openExerciseModal('Liberación plantar', 'docs/liberacion-plantar.pdf', 'videos/liberacion-plantar-ia.mp4', 'videos/liberacion-plantar-real.mp4')">
-              <img src="images/liberacion-plantar.jpg" alt="Miniatura del ejercicio liberación plantar." loading="lazy">
+              <img src="images/liberacion-plantar.jpg" alt="Liberación plantar" loading="lazy">
               <span>Liberación plantar</span>
             </button>
 
-            <button class="exercise-card" onclick="openExerciseModal('Trabajo de tobillo', 'docs/trabajo-tobillo.pdf', 'videos/trabajo-tobillo-ia.mp4', 'videos/trabajo-tobillo-
+            <button class="exercise-card" onclick="openExerciseModal('Trabajo de tobillo', 'docs/trabajo-tobillo.pdf', 'videos/trabajo-tobillo-ia.mp4', 'videos/trabajo-tobillo-real.mp4')">
+              <img src="images/trabajo-tobillo.jpg" alt="Trabajo de tobillo" loading="lazy">
+              <span>Trabajo de tobillo</span>
+            </button>
+
+            <button class="exercise-card" onclick="openExerciseModal('Descarga de gemelo', 'docs/descarga-gemelo.pdf', 'videos/descarga-gemelo-ia.mp4', 'videos/descarga-gemelo-real.mp4')">
+              <img src="images/descarga-gemelo.jpg" alt="Descarga de gemelo" loading="lazy">
+              <span>Descarga de gemelo</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div class="exercise-modal" id="exerciseModal" aria-hidden="true">
+    <div class="exercise-modal__backdrop" onclick="closeExerciseModal()"></div>
+
+    <div class="exercise-modal__panel" role="dialog" aria-modal="true" aria-labelledby="exerciseModalTitle">
+      <button class="exercise-modal__close" onclick="closeExerciseModal()" aria-label="Cerrar modal">×</button>
+
+      <div class="exercise-modal__content">
+        <h3 id="exerciseModalTitle">Ejercicio</h3>
+
+        <div class="exercise-modal__file">
+          <iframe id="exerciseFile" src="" title="Archivo del ejercicio"></iframe>
+        </div>
+
+        <div class="exercise-modal__videos">
+          <div class="exercise-modal__video-block">
+            <p>Vídeo IA</p>
+            <video id="exerciseVideoAI" controls playsinline>
+              <source src="" type="video/mp4">
+            </video>
+          </div>
+
+          <div class="exercise-modal__video-block">
+            <p>Vídeo real</p>
+            <video id="exerciseVideoReal" controls playsinline>
+              <source src="" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openExerciseModal(title, fileUrl, aiVideoUrl, realVideoUrl) {
+      const modal = document.getElementById('exerciseModal');
+      const titleEl = document.getElementById('exerciseModalTitle');
+      const fileEl = document.getElementById('exerciseFile');
+      const aiVideo = document.getElementById('exerciseVideoAI');
+      const realVideo = document.getElementById('exerciseVideoReal');
+
+      titleEl.textContent = title;
+      fileEl.src = fileUrl;
+
+      aiVideo.querySelector('source').src = aiVideoUrl;
+      aiVideo.load();
+
+      realVideo.querySelector('source').src = realVideoUrl;
+      realVideo.load();
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeExerciseModal() {
+      const modal = document.getElementById('exerciseModal');
+      const fileEl = document.getElementById('exerciseFile');
+      const aiVideo = document.getElementById('exerciseVideoAI');
+      const realVideo = document.getElementById('exerciseVideoReal');
+
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+
+      fileEl.src = '';
+
+      aiVideo.pause();
+      realVideo.pause();
+
+      aiVideo.querySelector('source').src = '';
+      realVideo.querySelector('source').src = '';
+
+      aiVideo.load();
+      realVideo.load();
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeExerciseModal();
+      }
+    });
+
+    const searchInput = document.getElementById('searchInput');
+    const filterMuscle = document.getElementById('filterMuscle');
+    const clearFilters = document.getElementById('clearFilters');
+
+    clearFilters.addEventListener('click', function() {
+      searchInput.value = '';
+      filterMuscle.value = '';
+    });
+  </script>
+</body>
+</html>
