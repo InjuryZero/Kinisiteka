@@ -105,7 +105,7 @@
 
     .search-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr auto;
+      grid-template-columns: 2fr 1fr auto;
       gap: 14px;
       align-items: end;
     }
@@ -401,7 +401,7 @@
             </div>
 
             <div class="field">
-              <label for="filterMuscle">Filtrar por músculo</label>
+              <label for="filterMuscle">Músculo</label>
               <select id="filterMuscle">
                 <option value="">Todos</option>
                 <option>Glúteo</option>
@@ -409,16 +409,6 @@
                 <option>Hombro</option>
                 <option>Isquios</option>
                 <option>Core</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="filterLevel">Nivel</label>
-              <select id="filterLevel">
-                <option value="">Todos</option>
-                <option>Inicial</option>
-                <option>Intermedio</option>
-                <option>Avanzado</option>
               </select>
             </div>
 
@@ -611,14 +601,13 @@
 
     const searchInput = document.getElementById('searchInput');
     const filterMuscle = document.getElementById('filterMuscle');
-    const filterLevel = document.getElementById('filterLevel');
     const clearFilters = document.getElementById('clearFilters');
 
     clearFilters.addEventListener('click', function() {
       searchInput.value = '';
       filterMuscle.value = '';
-      filterLevel.value = '';
     });
   </script>
 </body>
 </html>
+
