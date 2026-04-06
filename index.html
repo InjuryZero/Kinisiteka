@@ -6,42 +6,53 @@
   <title>Kinisiteca</title>
   <meta
     name="description"
-    content="Kinisiteca: biblioteca interactiva de ejercicios para entrenadores y clientes."
+    content="Kinisiteca: plataforma profesional para entrenadores y clientes con biblioteca interactiva y rutinas personalizadas."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
   />
   <style>
     :root{
-      --bg:#0b1020;
-      --panel:#11182d;
-      --panel-2:#18213a;
-      --soft:#22304f;
+      --bg:#07111f;
+      --bg-2:#0b1528;
+      --panel:#0f1b31;
+      --panel-2:#13213b;
+      --panel-3:#182948;
       --line:rgba(255,255,255,.08);
-      --text:#eef2ff;
-      --muted:#aab6d3;
-      --brand:#78a6ff;
-      --brand-2:#9b8cff;
-      --ok:#7ce0b0;
-      --danger:#ff8f8f;
-      --shadow:0 18px 45px rgba(0,0,0,.35);
-      --radius:22px;
+      --line-strong:rgba(255,255,255,.14);
+      --text:#f4f7ff;
+      --muted:#98a7c7;
+      --muted-2:#7f90b2;
+      --brand:#84a8ff;
+      --brand-2:#6f86ff;
+      --brand-3:#b0a3ff;
+      --success:#83d9b2;
+      --shadow:0 24px 70px rgba(0,0,0,.35);
+      --radius:24px;
+      --radius-md:18px;
       --radius-sm:14px;
-      --max:1280px;
+      --max:1320px;
     }
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(120,166,255,.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(155,140,255,.14), transparent 22%),
-        linear-gradient(180deg, #09101d 0%, #0b1020 100%);
+      font-family:"Manrope", sans-serif;
       color:var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(132,168,255,.14), transparent 28%),
+        radial-gradient(circle at 100% 0%, rgba(176,163,255,.12), transparent 24%),
+        linear-gradient(180deg, #06101d 0%, #081425 100%);
     }
 
-    a{color:inherit;text-decoration:none}
+    a{text-decoration:none;color:inherit}
     button,input,select{font:inherit}
-    img{max-width:100%;display:block}
+    input,select{appearance:none}
+    img{display:block;max-width:100%}
 
     .container{
       width:min(var(--max), calc(100% - 32px));
@@ -51,136 +62,143 @@
     .topbar{
       position:sticky;
       top:0;
-      z-index:40;
-      backdrop-filter: blur(14px);
-      background:rgba(8,12,24,.72);
+      z-index:60;
+      background:rgba(6,12,22,.78);
+      backdrop-filter:blur(16px);
       border-bottom:1px solid var(--line);
     }
 
     .topbar-inner{
+      min-height:78px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
-      padding:16px 0;
+      gap:20px;
     }
 
     .brand{
       display:flex;
       flex-direction:column;
-      gap:4px;
+      gap:6px;
     }
 
-    .brand h1{
+    .brand-mark{
       margin:0;
-      font-size:1.25rem;
-      letter-spacing:.14em;
+      font-size:1.05rem;
+      letter-spacing:.28em;
       font-weight:800;
     }
 
-    .brand p{
+    .brand-copy{
       margin:0;
       color:var(--muted);
-      font-size:.95rem;
+      font-size:.92rem;
+      max-width:560px;
     }
 
-    .mode-switch{
+    .top-actions{
       display:flex;
-      gap:10px;
-      background:rgba(255,255,255,.04);
-      padding:6px;
+      align-items:center;
+      gap:12px;
+    }
+
+    .ghost-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 16px;
+      border-radius:999px;
       border:1px solid var(--line);
-      border-radius:999px;
-    }
-
-    .mode-btn{
-      border:none;
-      background:transparent;
       color:var(--muted);
-      padding:10px 16px;
-      border-radius:999px;
-      cursor:pointer;
+      background:rgba(255,255,255,.03);
       transition:.25s ease;
-      font-weight:700;
     }
 
-    .mode-btn.is-active{
-      background:linear-gradient(135deg, var(--brand), var(--brand-2));
-      color:white;
-      box-shadow:var(--shadow);
+    .ghost-link:hover{
+      color:var(--text);
+      border-color:var(--line-strong);
+      background:rgba(255,255,255,.05);
     }
 
     .hero{
-      padding:46px 0 20px;
+      padding:52px 0 30px;
     }
 
     .hero-grid{
       display:grid;
-      grid-template-columns:1.25fr .95fr;
+      grid-template-columns:1.12fr .88fr;
       gap:22px;
     }
 
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    .surface{
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
     }
 
     .hero-main{
-      padding:28px;
+      padding:34px;
     }
 
-    .eyebrow{
+    .hero-label{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding:8px 12px;
+      min-height:36px;
+      padding:0 14px;
       border-radius:999px;
-      background:rgba(120,166,255,.12);
-      color:#dbe6ff;
-      border:1px solid rgba(120,166,255,.24);
-      font-size:.88rem;
+      background:rgba(132,168,255,.1);
+      border:1px solid rgba(132,168,255,.18);
+      color:#dce7ff;
+      font-size:.85rem;
       font-weight:700;
+      letter-spacing:.02em;
     }
 
-    .hero h2{
-      margin:16px 0 12px;
-      font-size:clamp(2rem, 3vw, 3.4rem);
-      line-height:1.04;
+    .hero-main h1{
+      margin:18px 0 14px;
+      font-size:clamp(2.2rem, 4.2vw, 4.6rem);
+      line-height:1.02;
+      letter-spacing:-.03em;
+      max-width:12ch;
     }
 
-    .hero p{
+    .hero-main p{
       margin:0;
+      max-width:60ch;
       color:var(--muted);
-      font-size:1.02rem;
-      max-width:65ch;
+      line-height:1.75;
+      font-size:1rem;
     }
 
     .hero-actions{
       display:flex;
       flex-wrap:wrap;
       gap:12px;
-      margin-top:22px;
+      margin-top:28px;
     }
 
     .btn{
       border:none;
-      border-radius:14px;
-      padding:13px 18px;
       cursor:pointer;
-      font-weight:800;
       transition:.25s ease;
+      border-radius:14px;
+      min-height:48px;
+      padding:0 18px;
+      font-weight:800;
+      letter-spacing:.01em;
     }
 
     .btn-primary{
-      background:linear-gradient(135deg, var(--brand), var(--brand-2));
       color:white;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2) 60%, var(--brand-3));
+      box-shadow:0 12px 32px rgba(111,134,255,.24);
     }
 
     .btn-secondary{
-      background:rgba(255,255,255,.05);
       color:var(--text);
+      background:rgba(255,255,255,.04);
       border:1px solid var(--line);
     }
 
@@ -191,86 +209,300 @@
       align-content:start;
     }
 
-    .mini-stat{
+    .side-panel{
       padding:18px;
       border-radius:18px;
       background:rgba(255,255,255,.03);
       border:1px solid var(--line);
     }
 
-    .mini-stat strong{
-      display:block;
-      font-size:1.25rem;
-      margin-bottom:6px;
+    .side-panel h3{
+      margin:0 0 8px;
+      font-size:1rem;
     }
 
-    .mini-stat span{
+    .side-panel p{
+      margin:0;
       color:var(--muted);
+      line-height:1.6;
+      font-size:.94rem;
+    }
+
+    .mode-tabs{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      padding:6px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      width:max-content;
+      max-width:100%;
+    }
+
+    .mode-btn{
+      border:none;
+      background:transparent;
+      color:var(--muted);
+      min-height:44px;
+      padding:0 18px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:800;
+      transition:.25s ease;
+      white-space:nowrap;
+    }
+
+    .mode-btn.is-active{
+      color:white;
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow:0 10px 24px rgba(111,134,255,.24);
+    }
+
+    .section{
+      margin:26px 0;
+    }
+
+    .panel-layout{
+      display:grid;
+      gap:22px;
+    }
+
+    [data-mode-panel]{
+      display:none;
+    }
+
+    [data-mode-panel].is-active{
+      display:grid;
+      gap:22px;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1.12fr .88fr;
+      gap:22px;
+    }
+
+    .block{
+      padding:24px;
+    }
+
+    .block-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .block-head h2,
+    .block-head h3{
+      margin:0;
+      letter-spacing:-.02em;
+    }
+
+    .block-head p{
+      margin:6px 0 0;
+      color:var(--muted);
+      line-height:1.6;
+      max-width:64ch;
       font-size:.95rem;
     }
 
-    .toolbar{
-      margin:22px 0 28px;
+    .form-grid{
       display:grid;
-      grid-template-columns:1.15fr .8fr .8fr;
       gap:14px;
     }
 
     .field{
+      min-height:58px;
+      padding:0 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
       display:flex;
       align-items:center;
-      gap:10px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      border-radius:16px;
-      padding:0 14px;
-      min-height:56px;
     }
 
     .field input,
     .field select{
       width:100%;
       background:transparent;
-      color:var(--text);
       border:none;
       outline:none;
+      color:var(--text);
     }
 
     .field select option{
-      background:#0f1730;
+      background:#0d1730;
       color:white;
     }
 
-    .section{
-      margin:30px 0 10px;
+    .selected-exercises{
+      min-height:160px;
+      padding:14px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.16);
+      background:rgba(255,255,255,.02);
+      display:grid;
+      gap:10px;
+      align-content:start;
     }
 
-    .section-head{
+    .selected-empty{
+      color:var(--muted);
+      line-height:1.7;
+      font-size:.95rem;
+    }
+
+    .selected-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+    }
+
+    .selected-item strong{
+      font-size:.95rem;
+      font-weight:700;
+    }
+
+    .selected-item button{
+      border:none;
+      min-height:38px;
+      padding:0 12px;
+      border-radius:10px;
+      cursor:pointer;
+      color:var(--text);
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+    }
+
+    .actions-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:4px;
+    }
+
+    .list{
+      display:grid;
+      gap:12px;
+    }
+
+    .list-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+    }
+
+    .list-item strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:.96rem;
+    }
+
+    .list-item span{
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    .mini-btn{
+      border:none;
+      min-height:40px;
+      padding:0 14px;
+      border-radius:12px;
+      cursor:pointer;
+      color:var(--text);
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      font-weight:700;
+    }
+
+    .mini-btn.primary{
+      background:linear-gradient(135deg, var(--brand), var(--brand-2));
+      border:none;
+      color:white;
+    }
+
+    .routine-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:16px;
+    }
+
+    .routine-card{
+      padding:18px;
+      border-radius:20px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      display:grid;
+      gap:12px;
+    }
+
+    .routine-card h4{
+      margin:0;
+      font-size:1.02rem;
+    }
+
+    .routine-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      font-size:.93rem;
+    }
+
+    .library-shell{
+      display:grid;
+      gap:18px;
+    }
+
+    .toolbar{
+      display:grid;
+      grid-template-columns:1.1fr .8fr .8fr;
+      gap:14px;
+    }
+
+    .row-section{
+      display:grid;
+      gap:14px;
+    }
+
+    .row-head{
       display:flex;
       align-items:end;
       justify-content:space-between;
       gap:16px;
-      margin-bottom:14px;
     }
 
-    .section-head h3{
+    .row-head h3{
       margin:0;
-      font-size:1.35rem;
+      font-size:1.2rem;
+      letter-spacing:-.02em;
     }
 
-    .section-head p{
-      margin:0;
+    .row-head p{
+      margin:6px 0 0;
       color:var(--muted);
-      font-size:.95rem;
+      font-size:.93rem;
     }
 
     .row-scroll{
       display:grid;
       grid-auto-flow:column;
-      grid-auto-columns:280px;
+      grid-auto-columns:290px;
       gap:16px;
       overflow-x:auto;
-      padding-bottom:6px;
+      padding-bottom:8px;
       scroll-snap-type:x proximity;
     }
 
@@ -285,40 +517,39 @@
 
     .exercise-card{
       scroll-snap-align:start;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border:1px solid var(--line);
-      border-radius:22px;
       overflow:hidden;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.025));
       transition:transform .25s ease, border-color .25s ease;
-      cursor:pointer;
     }
 
     .exercise-card:hover{
       transform:translateY(-4px);
-      border-color:rgba(120,166,255,.4);
+      border-color:rgba(132,168,255,.34);
     }
 
     .exercise-thumb{
       aspect-ratio:16/10;
-      background:
-        linear-gradient(135deg, rgba(120,166,255,.18), rgba(155,140,255,.14)),
-        linear-gradient(180deg, #1a2440, #11182d);
+      padding:18px;
       display:flex;
       align-items:flex-end;
-      justify-content:flex-start;
-      padding:16px;
+      background:
+        linear-gradient(135deg, rgba(132,168,255,.14), rgba(176,163,255,.11)),
+        linear-gradient(180deg, #15223d, #10192f);
     }
 
-    .badge{
+    .exercise-label{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding:8px 12px;
+      min-height:32px;
+      padding:0 12px;
+      border-radius:999px;
       background:rgba(8,12,24,.52);
       border:1px solid rgba(255,255,255,.08);
-      border-radius:999px;
-      font-size:.82rem;
+      font-size:.8rem;
       font-weight:700;
+      color:#e8eeff;
     }
 
     .exercise-body{
@@ -327,213 +558,61 @@
       gap:10px;
     }
 
-    .exercise-title{
+    .exercise-body h4{
       margin:0;
-      font-size:1.06rem;
+      font-size:1.02rem;
     }
 
-    .exercise-meta{
+    .meta{
       display:flex;
       flex-wrap:wrap;
       gap:8px;
     }
 
-    .pill{
-      font-size:.82rem;
-      padding:7px 10px;
+    .meta span{
+      display:inline-flex;
+      align-items:center;
+      min-height:30px;
+      padding:0 10px;
       border-radius:999px;
-      background:rgba(255,255,255,.05);
-      color:var(--muted);
+      background:rgba(255,255,255,.04);
       border:1px solid var(--line);
+      color:var(--muted);
+      font-size:.82rem;
+      font-weight:600;
     }
 
-    .exercise-actions{
+    .card-actions{
       display:flex;
       gap:10px;
-      margin-top:4px;
+      margin-top:2px;
     }
 
-    .small-btn{
+    .card-actions button{
       flex:1;
-      border:none;
-      border-radius:12px;
-      padding:11px 12px;
-      cursor:pointer;
-      font-weight:700;
-      color:white;
-      background:#1b2645;
-      border:1px solid var(--line);
-    }
-
-    .small-btn.primary{
-      background:linear-gradient(135deg, var(--brand), var(--brand-2));
-    }
-
-    .dashboard{
-      margin:36px 0 80px;
-      display:grid;
-      gap:22px;
-    }
-
-    [data-mode-panel]{
-      display:none;
-    }
-
-    [data-mode-panel].is-active{
-      display:grid;
-      gap:22px;
-    }
-
-    .dashboard-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:22px;
-    }
-
-    .panel{
-      padding:22px;
-    }
-
-    .panel h3{
-      margin:0 0 8px;
-      font-size:1.2rem;
-    }
-
-    .panel p{
-      margin:0 0 18px;
-      color:var(--muted);
-    }
-
-    .client-list,
-    .routine-list{
-      display:grid;
-      gap:12px;
-    }
-
-    .client-item,
-    .routine-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--line);
-    }
-
-    .client-meta strong,
-    .routine-meta strong{
-      display:block;
-      margin-bottom:4px;
-    }
-
-    .client-meta span,
-    .routine-meta span{
-      color:var(--muted);
-      font-size:.92rem;
-    }
-
-    .stack{
-      display:grid;
-      gap:14px;
-    }
-
-    .routine-builder{
-      display:grid;
-      gap:14px;
-    }
-
-    .builder-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .selected-exercises{
-      min-height:120px;
-      border:1px dashed rgba(255,255,255,.16);
-      border-radius:18px;
-      padding:14px;
-      color:var(--muted);
-      display:grid;
-      gap:10px;
-      background:rgba(255,255,255,.02);
-    }
-
-    .selected-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 14px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      border-radius:14px;
-      color:var(--text);
-    }
-
-    .selected-item button{
-      background:transparent;
-      border:1px solid var(--line);
-      color:#fff;
-      border-radius:10px;
-      padding:8px 10px;
-      cursor:pointer;
-    }
-
-    .client-routine-grid{
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0,1fr));
-      gap:16px;
-    }
-
-    .client-routine-card{
-      padding:18px;
-      border-radius:20px;
-      background:rgba(255,255,255,.04);
-      border:1px solid var(--line);
-      display:grid;
-      gap:12px;
-    }
-
-    .client-routine-card h4{
-      margin:0;
-      font-size:1.05rem;
-    }
-
-    .client-routine-card p{
-      margin:0;
-      color:var(--muted);
-      font-size:.94rem;
-    }
-
-    .empty-note{
-      color:var(--muted);
-      font-size:.94rem;
     }
 
     dialog{
       width:min(980px, calc(100% - 24px));
-      border:none;
-      border-radius:24px;
       padding:0;
-      background:#0f1730;
+      border:none;
+      border-radius:26px;
+      background:#0c1730;
       color:white;
-      box-shadow:0 30px 80px rgba(0,0,0,.55);
+      box-shadow:0 30px 90px rgba(0,0,0,.55);
     }
 
     dialog::backdrop{
-      background:rgba(4,8,18,.76);
+      background:rgba(5,9,18,.78);
       backdrop-filter:blur(8px);
     }
 
     .dialog-head{
       display:flex;
-      align-items:start;
+      align-items:flex-start;
       justify-content:space-between;
-      gap:14px;
-      padding:22px 22px 10px;
+      gap:16px;
+      padding:24px 24px 12px;
       border-bottom:1px solid var(--line);
     }
 
@@ -545,32 +624,33 @@
     .dialog-head p{
       margin:0;
       color:var(--muted);
+      font-size:.94rem;
     }
 
-    .close-btn{
+    .dialog-close{
       border:none;
-      background:rgba(255,255,255,.06);
-      color:white;
       width:42px;
       height:42px;
       border-radius:12px;
       cursor:pointer;
-      font-size:1.1rem;
+      color:white;
+      background:rgba(255,255,255,.06);
+      border:1px solid var(--line);
     }
 
     .dialog-body{
-      padding:22px;
+      padding:24px;
       display:grid;
-      grid-template-columns:1.05fr .95fr;
+      grid-template-columns:1.02fr .98fr;
       gap:18px;
     }
 
     .resource-box{
       min-height:220px;
+      padding:18px;
       border-radius:20px;
       border:1px solid var(--line);
       background:rgba(255,255,255,.03);
-      padding:18px;
       display:grid;
       gap:12px;
       align-content:start;
@@ -584,21 +664,24 @@
     .resource-box p{
       margin:0;
       color:var(--muted);
-      font-size:.94rem;
+      line-height:1.65;
+      font-size:.93rem;
     }
 
     .resource-placeholder{
-      min-height:138px;
+      min-height:140px;
       border-radius:16px;
+      border:1px dashed rgba(255,255,255,.14);
+      background:
+        linear-gradient(135deg, rgba(132,168,255,.12), rgba(176,163,255,.10)),
+        rgba(255,255,255,.02);
+      color:#e2e9ff;
       display:grid;
       place-items:center;
       text-align:center;
-      color:#d9e2ff;
-      background:
-        linear-gradient(135deg, rgba(120,166,255,.14), rgba(155,140,255,.12)),
-        rgba(255,255,255,.02);
-      border:1px dashed rgba(255,255,255,.14);
       padding:18px;
+      line-height:1.6;
+      font-size:.93rem;
     }
 
     .resource-link{
@@ -606,7 +689,7 @@
       align-items:center;
       justify-content:center;
       min-height:44px;
-      padding:12px 14px;
+      padding:0 14px;
       border-radius:12px;
       background:linear-gradient(135deg, var(--brand), var(--brand-2));
       color:white;
@@ -614,49 +697,58 @@
     }
 
     .footer{
-      padding:26px 0 50px;
-      color:var(--muted);
-      font-size:.94rem;
+      padding:24px 0 44px;
+      color:var(--muted-2);
+      font-size:.92rem;
     }
 
-    @media (max-width: 980px){
+    @media (max-width: 1080px){
       .hero-grid,
-      .dashboard-grid,
+      .grid-2,
       .dialog-body{
         grid-template-columns:1fr;
       }
+    }
 
+    @media (max-width: 820px){
       .toolbar{
         grid-template-columns:1fr;
       }
 
-      .client-routine-grid{
+      .routine-grid{
         grid-template-columns:1fr;
       }
-    }
 
-    @media (max-width: 700px){
       .topbar-inner{
+        padding:14px 0;
         flex-direction:column;
         align-items:flex-start;
       }
 
-      .mode-switch{
+      .top-actions{
         width:100%;
+        flex-wrap:wrap;
       }
+    }
 
-      .mode-btn{
-        flex:1;
+    @media (max-width: 700px){
+      .hero-main,
+      .hero-side,
+      .block{
+        padding:18px;
       }
 
       .row-scroll{
         grid-auto-columns:86%;
       }
 
-      .hero-main,
-      .hero-side,
-      .panel{
-        padding:18px;
+      .mode-tabs{
+        width:100%;
+      }
+
+      .mode-btn{
+        flex:1;
+        padding:0 12px;
       }
     }
   </style>
@@ -665,33 +757,13 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <div class="brand">
-        <h1>KINISITECA</h1>
-        <p>Biblioteca interactiva de ejercicios para entrenadores y clientes</p>
+        <p class="brand-mark">KINISITECA</p>
+        <p class="brand-copy">Plataforma de ejercicio terapéutico y rendimiento para entrenadores y clientes.</p>
       </div>
 
-      <div class="mode-switch" role="tablist" aria-label="Modo de acceso">
-        <button
-          type="button"
-          class="mode-btn is-active"
-          role="tab"
-          aria-selected="true"
-          aria-controls="panel-trainer"
-          id="tab-trainer"
-          data-mode-button="trainer"
-        >
-          Para entrenadores
-        </button>
-        <button
-          type="button"
-          class="mode-btn"
-          role="tab"
-          aria-selected="false"
-          aria-controls="panel-client"
-          id="tab-client"
-          data-mode-button="client"
-        >
-          Para clientes
-        </button>
+      <div class="top-actions">
+        <a href="#paneles" class="ghost-link">Entrenamientos</a>
+        <a href="#biblioteca" class="ghost-link">Biblioteca</a>
       </div>
     </div>
   </header>
@@ -699,498 +771,81 @@
   <main class="container">
     <section class="hero">
       <div class="hero-grid">
-        <article class="card hero-main">
-          <span class="eyebrow">Plataforma premium · ejercicio guiado</span>
-          <h2>Explora, prescribe y visualiza ejercicios en una sola biblioteca.</h2>
+        <article class="surface hero-main">
+          <span class="hero-label">Plataforma profesional</span>
+          <h1>Prescribe, organiza y visualiza ejercicios en un solo entorno.</h1>
           <p>
-            Kinisiteca está pensada para centralizar ejercicios de fuerza, crossfit,
-            estiramientos y rehabilitación, con una ficha visual que puede abrir PDF,
-            vídeo IA y vídeo real en cada ejercicio.
+            Kinisiteca reúne una biblioteca interactiva de ejercicios y una experiencia
+            diferenciada para entrenador y cliente. El entrenador construye entrenamientos
+            personalizados y el cliente accede a su rutina con ficha completa, documento PDF,
+            vídeo IA y vídeo real.
           </p>
-          <div class="hero-actions">
-            <button type="button" class="btn btn-primary" onclick="scrollToLibrary()">
-              Ir a la biblioteca
+
+          <div class="mode-tabs" role="tablist" aria-label="Modo de acceso">
+            <button
+              type="button"
+              class="mode-btn is-active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="panel-trainer"
+              id="tab-trainer"
+              data-mode-button="trainer"
+            >
+              Entrenador
             </button>
-            <button type="button" class="btn btn-secondary" onclick="scrollToDashboard()">
-              Ver panel de rutinas
+            <button
+              type="button"
+              class="mode-btn"
+              role="tab"
+              aria-selected="false"
+              aria-controls="panel-client"
+              id="tab-client"
+              data-mode-button="client"
+            >
+              Cliente
+            </button>
+          </div>
+
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" onclick="scrollToPanels()">
+              Ver entrenamientos
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="scrollToLibrary()">
+              Explorar biblioteca
             </button>
           </div>
         </article>
 
-        <aside class="card hero-side">
-          <div class="mini-stat">
-            <strong>4 apartados horizontales</strong>
-            <span>Fuerza, crossfit, estiramientos y rehabilitación.</span>
+        <aside class="surface hero-side">
+          <div class="side-panel">
+            <h3>Entrenador</h3>
+            <p>Crea rutinas personalizadas usando ejercicios de la biblioteca y asigna cada plan a un cliente.</p>
           </div>
-          <div class="mini-stat">
-            <strong>3 recursos por ejercicio</strong>
-            <span>Documento PDF, vídeo IA y vídeo real.</span>
+          <div class="side-panel">
+            <h3>Cliente</h3>
+            <p>Accede a tu entrenamiento y abre cada ejercicio con sus recursos visuales y documentales.</p>
           </div>
-          <div class="mini-stat">
-            <strong>2 experiencias de uso</strong>
-            <span>Entrenador crea rutinas y cliente visualiza su rutina.</span>
+          <div class="side-panel">
+            <h3>Biblioteca</h3>
+            <p>Organización por fuerza, crossfit, estiramientos y rehabilitación con navegación horizontal.</p>
           </div>
         </aside>
       </div>
     </section>
 
-    <section class="toolbar" id="biblioteca">
-      <label class="field" aria-label="Buscar ejercicio">
-        <span>🔎</span>
-        <input type="text" id="searchInput" placeholder="Buscar ejercicio..." />
-      </label>
-
-      <label class="field" aria-label="Filtrar por categoría">
-        <span>📚</span>
-        <select id="categoryFilter">
-          <option value="all">Todas las categorías</option>
-          <option value="fuerza">Fuerza</option>
-          <option value="crossfit">Crossfit</option>
-          <option value="estiramientos">Estiramientos</option>
-          <option value="rehabilitacion">Rehabilitación</option>
-        </select>
-      </label>
-
-      <label class="field" aria-label="Filtrar por nivel">
-        <span>⚙️</span>
-        <select id="levelFilter">
-          <option value="all">Todos los niveles</option>
-          <option value="básico">Básico</option>
-          <option value="intermedio">Intermedio</option>
-          <option value="avanzado">Avanzado</option>
-        </select>
-      </label>
-    </section>
-
-    <section class="section" data-category-section="fuerza">
-      <div class="section-head">
-        <div>
-          <h3>Fuerza</h3>
-          <p>Ejercicios base para trabajo de fuerza general y específica.</p>
-        </div>
-      </div>
-
-      <div class="row-scroll">
-        <article class="exercise-card" data-category="fuerza" data-level="intermedio" data-title="Press banca">
-          <div class="exercise-thumb">
-            <span class="badge">Fuerza · Intermedio</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Press banca</h4>
-            <div class="exercise-meta">
-              <span class="pill">Pectoral</span>
-              <span class="pill">Empuje</span>
-              <span class="pill">Barra</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Press banca',
-                  category:'Fuerza',
-                  level:'Intermedio',
-                  description:'Ejemplo placeholder para que luego sustituyas por tu ejercicio real.',
-                  pdf:'assets/docs/press-banca.pdf',
-                  ai:'assets/videos/press-banca-ia.mp4',
-                  real:'assets/videos/press-banca-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Press banca')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="fuerza" data-level="básico" data-title="Sentadilla goblet">
-          <div class="exercise-thumb">
-            <span class="badge">Fuerza · Básico</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Sentadilla goblet</h4>
-            <div class="exercise-meta">
-              <span class="pill">Pierna</span>
-              <span class="pill">Patrón squat</span>
-              <span class="pill">Mancuerna</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Sentadilla goblet',
-                  category:'Fuerza',
-                  level:'Básico',
-                  description:'Plantilla inicial para reemplazar más adelante con contenido real.',
-                  pdf:'assets/docs/sentadilla-goblet.pdf',
-                  ai:'assets/videos/sentadilla-goblet-ia.mp4',
-                  real:'assets/videos/sentadilla-goblet-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Sentadilla goblet')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="fuerza" data-level="avanzado" data-title="Peso muerto rumano">
-          <div class="exercise-thumb">
-            <span class="badge">Fuerza · Avanzado</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Peso muerto rumano</h4>
-            <div class="exercise-meta">
-              <span class="pill">Cadena posterior</span>
-              <span class="pill">Bisagra</span>
-              <span class="pill">Barra</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Peso muerto rumano',
-                  category:'Fuerza',
-                  level:'Avanzado',
-                  description:'Ficha de ejemplo para estructura de la plataforma.',
-                  pdf:'assets/docs/peso-muerto-rumano.pdf',
-                  ai:'assets/videos/peso-muerto-rumano-ia.mp4',
-                  real:'assets/videos/peso-muerto-rumano-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Peso muerto rumano')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" data-category-section="crossfit">
-      <div class="section-head">
-        <div>
-          <h3>Crossfit</h3>
-          <p>Movimientos funcionales y técnicos para rendimiento y acondicionamiento.</p>
-        </div>
-      </div>
-
-      <div class="row-scroll">
-        <article class="exercise-card" data-category="crossfit" data-level="intermedio" data-title="Thruster">
-          <div class="exercise-thumb">
-            <span class="badge">Crossfit · Intermedio</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Thruster</h4>
-            <div class="exercise-meta">
-              <span class="pill">Full body</span>
-              <span class="pill">Barra</span>
-              <span class="pill">Potencia</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Thruster',
-                  category:'Crossfit',
-                  level:'Intermedio',
-                  description:'Plantilla de ejercicio tipo crossfit para completar después.',
-                  pdf:'assets/docs/thruster.pdf',
-                  ai:'assets/videos/thruster-ia.mp4',
-                  real:'assets/videos/thruster-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Thruster')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="crossfit" data-level="avanzado" data-title="Wall ball">
-          <div class="exercise-thumb">
-            <span class="badge">Crossfit · Avanzado</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Wall ball</h4>
-            <div class="exercise-meta">
-              <span class="pill">Coordinación</span>
-              <span class="pill">Potencia</span>
-              <span class="pill">Metcon</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Wall ball',
-                  category:'Crossfit',
-                  level:'Avanzado',
-                  description:'Ejercicio de ejemplo para la biblioteca visual.',
-                  pdf:'assets/docs/wall-ball.pdf',
-                  ai:'assets/videos/wall-ball-ia.mp4',
-                  real:'assets/videos/wall-ball-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Wall ball')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="crossfit" data-level="básico" data-title="Box step-up">
-          <div class="exercise-thumb">
-            <span class="badge">Crossfit · Básico</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Box step-up</h4>
-            <div class="exercise-meta">
-              <span class="pill">Pierna</span>
-              <span class="pill">Escalón</span>
-              <span class="pill">Control</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Box step-up',
-                  category:'Crossfit',
-                  level:'Básico',
-                  description:'Ejemplo inicial para completar con tus materiales.',
-                  pdf:'assets/docs/box-step-up.pdf',
-                  ai:'assets/videos/box-step-up-ia.mp4',
-                  real:'assets/videos/box-step-up-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Box step-up')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" data-category-section="estiramientos">
-      <div class="section-head">
-        <div>
-          <h3>Estiramientos</h3>
-          <p>Opciones guiadas para movilidad, flexibilidad y descarga muscular.</p>
-        </div>
-      </div>
-
-      <div class="row-scroll">
-        <article class="exercise-card" data-category="estiramientos" data-level="básico" data-title="Estiramiento isquiotibial">
-          <div class="exercise-thumb">
-            <span class="badge">Estiramientos · Básico</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Estiramiento isquiotibial</h4>
-            <div class="exercise-meta">
-              <span class="pill">Pierna</span>
-              <span class="pill">Movilidad</span>
-              <span class="pill">Suelo</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Estiramiento isquiotibial',
-                  category:'Estiramientos',
-                  level:'Básico',
-                  description:'Modelo de ficha para una serie de estiramientos.',
-                  pdf:'assets/docs/estiramiento-isquios.pdf',
-                  ai:'assets/videos/estiramiento-isquios-ia.mp4',
-                  real:'assets/videos/estiramiento-isquios-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Estiramiento isquiotibial')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="estiramientos" data-level="intermedio" data-title="Apertura de cadera">
-          <div class="exercise-thumb">
-            <span class="badge">Estiramientos · Intermedio</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Apertura de cadera</h4>
-            <div class="exercise-meta">
-              <span class="pill">Cadera</span>
-              <span class="pill">Movilidad</span>
-              <span class="pill">Control</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Apertura de cadera',
-                  category:'Estiramientos',
-                  level:'Intermedio',
-                  description:'Placeholder para estructura visual del estiramiento.',
-                  pdf:'assets/docs/apertura-cadera.pdf',
-                  ai:'assets/videos/apertura-cadera-ia.mp4',
-                  real:'assets/videos/apertura-cadera-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Apertura de cadera')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="estiramientos" data-level="básico" data-title="Movilidad torácica">
-          <div class="exercise-thumb">
-            <span class="badge">Estiramientos · Básico</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Movilidad torácica</h4>
-            <div class="exercise-meta">
-              <span class="pill">Columna</span>
-              <span class="pill">Movilidad</span>
-              <span class="pill">Respiración</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Movilidad torácica',
-                  category:'Estiramientos',
-                  level:'Básico',
-                  description:'Ejemplo editable para una ficha de movilidad.',
-                  pdf:'assets/docs/movilidad-toracica.pdf',
-                  ai:'assets/videos/movilidad-toracica-ia.mp4',
-                  real:'assets/videos/movilidad-toracica-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Movilidad torácica')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" data-category-section="rehabilitacion">
-      <div class="section-head">
-        <div>
-          <h3>Rehabilitación</h3>
-          <p>Ejercicios orientados a control motor, recuperación y readaptación.</p>
-        </div>
-      </div>
-
-      <div class="row-scroll">
-        <article class="exercise-card" data-category="rehabilitacion" data-level="básico" data-title="Puente de glúteo">
-          <div class="exercise-thumb">
-            <span class="badge">Rehabilitación · Básico</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Puente de glúteo</h4>
-            <div class="exercise-meta">
-              <span class="pill">Core</span>
-              <span class="pill">Cadera</span>
-              <span class="pill">Control motor</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Puente de glúteo',
-                  category:'Rehabilitación',
-                  level:'Básico',
-                  description:'Ejercicio placeholder para la categoría de rehabilitación.',
-                  pdf:'assets/docs/puente-gluteo.pdf',
-                  ai:'assets/videos/puente-gluteo-ia.mp4',
-                  real:'assets/videos/puente-gluteo-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Puente de glúteo')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="rehabilitacion" data-level="intermedio" data-title="Equilibrio unipodal">
-          <div class="exercise-thumb">
-            <span class="badge">Rehabilitación · Intermedio</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Equilibrio unipodal</h4>
-            <div class="exercise-meta">
-              <span class="pill">Propiocepción</span>
-              <span class="pill">Tobillo</span>
-              <span class="pill">Control</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Equilibrio unipodal',
-                  category:'Rehabilitación',
-                  level:'Intermedio',
-                  description:'Plantilla editable para ficha clínica o deportiva.',
-                  pdf:'assets/docs/equilibrio-unipodal.pdf',
-                  ai:'assets/videos/equilibrio-unipodal-ia.mp4',
-                  real:'assets/videos/equilibrio-unipodal-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Equilibrio unipodal')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-
-        <article class="exercise-card" data-category="rehabilitacion" data-level="avanzado" data-title="Step down controlado">
-          <div class="exercise-thumb">
-            <span class="badge">Rehabilitación · Avanzado</span>
-          </div>
-          <div class="exercise-body">
-            <h4 class="exercise-title">Step down controlado</h4>
-            <div class="exercise-meta">
-              <span class="pill">Rodilla</span>
-              <span class="pill">Control excéntrico</span>
-              <span class="pill">Readaptación</span>
-            </div>
-            <div class="exercise-actions">
-              <button type="button" class="small-btn primary"
-                onclick="openExercise({
-                  title:'Step down controlado',
-                  category:'Rehabilitación',
-                  level:'Avanzado',
-                  description:'Ejemplo para la arquitectura final de la biblioteca.',
-                  pdf:'assets/docs/step-down-controlado.pdf',
-                  ai:'assets/videos/step-down-controlado-ia.mp4',
-                  real:'assets/videos/step-down-controlado-real.mp4'
-                })">
-                Ver ficha
-              </button>
-              <button type="button" class="small-btn" onclick="addToRoutine('Step down controlado')">
-                Añadir rutina
-              </button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="dashboard" id="dashboard">
+    <section class="section panel-layout" id="paneles">
       <div id="panel-trainer" data-mode-panel class="is-active" role="tabpanel" aria-labelledby="tab-trainer">
-        <div class="dashboard-grid">
-          <article class="card panel">
-            <h3>Rutina personalizada</h3>
-            <p>
-              El entrenador puede seleccionar ejercicios de la biblioteca y construir una
-              rutina específica para cada cliente.
-            </p>
+        <div class="grid-2">
+          <article class="surface block">
+            <div class="block-head">
+              <div>
+                <h2>Crear entrenamiento</h2>
+                <p>Selecciona ejercicios de la biblioteca y compón una rutina específica para cada cliente.</p>
+              </div>
+            </div>
 
-            <div class="routine-builder">
+            <div class="form-grid">
               <label class="field">
-                <span>👤</span>
                 <select id="clientSelect">
                   <option value="Carlos Martín">Carlos Martín</option>
                   <option value="Lucía Pérez">Lucía Pérez</option>
@@ -1199,147 +854,633 @@
               </label>
 
               <label class="field">
-                <span>📝</span>
-                <input type="text" id="routineName" placeholder="Nombre de la rutina" value="Rutina fuerza inicial" />
+                <input type="text" id="routineName" placeholder="Nombre del entrenamiento" value="Entrenamiento inicial" />
               </label>
 
               <div class="selected-exercises" id="selectedExercises">
-                <span class="empty-note">Todavía no has añadido ejercicios. Pulsa “Añadir rutina” en cualquier tarjeta.</span>
+                <div class="selected-empty">
+                  Aún no has añadido ejercicios. Utiliza el botón “Añadir” desde cualquier tarjeta de la biblioteca interactiva.
+                </div>
               </div>
 
-              <div class="builder-actions">
-                <button type="button" class="btn btn-primary" onclick="saveRoutine()">
-                  Guardar rutina
-                </button>
-                <button type="button" class="btn btn-secondary" onclick="clearRoutine()">
-                  Vaciar selección
-                </button>
+              <div class="actions-row">
+                <button type="button" class="btn btn-primary" onclick="saveRoutine()">Guardar entrenamiento</button>
+                <button type="button" class="btn btn-secondary" onclick="clearRoutine()">Vaciar selección</button>
               </div>
             </div>
           </article>
 
-          <article class="card panel stack">
-            <div>
-              <h3>Clientes</h3>
-              <p>Vista ejemplo de clientes a los que podrías asignar rutinas.</p>
+          <article class="surface block">
+            <div class="block-head">
+              <div>
+                <h3>Clientes</h3>
+                <p>Listado de ejemplo para elegir el destinatario del entrenamiento.</p>
+              </div>
             </div>
 
-            <div class="client-list">
-              <div class="client-item">
-                <div class="client-meta">
+            <div class="list">
+              <div class="list-item">
+                <div>
                   <strong>Carlos Martín</strong>
-                  <span>Objetivo: fuerza general</span>
+                  <span>Objetivo principal: fuerza general</span>
                 </div>
-                <button type="button" class="small-btn" onclick="selectClient('Carlos Martín')">Seleccionar</button>
+                <button type="button" class="mini-btn" onclick="selectClient('Carlos Martín')">Seleccionar</button>
               </div>
 
-              <div class="client-item">
-                <div class="client-meta">
+              <div class="list-item">
+                <div>
                   <strong>Lucía Pérez</strong>
-                  <span>Objetivo: movilidad y control</span>
+                  <span>Objetivo principal: movilidad y control</span>
                 </div>
-                <button type="button" class="small-btn" onclick="selectClient('Lucía Pérez')">Seleccionar</button>
+                <button type="button" class="mini-btn" onclick="selectClient('Lucía Pérez')">Seleccionar</button>
               </div>
 
-              <div class="client-item">
-                <div class="client-meta">
+              <div class="list-item">
+                <div>
                   <strong>Marta Sánchez</strong>
-                  <span>Objetivo: readaptación rodilla</span>
+                  <span>Objetivo principal: readaptación</span>
                 </div>
-                <button type="button" class="small-btn" onclick="selectClient('Marta Sánchez')">Seleccionar</button>
+                <button type="button" class="mini-btn" onclick="selectClient('Marta Sánchez')">Seleccionar</button>
               </div>
             </div>
           </article>
         </div>
 
-        <article class="card panel">
-          <h3>Rutinas guardadas</h3>
-          <p>Listado demo de rutinas creadas desde el panel de entrenador.</p>
-          <div class="routine-list" id="savedRoutines">
-            <div class="routine-item">
-              <div class="routine-meta">
-                <strong>Rutina demo · Carlos Martín</strong>
+        <article class="surface block">
+          <div class="block-head">
+            <div>
+              <h3>Entrenamientos guardados</h3>
+              <p>Panel de ejemplo para visualizar rutinas creadas y enviarlas al cliente.</p>
+            </div>
+          </div>
+
+          <div class="list" id="savedRoutines">
+            <div class="list-item">
+              <div>
+                <strong>Entrenamiento demo · Carlos Martín</strong>
                 <span>3 ejercicios asignados</span>
               </div>
-              <button type="button" class="small-btn" onclick="loadDemoRoutine()">Cargar demo</button>
+              <button type="button" class="mini-btn" onclick="loadDemoRoutine()">Cargar demo</button>
             </div>
           </div>
         </article>
       </div>
 
       <div id="panel-client" data-mode-panel role="tabpanel" aria-labelledby="tab-client">
-        <div class="dashboard-grid">
-          <article class="card panel">
-            <h3>Mi rutina</h3>
-            <p>
-              El cliente visualiza aquí los ejercicios que le ha asignado el entrenador y
-              puede abrir la ficha completa de cada uno.
-            </p>
+        <div class="grid-2">
+          <article class="surface block">
+            <div class="block-head">
+              <div>
+                <h2>Mi entrenamiento</h2>
+                <p>El cliente visualiza aquí los ejercicios asignados por el entrenador y abre la ficha completa de cada uno.</p>
+              </div>
+            </div>
 
-            <div class="client-routine-grid" id="clientRoutineGrid">
-              <article class="client-routine-card">
+            <div class="routine-grid" id="clientRoutineGrid">
+              <article class="routine-card">
                 <h4>Press banca</h4>
-                <p>Ejemplo de ejercicio visible para el cliente dentro de su rutina.</p>
-                <button type="button" class="small-btn primary"
+                <p>Ejemplo de ejercicio visible dentro de un entrenamiento asignado.</p>
+                <button
+                  type="button"
+                  class="mini-btn primary"
                   onclick="openExercise({
                     title:'Press banca',
                     category:'Fuerza',
                     level:'Intermedio',
-                    description:'Ejemplo de cómo el cliente abriría la ficha asignada.',
+                    description:'Ejemplo de vista de cliente para una ficha de ejercicio.',
                     pdf:'assets/docs/press-banca.pdf',
                     ai:'assets/videos/press-banca-ia.mp4',
                     real:'assets/videos/press-banca-real.mp4'
-                  })">
+                  })"
+                >
                   Abrir ejercicio
                 </button>
               </article>
 
-              <article class="client-routine-card">
+              <article class="routine-card">
                 <h4>Puente de glúteo</h4>
                 <p>Acceso directo al PDF, al vídeo IA y al vídeo real del ejercicio.</p>
-                <button type="button" class="small-btn primary"
+                <button
+                  type="button"
+                  class="mini-btn primary"
                   onclick="openExercise({
                     title:'Puente de glúteo',
                     category:'Rehabilitación',
                     level:'Básico',
-                    description:'Vista de cliente con los recursos del ejercicio.',
+                    description:'Ejemplo de ejercicio asignado al cliente.',
                     pdf:'assets/docs/puente-gluteo.pdf',
                     ai:'assets/videos/puente-gluteo-ia.mp4',
                     real:'assets/videos/puente-gluteo-real.mp4'
-                  })">
+                  })"
+                >
                   Abrir ejercicio
                 </button>
               </article>
             </div>
           </article>
 
-          <article class="card panel stack">
-            <div>
-              <h3>Perfil del cliente</h3>
-              <p>Bloque de ejemplo para una futura ampliación de seguimiento y progreso.</p>
+          <article class="surface block">
+            <div class="block-head">
+              <div>
+                <h3>Resumen del plan</h3>
+                <p>Espacio preparado para próximas funciones de seguimiento, progreso y adherencia.</p>
+              </div>
             </div>
 
-            <div class="mini-stat">
-              <strong>Rutina actual</strong>
-              <span>2 ejercicios visibles en este ejemplo base.</span>
-            </div>
-
-            <div class="mini-stat">
-              <strong>Última actualización</strong>
-              <span>Hoy mismo, desde el panel del entrenador.</span>
-            </div>
-
-            <div class="mini-stat">
-              <strong>Próxima evolución</strong>
-              <span>Historial, adherencia, feedback y progreso.</span>
+            <div class="list">
+              <div class="list-item">
+                <div>
+                  <strong>Estado actual</strong>
+                  <span>Entrenamiento activo visible en esta demostración.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div>
+                  <strong>Última asignación</strong>
+                  <span>Actualizado desde el panel del entrenador.</span>
+                </div>
+              </div>
+              <div class="list-item">
+                <div>
+                  <strong>Evolución futura</strong>
+                  <span>Historial, feedback, checklists y progreso.</span>
+                </div>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
+    <section class="section" id="biblioteca">
+      <article class="surface block library-shell">
+        <div class="block-head">
+          <div>
+            <h2>Biblioteca interactiva</h2>
+            <p>
+              Explora ejercicios organizados por categorías. Al abrir cada ficha podrás enlazar
+              tu documento PDF, tu vídeo IA y tu vídeo real.
+            </p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <label class="field">
+            <input type="text" id="searchInput" placeholder="Buscar ejercicio" />
+          </label>
+
+          <label class="field">
+            <select id="categoryFilter">
+              <option value="all">Todas las categorías</option>
+              <option value="fuerza">Fuerza</option>
+              <option value="crossfit">Crossfit</option>
+              <option value="estiramientos">Estiramientos</option>
+              <option value="rehabilitacion">Rehabilitación</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <select id="levelFilter">
+              <option value="all">Todos los niveles</option>
+              <option value="básico">Básico</option>
+              <option value="intermedio">Intermedio</option>
+              <option value="avanzado">Avanzado</option>
+            </select>
+          </label>
+        </div>
+
+        <section class="row-section" data-category-section="fuerza">
+          <div class="row-head">
+            <div>
+              <h3>Fuerza</h3>
+              <p>Base de ejercicios para trabajo de fuerza general y específica.</p>
+            </div>
+          </div>
+
+          <div class="row-scroll">
+            <article class="exercise-card" data-category="fuerza" data-level="intermedio" data-title="Press banca">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Fuerza · Intermedio</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Press banca</h4>
+                <div class="meta">
+                  <span>Pectoral</span>
+                  <span>Empuje</span>
+                  <span>Barra</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Press banca',
+                      category:'Fuerza',
+                      level:'Intermedio',
+                      description:'Ejemplo placeholder para que después sustituyas por tu contenido real.',
+                      pdf:'assets/docs/press-banca.pdf',
+                      ai:'assets/videos/press-banca-ia.mp4',
+                      real:'assets/videos/press-banca-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Press banca')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="fuerza" data-level="básico" data-title="Sentadilla goblet">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Fuerza · Básico</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Sentadilla goblet</h4>
+                <div class="meta">
+                  <span>Pierna</span>
+                  <span>Squat</span>
+                  <span>Mancuerna</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Sentadilla goblet',
+                      category:'Fuerza',
+                      level:'Básico',
+                      description:'Plantilla editable de ejercicio para la estructura inicial.',
+                      pdf:'assets/docs/sentadilla-goblet.pdf',
+                      ai:'assets/videos/sentadilla-goblet-ia.mp4',
+                      real:'assets/videos/sentadilla-goblet-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Sentadilla goblet')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="fuerza" data-level="avanzado" data-title="Peso muerto rumano">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Fuerza · Avanzado</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Peso muerto rumano</h4>
+                <div class="meta">
+                  <span>Bisagra</span>
+                  <span>Posterior</span>
+                  <span>Barra</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Peso muerto rumano',
+                      category:'Fuerza',
+                      level:'Avanzado',
+                      description:'Ficha de ejemplo para la categoría de fuerza.',
+                      pdf:'assets/docs/peso-muerto-rumano.pdf',
+                      ai:'assets/videos/peso-muerto-rumano-ia.mp4',
+                      real:'assets/videos/peso-muerto-rumano-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Peso muerto rumano')">Añadir</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="row-section" data-category-section="crossfit">
+          <div class="row-head">
+            <div>
+              <h3>Crossfit</h3>
+              <p>Movimientos funcionales y técnicos para rendimiento y acondicionamiento.</p>
+            </div>
+          </div>
+
+          <div class="row-scroll">
+            <article class="exercise-card" data-category="crossfit" data-level="intermedio" data-title="Thruster">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Crossfit · Intermedio</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Thruster</h4>
+                <div class="meta">
+                  <span>Full body</span>
+                  <span>Potencia</span>
+                  <span>Barra</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Thruster',
+                      category:'Crossfit',
+                      level:'Intermedio',
+                      description:'Ejemplo placeholder para un movimiento funcional.',
+                      pdf:'assets/docs/thruster.pdf',
+                      ai:'assets/videos/thruster-ia.mp4',
+                      real:'assets/videos/thruster-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Thruster')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="crossfit" data-level="avanzado" data-title="Wall ball">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Crossfit · Avanzado</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Wall ball</h4>
+                <div class="meta">
+                  <span>Potencia</span>
+                  <span>Metcon</span>
+                  <span>Coordinación</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Wall ball',
+                      category:'Crossfit',
+                      level:'Avanzado',
+                      description:'Ejemplo para la categoría de crossfit.',
+                      pdf:'assets/docs/wall-ball.pdf',
+                      ai:'assets/videos/wall-ball-ia.mp4',
+                      real:'assets/videos/wall-ball-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Wall ball')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="crossfit" data-level="básico" data-title="Box step-up">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Crossfit · Básico</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Box step-up</h4>
+                <div class="meta">
+                  <span>Pierna</span>
+                  <span>Escalón</span>
+                  <span>Control</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Box step-up',
+                      category:'Crossfit',
+                      level:'Básico',
+                      description:'Ficha de ejemplo para completar más adelante.',
+                      pdf:'assets/docs/box-step-up.pdf',
+                      ai:'assets/videos/box-step-up-ia.mp4',
+                      real:'assets/videos/box-step-up-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Box step-up')">Añadir</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="row-section" data-category-section="estiramientos">
+          <div class="row-head">
+            <div>
+              <h3>Estiramientos</h3>
+              <p>Opciones guiadas para movilidad, flexibilidad y descarga muscular.</p>
+            </div>
+          </div>
+
+          <div class="row-scroll">
+            <article class="exercise-card" data-category="estiramientos" data-level="básico" data-title="Estiramiento isquiotibial">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Estiramientos · Básico</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Estiramiento isquiotibial</h4>
+                <div class="meta">
+                  <span>Pierna</span>
+                  <span>Movilidad</span>
+                  <span>Suelo</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Estiramiento isquiotibial',
+                      category:'Estiramientos',
+                      level:'Básico',
+                      description:'Modelo inicial para una ficha de estiramiento.',
+                      pdf:'assets/docs/estiramiento-isquios.pdf',
+                      ai:'assets/videos/estiramiento-isquios-ia.mp4',
+                      real:'assets/videos/estiramiento-isquios-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Estiramiento isquiotibial')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="estiramientos" data-level="intermedio" data-title="Apertura de cadera">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Estiramientos · Intermedio</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Apertura de cadera</h4>
+                <div class="meta">
+                  <span>Cadera</span>
+                  <span>Movilidad</span>
+                  <span>Control</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Apertura de cadera',
+                      category:'Estiramientos',
+                      level:'Intermedio',
+                      description:'Plantilla visual para movilidad y flexibilidad.',
+                      pdf:'assets/docs/apertura-cadera.pdf',
+                      ai:'assets/videos/apertura-cadera-ia.mp4',
+                      real:'assets/videos/apertura-cadera-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Apertura de cadera')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="estiramientos" data-level="básico" data-title="Movilidad torácica">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Estiramientos · Básico</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Movilidad torácica</h4>
+                <div class="meta">
+                  <span>Columna</span>
+                  <span>Movilidad</span>
+                  <span>Respiración</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Movilidad torácica',
+                      category:'Estiramientos',
+                      level:'Básico',
+                      description:'Ejemplo editable para la biblioteca de movilidad.',
+                      pdf:'assets/docs/movilidad-toracica.pdf',
+                      ai:'assets/videos/movilidad-toracica-ia.mp4',
+                      real:'assets/videos/movilidad-toracica-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Movilidad torácica')">Añadir</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="row-section" data-category-section="rehabilitacion">
+          <div class="row-head">
+            <div>
+              <h3>Rehabilitación</h3>
+              <p>Ejercicios orientados a control motor, recuperación y readaptación.</p>
+            </div>
+          </div>
+
+          <div class="row-scroll">
+            <article class="exercise-card" data-category="rehabilitacion" data-level="básico" data-title="Puente de glúteo">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Rehabilitación · Básico</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Puente de glúteo</h4>
+                <div class="meta">
+                  <span>Core</span>
+                  <span>Cadera</span>
+                  <span>Control motor</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Puente de glúteo',
+                      category:'Rehabilitación',
+                      level:'Básico',
+                      description:'Ejemplo placeholder para la categoría de rehabilitación.',
+                      pdf:'assets/docs/puente-gluteo.pdf',
+                      ai:'assets/videos/puente-gluteo-ia.mp4',
+                      real:'assets/videos/puente-gluteo-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Puente de glúteo')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="rehabilitacion" data-level="intermedio" data-title="Equilibrio unipodal">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Rehabilitación · Intermedio</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Equilibrio unipodal</h4>
+                <div class="meta">
+                  <span>Propiocepción</span>
+                  <span>Tobillo</span>
+                  <span>Control</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Equilibrio unipodal',
+                      category:'Rehabilitación',
+                      level:'Intermedio',
+                      description:'Plantilla de ficha clínica o deportiva.',
+                      pdf:'assets/docs/equilibrio-unipodal.pdf',
+                      ai:'assets/videos/equilibrio-unipodal-ia.mp4',
+                      real:'assets/videos/equilibrio-unipodal-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Equilibrio unipodal')">Añadir</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="exercise-card" data-category="rehabilitacion" data-level="avanzado" data-title="Step down controlado">
+              <div class="exercise-thumb">
+                <span class="exercise-label">Rehabilitación · Avanzado</span>
+              </div>
+              <div class="exercise-body">
+                <h4>Step down controlado</h4>
+                <div class="meta">
+                  <span>Rodilla</span>
+                  <span>Readaptación</span>
+                  <span>Excéntrico</span>
+                </div>
+                <div class="card-actions">
+                  <button
+                    type="button"
+                    class="mini-btn primary"
+                    onclick="openExercise({
+                      title:'Step down controlado',
+                      category:'Rehabilitación',
+                      level:'Avanzado',
+                      description:'Ejemplo para la arquitectura general de la biblioteca.',
+                      pdf:'assets/docs/step-down-controlado.pdf',
+                      ai:'assets/videos/step-down-controlado-ia.mp4',
+                      real:'assets/videos/step-down-controlado-real.mp4'
+                    })"
+                  >
+                    Ver ficha
+                  </button>
+                  <button type="button" class="mini-btn" onclick="addToRoutine('Step down controlado')">Añadir</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+      </article>
+    </section>
+
     <footer class="footer">
-      Kinisiteca · Estructura base para GitHub Pages con biblioteca interactiva, rutinas para entrenador y vista para cliente.
+      Kinisiteca · Estructura base profesional para GitHub Pages con roles de entrenador y cliente.
     </footer>
   </main>
 
@@ -1349,7 +1490,7 @@
         <h3 id="exerciseTitle">Ejercicio</h3>
         <p id="exerciseSubtitle">Categoría · Nivel</p>
       </div>
-      <button type="button" class="close-btn" aria-label="Cerrar" onclick="closeExercise()">✕</button>
+      <button type="button" class="dialog-close" aria-label="Cerrar" onclick="closeExercise()">×</button>
     </div>
 
     <div class="dialog-body">
@@ -1357,19 +1498,19 @@
         <h4>Documento PDF</h4>
         <p id="exerciseDescription">Descripción del ejercicio.</p>
         <div class="resource-placeholder" id="pdfPlaceholder">
-          Aquí aparecerá tu documento PDF o un enlace al archivo.
+          Aquí podrás mostrar tu documento PDF o enlazar el archivo correspondiente.
         </div>
         <a id="pdfLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">
           Abrir PDF
         </a>
       </section>
 
-      <div class="stack">
+      <div style="display:grid; gap:18px;">
         <section class="resource-box">
           <h4>Vídeo IA</h4>
-          <p>Versión generada para explicar la ejecución del ejercicio.</p>
+          <p>Espacio destinado a la versión generada para explicar la ejecución del ejercicio.</p>
           <div class="resource-placeholder" id="aiPlaceholder">
-            Sustituye este bloque por tu vídeo IA o embed.
+            Sustituye este bloque por tu vídeo IA, embed o reproductor.
           </div>
           <a id="aiLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">
             Abrir vídeo IA
@@ -1378,9 +1519,9 @@
 
         <section class="resource-box">
           <h4>Vídeo real</h4>
-          <p>Demostración grabada real del ejercicio.</p>
+          <p>Espacio destinado a la demostración real del ejercicio.</p>
           <div class="resource-placeholder" id="realPlaceholder">
-            Sustituye este bloque por tu vídeo real o embed.
+            Sustituye este bloque por tu vídeo real, embed o reproductor.
           </div>
           <a id="realLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">
             Abrir vídeo real
@@ -1470,13 +1611,17 @@
 
     function renderSelectedExercises(){
       if(selectedExercises.length === 0){
-        selectedExercisesContainer.innerHTML = '<span class="empty-note">Todavía no has añadido ejercicios. Pulsa “Añadir rutina” en cualquier tarjeta.</span>';
+        selectedExercisesContainer.innerHTML = `
+          <div class="selected-empty">
+            Aún no has añadido ejercicios. Utiliza el botón “Añadir” desde cualquier tarjeta de la biblioteca interactiva.
+          </div>
+        `;
         return;
       }
 
       selectedExercisesContainer.innerHTML = selectedExercises.map(item => `
         <div class="selected-item">
-          <span>${item}</span>
+          <strong>${item}</strong>
           <button type="button" onclick="removeFromRoutine('${item.replace(/'/g, "\\'")}')">Quitar</button>
         </div>
       `).join('');
@@ -1484,29 +1629,29 @@
 
     function saveRoutine(){
       const client = clientSelect.value;
-      const name = routineName.value.trim() || 'Rutina sin nombre';
+      const name = routineName.value.trim() || 'Entrenamiento sin nombre';
 
       if(selectedExercises.length === 0){
-        alert('Añade al menos un ejercicio a la rutina.');
+        alert('Añade al menos un ejercicio al entrenamiento.');
         return;
       }
 
       const total = selectedExercises.length;
 
       const routineHtml = `
-        <div class="routine-item">
-          <div class="routine-meta">
+        <div class="list-item">
+          <div>
             <strong>${name} · ${client}</strong>
             <span>${total} ejercicios asignados</span>
           </div>
-          <button type="button" class="small-btn" onclick='loadClientRoutine(${JSON.stringify(selectedExercises)}, ${JSON.stringify(client)}, ${JSON.stringify(name)})'>
-            Enviar a cliente
+          <button type="button" class="mini-btn" onclick='loadClientRoutine(${JSON.stringify(selectedExercises)}, ${JSON.stringify(client)}, ${JSON.stringify(name)})'>
+            Enviar al cliente
           </button>
         </div>
       `;
 
       savedRoutines.insertAdjacentHTML('afterbegin', routineHtml);
-      alert('Rutina guardada correctamente.');
+      alert('Entrenamiento guardado correctamente.');
     }
 
     function clearRoutine(){
@@ -1517,24 +1662,24 @@
     function selectClient(name){
       clientSelect.value = name;
       setMode('trainer');
-      window.scrollTo({ top: document.getElementById('dashboard').offsetTop - 90, behavior: 'smooth' });
+      document.getElementById('paneles').scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
     function loadClientRoutine(exercises, client, name){
       setMode('client');
 
       clientRoutineGrid.innerHTML = exercises.map(exercise => `
-        <article class="client-routine-card">
+        <article class="routine-card">
           <h4>${exercise}</h4>
-          <p>Rutina asignada a ${client}: ${name}.</p>
+          <p>Entrenamiento asignado a ${client}: ${name}.</p>
           <button
             type="button"
-            class="small-btn primary"
+            class="mini-btn primary"
             onclick="openExercise({
               title:${JSON.stringify(exercise)},
               category:'Asignado por entrenador',
               level:'Personalizado',
-              description:'Ejercicio enviado dentro de una rutina personalizada.',
+              description:'Ejercicio enviado dentro de un entrenamiento personalizado.',
               pdf:'assets/docs/${slugify(exercise)}.pdf',
               ai:'assets/videos/${slugify(exercise)}-ia.mp4',
               real:'assets/videos/${slugify(exercise)}-real.mp4'
@@ -1545,7 +1690,7 @@
         </article>
       `).join('');
 
-      window.scrollTo({ top: document.getElementById('dashboard').offsetTop - 90, behavior: 'smooth' });
+      document.getElementById('paneles').scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
     function loadDemoRoutine(){
@@ -1581,7 +1726,6 @@
       });
 
       sections.forEach(section => {
-        const categoryName = section.dataset.categorySection;
         const visibleCards = section.querySelectorAll('.exercise-card:not([style*="display: none"])');
         section.style.display = visibleCards.length ? '' : 'none';
       });
@@ -1591,25 +1735,23 @@
     categoryFilter.addEventListener('change', filterCards);
     levelFilter.addEventListener('change', filterCards);
 
-    function scrollToLibrary(){
-      document.getElementById('biblioteca').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function scrollToPanels(){
+      document.getElementById('paneles').scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
-    function scrollToDashboard(){
-      document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    function scrollToLibrary(){
+      document.getElementById('biblioteca').scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
     dialog.addEventListener('click', (event) => {
       const rect = dialog.getBoundingClientRect();
-      const clickedInDialog =
+      const clickedInside =
         rect.top <= event.clientY &&
         event.clientY <= rect.top + rect.height &&
         rect.left <= event.clientX &&
         event.clientX <= rect.left + rect.width;
 
-      if (!clickedInDialog) {
-        dialog.close();
-      }
+      if (!clickedInside) dialog.close();
     });
   </script>
 </body>
