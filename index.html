@@ -257,6 +257,12 @@
       color:white;
     }
 
+    .stack-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
     .selected-exercises{
       min-height:170px;
       padding:14px;
@@ -359,6 +365,12 @@
       align-items:center;
     }
 
+    .mini-btn.danger{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
+      color:#ffd8d8;
+    }
+
     .routine-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
@@ -384,6 +396,32 @@
       color:var(--muted);
       font-size:.88rem;
       line-height:1.8;
+    }
+
+    .routine-days{
+      display:grid;
+      gap:10px;
+      margin-top:12px;
+    }
+
+    .routine-day{
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .routine-day strong{
+      font-size:.92rem;
+    }
+
+    .routine-day span{
+      color:var(--muted);
+      font-size:.84rem;
     }
 
     .library-toolbar{
@@ -680,11 +718,15 @@
         grid-auto-columns:86%;
       }
 
-      .dialog-actions{
+      .dialog-actions,
+      .stack-actions,
+      .actions-row{
         flex-direction:column;
       }
 
-      .dialog-actions button{
+      .dialog-actions button,
+      .stack-actions button,
+      .actions-row button{
         width:100%;
       }
     }
@@ -748,7 +790,7 @@
             <div class="section-head">
               <div>
                 <h3>Crear entrenamiento</h3>
-                <p>Selecciona ejercicios desde la biblioteca y compón una rutina adaptada a cada cliente.</p>
+                <p>Selecciona un cliente, elige una de sus rutinas o crea una nueva para asignarle ejercicios.</p>
               </div>
             </div>
 
@@ -758,7 +800,16 @@
               </label>
 
               <label class="field">
-                <input type="text" id="routineName" placeholder="Nombre del entrenamiento" value="Entrenamiento inicial" />
+                <select id="routineSelect"></select>
+              </label>
+
+              <div class="stack-actions">
+                <button type="button" class="mini-btn primary" onclick="openAddRoutineDialog()">Añadir rutina</button>
+                <button type="button" class="mini-btn danger" onclick="deleteCurrentRoutine()">Eliminar rutina actual</button>
+              </div>
+
+              <label class="field">
+                <input type="text" id="routineName" placeholder="Nombre de la rutina" value="" />
               </label>
 
               <div class="selected-exercises" id="selectedExercises">
@@ -768,7 +819,7 @@
               </div>
 
               <div class="actions-row">
-                <button type="button" class="btn btn-primary" onclick="saveRoutine()">Guardar entrenamiento</button>
+                <button type="button" class="btn btn-primary" onclick="saveRoutine()">Guardar rutina</button>
                 <button type="button" class="btn btn-secondary" onclick="clearRoutine()">Vaciar selección</button>
               </div>
             </div>
@@ -778,7 +829,7 @@
             <div class="section-head">
               <div>
                 <h3>Clientes</h3>
-                <p>Añade clientes nuevos y crea una rutina personalizada para cada uno.</p>
+                <p>Añade clientes nuevos y organiza varias rutinas para cada uno, por ejemplo una por día de la semana.</p>
               </div>
             </div>
 
@@ -794,7 +845,7 @@
           <div class="section-head">
             <div>
               <h3>Entrenamientos guardados</h3>
-              <p>Rutinas vinculadas a clientes creados desde el panel del entrenador.</p>
+              <p>Resumen de clientes y de las rutinas que ya tienen creadas dentro de la plataforma.</p>
             </div>
           </div>
 
@@ -802,7 +853,7 @@
             <div class="list-item">
               <div>
                 <strong>Aún no hay rutinas guardadas</strong>
-                <span>Crea un cliente, añade ejercicios y guarda su entrenamiento.</span>
+                <span>Crea un cliente, añade una rutina y guarda sus ejercicios.</span>
               </div>
             </div>
           </div>
@@ -815,14 +866,14 @@
             <div class="section-head">
               <div>
                 <h3>Mi entrenamiento</h3>
-                <p id="clientViewText">El cliente visualiza aquí los ejercicios asignados y abre la ficha de cada uno.</p>
+                <p id="clientViewText">El cliente visualiza aquí sus rutinas y abre los ejercicios asignados.</p>
               </div>
             </div>
 
             <div class="routine-grid" id="clientRoutineGrid">
               <article class="routine-card">
-                <h4>Sin rutina asignada</h4>
-                <p>Aquí aparecerán los ejercicios cuando el entrenador guarde un plan para un cliente.</p>
+                <h4>Sin rutinas asignadas</h4>
+                <p>Aquí aparecerán las rutinas cuando el entrenador guarde un plan para un cliente.</p>
               </article>
             </div>
           </article>
@@ -839,7 +890,7 @@
               <div class="list-item">
                 <div>
                   <strong>Plan activo</strong>
-                  <span>Se actualizará cuando el entrenador guarde una rutina personalizada.</span>
+                  <span>Se actualizará cuando el entrenador guarde una o varias rutinas personalizadas.</span>
                 </div>
               </div>
 
@@ -866,7 +917,7 @@
       <div class="section-head">
         <div>
           <h3>Biblioteca interactiva</h3>
-          <p>Explora la base de ejercicios y añade los que necesites a un entrenamiento personalizado.</p>
+          <p>Explora la base de ejercicios y añade los que necesites a la rutina activa.</p>
         </div>
       </div>
 
@@ -1117,7 +1168,7 @@
     <div class="dialog-head">
       <div>
         <h3 id="addClientTitle">Añadir cliente</h3>
-        <p>Crea un nuevo cliente para asignarle una rutina personalizada.</p>
+        <p>Crea un nuevo cliente para asignarle varias rutinas personalizadas.</p>
       </div>
       <button type="button" class="dialog-close" aria-label="Cerrar" onclick="closeAddClientDialog()">×</button>
     </div>
@@ -1127,10 +1178,6 @@
         <input type="text" id="clientNameInput" placeholder="Nombre del cliente" required />
       </label>
 
-      <label class="field">
-        <input type="text" id="clientRoutineInput" placeholder="Nombre inicial de la rutina" />
-      </label>
-
       <div class="dialog-actions">
         <button type="button" class="btn btn-secondary" onclick="closeAddClientDialog()">Cancelar</button>
         <button type="submit" class="btn btn-primary">Crear cliente</button>
@@ -1138,14 +1185,40 @@
     </form>
   </dialog>
 
+  <dialog id="addRoutineDialog" aria-labelledby="addRoutineTitle">
+    <div class="dialog-head">
+      <div>
+        <h3 id="addRoutineTitle">Añadir rutina</h3>
+        <p>Crea una nueva rutina para el cliente seleccionado, por ejemplo “Lunes” o “Pierna”.</p>
+      </div>
+      <button type="button" class="dialog-close" aria-label="Cerrar" onclick="closeAddRoutineDialog()">×</button>
+    </div>
+
+    <form id="addRoutineForm" class="form-grid">
+      <label class="field">
+        <input type="text" id="routineNameInput" placeholder="Nombre de la rutina" required />
+      </label>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeAddRoutineDialog()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Crear rutina</button>
+      </div>
+    </form>
+  </dialog>
+
   <script>
     const modeButtons = document.querySelectorAll('[data-mode-button]');
     const modePanels = document.querySelectorAll('[data-mode-panel]');
+
     const dialog = document.getElementById('exerciseDialog');
     const addClientDialog = document.getElementById('addClientDialog');
+    const addRoutineDialog = document.getElementById('addRoutineDialog');
+
     const addClientForm = document.getElementById('addClientForm');
+    const addRoutineForm = document.getElementById('addRoutineForm');
+
     const clientNameInput = document.getElementById('clientNameInput');
-    const clientRoutineInput = document.getElementById('clientRoutineInput');
+    const routineNameInput = document.getElementById('routineNameInput');
 
     const exerciseTitle = document.getElementById('exerciseTitle');
     const exerciseSubtitle = document.getElementById('exerciseSubtitle');
@@ -1166,6 +1239,7 @@
     const clientRoutineGrid = document.getElementById('clientRoutineGrid');
     const savedRoutines = document.getElementById('savedRoutines');
     const clientSelect = document.getElementById('clientSelect');
+    const routineSelect = document.getElementById('routineSelect');
     const clientsList = document.getElementById('clientsList');
     const routineName = document.getElementById('routineName');
     const clientViewText = document.getElementById('clientViewText');
@@ -1176,6 +1250,10 @@
     modeButtons.forEach(button => {
       button.addEventListener('click', () => setMode(button.dataset.modeButton));
     });
+
+    function createId(){
+      return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random());
+    }
 
     function setMode(mode){
       modeButtons.forEach(btn => {
@@ -1209,11 +1287,7 @@
       aiPlaceholder.textContent = `Vídeo IA vinculado: ${exercise.ai}`;
       realPlaceholder.textContent = `Vídeo real vinculado: ${exercise.real}`;
 
-      if (typeof dialog.showModal === 'function') {
-        dialog.showModal();
-      } else {
-        alert('Tu navegador no soporta dialog.showModal()');
-      }
+      if (typeof dialog.showModal === 'function') dialog.showModal();
     }
 
     function closeExercise(){
@@ -1222,29 +1296,47 @@
 
     function openAddClientDialog(){
       clientNameInput.value = '';
-      clientRoutineInput.value = '';
-      if (typeof addClientDialog.showModal === 'function') {
-        addClientDialog.showModal();
-      }
+      addClientDialog.showModal();
     }
 
     function closeAddClientDialog(){
       addClientDialog.close();
     }
 
+    function openAddRoutineDialog(){
+      const client = getSelectedClient();
+      if(!client){
+        alert('Añade o selecciona primero un cliente.');
+        return;
+      }
+      routineNameInput.value = '';
+      addRoutineDialog.showModal();
+    }
+
+    function closeAddRoutineDialog(){
+      addRoutineDialog.close();
+    }
+
+    function getSelectedClient(){
+      return clients.find(client => client.id === clientSelect.value);
+    }
+
+    function getSelectedRoutine(){
+      const client = getSelectedClient();
+      if(!client) return null;
+      return client.routines.find(routine => routine.id === routineSelect.value);
+    }
+
     addClientForm.addEventListener('submit', (event) => {
       event.preventDefault();
 
       const name = clientNameInput.value.trim();
-      const routine = clientRoutineInput.value.trim() || `Rutina de ${name}`;
-
       if(!name) return;
 
       const client = {
-        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()),
+        id: createId(),
         name,
-        routineName: routine,
-        exercises: []
+        routines: []
       };
 
       clients.push(client);
@@ -1253,14 +1345,56 @@
       renderSavedRoutines();
 
       clientSelect.value = client.id;
-      routineName.value = client.routineName;
-      selectedExercises = [];
-      renderSelectedExercises();
+      syncRoutineSelect();
+      clearRoutine();
 
       closeAddClientDialog();
     });
 
+    addRoutineForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const client = getSelectedClient();
+      if(!client) return;
+
+      const name = routineNameInput.value.trim();
+      if(!name) return;
+
+      const exists = client.routines.some(routine => routine.name.toLowerCase() === name.toLowerCase());
+      if(exists){
+        alert('Ese cliente ya tiene una rutina con ese nombre.');
+        return;
+      }
+
+      const routine = {
+        id: createId(),
+        name,
+        exercises: []
+      };
+
+      client.routines.push(routine);
+      syncRoutineSelect();
+      routineSelect.value = routine.id;
+      loadRoutineIntoEditor(routine);
+      renderClients();
+      renderSavedRoutines();
+      closeAddRoutineDialog();
+    });
+
     function addToRoutine(name){
+      const client = getSelectedClient();
+      const routine = getSelectedRoutine();
+
+      if(!client){
+        alert('Selecciona primero un cliente.');
+        return;
+      }
+
+      if(!routine){
+        alert('Crea o selecciona primero una rutina.');
+        return;
+      }
+
       if(!selectedExercises.includes(name)){
         selectedExercises.push(name);
         renderSelectedExercises();
@@ -1307,7 +1441,7 @@
         <div class="list-item">
           <div>
             <strong>${client.name}</strong>
-            <span>${client.exercises.length ? client.exercises.length + ' ejercicios asignados.' : 'Sin rutina guardada todavía.'}</span>
+            <span>${client.routines.length ? client.routines.length + ' rutinas creadas.' : 'Sin rutinas todavía.'}</span>
           </div>
           <button type="button" class="mini-btn" onclick="selectClient('${client.id}')">Seleccionar</button>
         </div>
@@ -1317,6 +1451,7 @@
     function syncClientSelect(){
       if(clients.length === 0){
         clientSelect.innerHTML = `<option value="">Añade primero un cliente</option>`;
+        routineSelect.innerHTML = `<option value="">Añade primero una rutina</option>`;
         return;
       }
 
@@ -1325,49 +1460,97 @@
       `).join('');
     }
 
+    function syncRoutineSelect(){
+      const client = getSelectedClient();
+
+      if(!client){
+        routineSelect.innerHTML = `<option value="">Selecciona un cliente</option>`;
+        routineName.value = '';
+        clearRoutine();
+        return;
+      }
+
+      if(client.routines.length === 0){
+        routineSelect.innerHTML = `<option value="">Añade primero una rutina</option>`;
+        routineName.value = '';
+        clearRoutine();
+        return;
+      }
+
+      routineSelect.innerHTML = client.routines.map(routine => `
+        <option value="${routine.id}">${routine.name}</option>
+      `).join('');
+
+      const selectedRoutine = client.routines.find(routine => routine.id === routineSelect.value) || client.routines[0];
+      routineSelect.value = selectedRoutine.id;
+      loadRoutineIntoEditor(selectedRoutine);
+    }
+
+    function loadRoutineIntoEditor(routine){
+      routineName.value = routine.name;
+      selectedExercises = [...routine.exercises];
+      renderSelectedExercises();
+    }
+
     function selectClient(id){
       const client = clients.find(item => item.id === id);
       if(!client) return;
 
       clientSelect.value = client.id;
-      routineName.value = client.routineName || `Rutina de ${client.name}`;
-      selectedExercises = [...client.exercises];
-      renderSelectedExercises();
+      syncRoutineSelect();
       setMode('trainer');
       scrollToPanels();
     }
 
     function saveRoutine(){
-      const clientId = clientSelect.value;
-      const client = clients.find(item => item.id === clientId);
+      const client = getSelectedClient();
+      const routine = getSelectedRoutine();
 
       if(!client){
         alert('Añade primero un cliente.');
         return;
       }
 
-      if(selectedExercises.length === 0){
-        alert('Añade al menos un ejercicio al entrenamiento.');
+      if(!routine){
+        alert('Añade primero una rutina.');
         return;
       }
 
-      client.routineName = routineName.value.trim() || `Rutina de ${client.name}`;
-      client.exercises = [...selectedExercises];
+      if(selectedExercises.length === 0){
+        alert('Añade al menos un ejercicio a la rutina.');
+        return;
+      }
+
+      const newName = routineName.value.trim() || routine.name;
+      const duplicateName = client.routines.some(item =>
+        item.id !== routine.id && item.name.toLowerCase() === newName.toLowerCase()
+      );
+
+      if(duplicateName){
+        alert('Ese cliente ya tiene otra rutina con ese nombre.');
+        return;
+      }
+
+      routine.name = newName;
+      routine.exercises = [...selectedExercises];
+
+      syncRoutineSelect();
+      routineSelect.value = routine.id;
       renderClients();
       renderSavedRoutines();
-      loadClientRoutine(client);
-      alert('Entrenamiento guardado correctamente.');
+      loadClientRoutines(client);
+      alert('Rutina guardada correctamente.');
     }
 
     function renderSavedRoutines(){
-      const clientsWithRoutines = clients.filter(client => client.exercises.length);
+      const clientsWithRoutines = clients.filter(client => client.routines.length);
 
       if(clientsWithRoutines.length === 0){
         savedRoutines.innerHTML = `
           <div class="list-item">
             <div>
               <strong>Aún no hay rutinas guardadas</strong>
-              <span>Crea un cliente, añade ejercicios y guarda su entrenamiento.</span>
+              <span>Crea un cliente, añade una rutina y guarda sus ejercicios.</span>
             </div>
           </div>
         `;
@@ -1377,10 +1560,10 @@
       savedRoutines.innerHTML = clientsWithRoutines.map(client => `
         <div class="list-item">
           <div>
-            <strong>${client.routineName} · ${client.name}</strong>
-            <span>${client.exercises.length} ejercicios asignados.</span>
+            <strong>${client.name}</strong>
+            <span>${client.routines.length} rutinas creadas.</span>
           </div>
-          <button type="button" class="mini-btn" onclick="loadClientRoutineById('${client.id}')">Ver rutina</button>
+          <button type="button" class="mini-btn" onclick="loadClientRoutinesById('${client.id}')">Ver rutinas</button>
         </div>
       `).join('');
     }
@@ -1390,34 +1573,100 @@
       renderSelectedExercises();
     }
 
-    function loadClientRoutineById(id){
-      const client = clients.find(item => item.id === id);
-      if(!client) return;
-      loadClientRoutine(client);
+    function deleteCurrentRoutine(){
+      const client = getSelectedClient();
+      const routine = getSelectedRoutine();
+
+      if(!client || !routine){
+        alert('Selecciona una rutina para eliminar.');
+        return;
+      }
+
+      const confirmed = window.confirm(`¿Eliminar la rutina "${routine.name}"?`);
+      if(!confirmed) return;
+
+      client.routines = client.routines.filter(item => item.id !== routine.id);
+      syncRoutineSelect();
+      renderClients();
+      renderSavedRoutines();
+
+      if(client.routines.length){
+        loadClientRoutines(client);
+      } else {
+        clientRoutineGrid.innerHTML = `
+          <article class="routine-card">
+            <h4>Sin rutinas asignadas</h4>
+            <p>Aquí aparecerán las rutinas cuando el entrenador guarde un plan para un cliente.</p>
+          </article>
+        `;
+        clientViewText.textContent = `${client.name} todavía no tiene rutinas guardadas.`;
+      }
     }
 
-    function loadClientRoutine(client){
+    function loadClientRoutinesById(id){
+      const client = clients.find(item => item.id === id);
+      if(!client) return;
+      loadClientRoutines(client);
+    }
+
+    function loadClientRoutines(client){
       setMode('client');
       clientRoutineGrid.innerHTML = '';
-      clientViewText.textContent = `${client.name} visualiza aquí los ejercicios asignados en “${client.routineName}”.`;
 
-      client.exercises.forEach(exercise => {
+      if(!client.routines.length){
+        clientViewText.textContent = `${client.name} todavía no tiene rutinas guardadas.`;
+        clientRoutineGrid.innerHTML = `
+          <article class="routine-card">
+            <h4>Sin rutinas asignadas</h4>
+            <p>Aquí aparecerán las rutinas cuando el entrenador guarde un plan para un cliente.</p>
+          </article>
+        `;
+        scrollToPanels();
+        return;
+      }
+
+      clientViewText.textContent = `${client.name} visualiza aquí sus rutinas semanales o por bloques de trabajo.`;
+
+      client.routines.forEach(routine => {
         const card = document.createElement('article');
         card.className = 'routine-card';
+
+        const exercisesMarkup = routine.exercises.length
+          ? routine.exercises.map(exercise => `
+              <div class="routine-day">
+                <div>
+                  <strong>${exercise}</strong>
+                  <span>Ejercicio incluido en ${routine.name}</span>
+                </div>
+                <button type="button" class="mini-btn primary" data-open-exercise="${exercise}">Abrir</button>
+              </div>
+            `).join('')
+          : `
+              <div class="routine-day">
+                <div>
+                  <strong>Sin ejercicios</strong>
+                  <span>Esta rutina aún no tiene ejercicios guardados.</span>
+                </div>
+              </div>
+            `;
+
         card.innerHTML = `
-          <h4>${exercise}</h4>
-          <p>Ejercicio asignado dentro de la rutina personalizada de ${client.name}.</p>
-          <button type="button" class="mini-btn primary">Abrir ejercicio</button>
+          <h4>${routine.name}</h4>
+          <p>${routine.exercises.length ? routine.exercises.length + ' ejercicios asignados.' : 'Rutina creada sin ejercicios todavía.'}</p>
+          <div class="routine-days">${exercisesMarkup}</div>
         `;
 
-        card.querySelector('button').addEventListener('click', () => {
-          openExercise({
-            title: exercise,
-            category: 'Asignado por entrenador',
-            description: 'Ejercicio enviado dentro de un entrenamiento personalizado.',
-            pdf: `assets/docs/${slugify(exercise)}.pdf`,
-            ai: `assets/videos/${slugify(exercise)}-ia.mp4`,
-            real: `assets/videos/${slugify(exercise)}-real.mp4`
+        card.querySelectorAll('[data-open-exercise]').forEach(button => {
+          button.addEventListener('click', () => {
+            const exercise = button.getAttribute('data-open-exercise');
+            openExercise({
+              title: exercise,
+              category: routine.name,
+              description: `Ejercicio enviado dentro de la rutina "${routine.name}".`,
+              pdf: `assets/docs/${slugify(exercise)}.pdf`,
+              ai: `assets/videos/${slugify(exercise)}-ia.mp4`,
+              real: `assets/videos/${slugify(exercise)}-real.mp4`
+            });
           });
         });
 
@@ -1457,12 +1706,18 @@
     searchInput.addEventListener('input', filterCards);
     categoryFilter.addEventListener('change', filterCards);
 
-    clientSelect.addEventListener('change', (event) => {
-      const client = clients.find(item => item.id === event.target.value);
-      if(!client) return;
-      routineName.value = client.routineName || `Rutina de ${client.name}`;
-      selectedExercises = [...client.exercises];
-      renderSelectedExercises();
+    clientSelect.addEventListener('change', () => {
+      syncRoutineSelect();
+    });
+
+    routineSelect.addEventListener('change', () => {
+      const routine = getSelectedRoutine();
+      if(!routine){
+        routineName.value = '';
+        clearRoutine();
+        return;
+      }
+      loadRoutineIntoEditor(routine);
     });
 
     function scrollToPanels(){
@@ -1473,27 +1728,22 @@
       document.getElementById('biblioteca').scrollIntoView({ behavior:'smooth', block:'start' });
     }
 
-    dialog.addEventListener('click', (event) => {
-      const rect = dialog.getBoundingClientRect();
-      const clickedInside =
-        rect.top <= event.clientY &&
-        event.clientY <= rect.top + rect.height &&
-        rect.left <= event.clientX &&
-        event.clientX <= rect.left + rect.width;
+    function enableBackdropClose(targetDialog){
+      targetDialog.addEventListener('click', (event) => {
+        const rect = targetDialog.getBoundingClientRect();
+        const clickedInside =
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width;
 
-      if (!clickedInside) dialog.close();
-    });
+        if (!clickedInside) targetDialog.close();
+      });
+    }
 
-    addClientDialog.addEventListener('click', (event) => {
-      const rect = addClientDialog.getBoundingClientRect();
-      const clickedInside =
-        rect.top <= event.clientY &&
-        event.clientY <= rect.top + rect.height &&
-        rect.left <= event.clientX &&
-        event.clientX <= rect.left + rect.width;
-
-      if (!clickedInside) addClientDialog.close();
-    });
+    enableBackdropClose(dialog);
+    enableBackdropClose(addClientDialog);
+    enableBackdropClose(addRoutineDialog);
 
     renderClients();
     syncClientSelect();
