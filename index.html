@@ -59,12 +59,12 @@
       top:0;
       z-index:40;
       backdrop-filter:blur(16px);
-      background:rgba(5,8,16,.7);
+      background:rgba(5,8,16,.78);
       border-bottom:1px solid var(--line);
     }
 
     .topbar-inner{
-      min-height:76px;
+      min-height:96px;
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -73,22 +73,15 @@
 
     .brand{
       display:flex;
-      flex-direction:column;
-      gap:8px;
+      align-items:center;
     }
 
     .brand h1{
       margin:0;
-      font-size:1rem;
+      font-size:1.55rem;
       font-weight:800;
-      letter-spacing:.34em;
-    }
-
-    .brand p{
-      margin:0;
-      color:var(--muted);
-      font-size:.84rem;
-      line-height:1.7;
+      letter-spacing:.28em;
+      line-height:1;
     }
 
     .nav{
@@ -117,20 +110,11 @@
     }
 
     .hero{
-      padding:56px 0 28px;
+      padding:34px 0 18px;
       text-align:center;
     }
 
-    .hero > img{
-      max-width:360px;
-      width:100%;
-      height:auto;
-      display:block;
-      margin:0 auto 28px;
-    }
-
     .mode-tabs-wrap{
-      margin-top:8px;
       display:flex;
       justify-content:center;
     }
@@ -366,6 +350,13 @@
       color:white;
       border:none;
       background:linear-gradient(135deg, var(--brand), var(--brand-2));
+    }
+
+    .mini-btn.full{
+      width:100%;
+      justify-content:center;
+      display:inline-flex;
+      align-items:center;
     }
 
     .routine-grid{
@@ -621,11 +612,25 @@
       background:linear-gradient(135deg, var(--brand), var(--brand-2));
     }
 
+    .form-grid{
+      display:grid;
+      gap:14px;
+      padding:24px;
+    }
+
+    .dialog-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:4px;
+    }
+
     .footer{
       padding:8px 0 42px;
       color:var(--muted-2);
       text-align:center;
       font-size:.84rem;
+      letter-spacing:.24em;
     }
 
     @media (max-width: 1024px){
@@ -642,13 +647,18 @@
         align-items:flex-start;
       }
 
+      .brand h1{
+        font-size:1.25rem;
+        letter-spacing:.18em;
+      }
+
       .library-toolbar,
       .routine-grid{
         grid-template-columns:1fr;
       }
 
       .hero{
-        padding-top:52px;
+        padding-top:28px;
       }
     }
 
@@ -670,9 +680,12 @@
         grid-auto-columns:86%;
       }
 
-      .hero > img{
-        max-width:260px;
-        margin-bottom:22px;
+      .dialog-actions{
+        flex-direction:column;
+      }
+
+      .dialog-actions button{
+        width:100%;
       }
     }
   </style>
@@ -682,7 +695,6 @@
     <div class="container topbar-inner">
       <div class="brand">
         <h1>KINISITECA</h1>
-        <p>Plataforma premium de ejercicio para entrenadores y clientes.</p>
       </div>
 
       <nav class="nav" aria-label="Navegación principal">
@@ -694,8 +706,6 @@
 
   <main class="container">
     <section class="hero">
-      <img src="assets/logo/logo-kinisiteca.png" alt="Kinisiteca">
-
       <div class="mode-tabs-wrap">
         <div class="mode-tabs" role="tablist" aria-label="Modo de acceso">
           <button
@@ -744,11 +754,7 @@
 
             <div class="field-grid">
               <label class="field">
-                <select id="clientSelect">
-                  <option value="Carlos Martín">Carlos Martín</option>
-                  <option value="Lucía Pérez">Lucía Pérez</option>
-                  <option value="Marta Sánchez">Marta Sánchez</option>
-                </select>
+                <select id="clientSelect"></select>
               </label>
 
               <label class="field">
@@ -772,34 +778,14 @@
             <div class="section-head">
               <div>
                 <h3>Clientes</h3>
-                <p>Selecciona el cliente al que vas a asignar el entrenamiento creado.</p>
+                <p>Añade clientes nuevos y crea una rutina personalizada para cada uno.</p>
               </div>
             </div>
 
-            <div class="list">
-              <div class="list-item">
-                <div>
-                  <strong>Carlos Martín</strong>
-                  <span>Objetivo principal: fuerza general.</span>
-                </div>
-                <button type="button" class="mini-btn" onclick="selectClient('Carlos Martín')">Seleccionar</button>
-              </div>
+            <div class="list" id="clientsList"></div>
 
-              <div class="list-item">
-                <div>
-                  <strong>Lucía Pérez</strong>
-                  <span>Objetivo principal: movilidad y control.</span>
-                </div>
-                <button type="button" class="mini-btn" onclick="selectClient('Lucía Pérez')">Seleccionar</button>
-              </div>
-
-              <div class="list-item">
-                <div>
-                  <strong>Marta Sánchez</strong>
-                  <span>Objetivo principal: readaptación.</span>
-                </div>
-                <button type="button" class="mini-btn" onclick="selectClient('Marta Sánchez')">Seleccionar</button>
-              </div>
+            <div style="margin-top:14px;">
+              <button type="button" class="mini-btn primary full" onclick="openAddClientDialog()">Añadir cliente</button>
             </div>
           </article>
         </div>
@@ -808,17 +794,16 @@
           <div class="section-head">
             <div>
               <h3>Entrenamientos guardados</h3>
-              <p>Rutinas guardadas dentro de esta demostración inicial de la plataforma.</p>
+              <p>Rutinas vinculadas a clientes creados desde el panel del entrenador.</p>
             </div>
           </div>
 
           <div class="list" id="savedRoutines">
             <div class="list-item">
               <div>
-                <strong>Entrenamiento demo · Carlos Martín</strong>
-                <span>3 ejercicios asignados.</span>
+                <strong>Aún no hay rutinas guardadas</strong>
+                <span>Crea un cliente, añade ejercicios y guarda su entrenamiento.</span>
               </div>
-              <button type="button" class="mini-btn" onclick="loadDemoRoutine()">Cargar demo</button>
             </div>
           </div>
         </article>
@@ -830,47 +815,14 @@
             <div class="section-head">
               <div>
                 <h3>Mi entrenamiento</h3>
-                <p>El cliente visualiza aquí los ejercicios asignados y abre la ficha de cada uno.</p>
+                <p id="clientViewText">El cliente visualiza aquí los ejercicios asignados y abre la ficha de cada uno.</p>
               </div>
             </div>
 
             <div class="routine-grid" id="clientRoutineGrid">
               <article class="routine-card">
-                <h4>Press banca</h4>
-                <p>Ejemplo de ejercicio visible dentro del entrenamiento del cliente.</p>
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({
-                    title:'Press banca',
-                    category:'Fuerza',
-                    description:'Ejemplo de ficha visible para el cliente dentro de su entrenamiento.',
-                    pdf:'assets/docs/press-banca.pdf',
-                    ai:'assets/videos/press-banca-ia.mp4',
-                    real:'assets/videos/press-banca-real.mp4'
-                  })"
-                >
-                  Abrir ejercicio
-                </button>
-              </article>
-
-              <article class="routine-card">
-                <h4>Puente de glúteo</h4>
-                <p>Acceso directo al PDF, al vídeo IA y al vídeo real del ejercicio.</p>
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({
-                    title:'Puente de glúteo',
-                    category:'Rehabilitación',
-                    description:'Ejercicio asignado al cliente dentro de una rutina personalizada.',
-                    pdf:'assets/docs/puente-gluteo.pdf',
-                    ai:'assets/videos/puente-gluteo-ia.mp4',
-                    real:'assets/videos/puente-gluteo-real.mp4'
-                  })"
-                >
-                  Abrir ejercicio
-                </button>
+                <h4>Sin rutina asignada</h4>
+                <p>Aquí aparecerán los ejercicios cuando el entrenador guarde un plan para un cliente.</p>
               </article>
             </div>
           </article>
@@ -887,14 +839,14 @@
               <div class="list-item">
                 <div>
                   <strong>Plan activo</strong>
-                  <span>Entrenamiento visible en esta demostración base.</span>
+                  <span>Se actualizará cuando el entrenador guarde una rutina personalizada.</span>
                 </div>
               </div>
 
               <div class="list-item">
                 <div>
                   <strong>Última actualización</strong>
-                  <span>Asignada desde el panel del entrenador.</span>
+                  <span>Visible cuando el plan haya sido asignado.</span>
                 </div>
               </div>
 
@@ -942,16 +894,10 @@
 
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Press banca">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Fuerza</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Fuerza</span></div>
             <div class="exercise-body">
               <h5>Press banca</h5>
-              <div class="meta">
-                <span>Pectoral</span>
-                <span>Empuje</span>
-                <span>Barra</span>
-              </div>
+              <div class="meta"><span>Pectoral</span><span>Empuje</span><span>Barra</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press banca', category:'Fuerza', description:'Ejemplo placeholder para sustituir después por tu contenido real.', pdf:'assets/docs/press-banca.pdf', ai:'assets/videos/press-banca-ia.mp4', real:'assets/videos/press-banca-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Press banca')">Añadir</button>
@@ -960,16 +906,10 @@
           </article>
 
           <article class="exercise-card" data-category="fuerza" data-title="Sentadilla goblet">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Fuerza</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Fuerza</span></div>
             <div class="exercise-body">
               <h5>Sentadilla goblet</h5>
-              <div class="meta">
-                <span>Pierna</span>
-                <span>Squat</span>
-                <span>Mancuerna</span>
-              </div>
+              <div class="meta"><span>Pierna</span><span>Squat</span><span>Mancuerna</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Sentadilla goblet', category:'Fuerza', description:'Plantilla inicial para un ejercicio de fuerza.', pdf:'assets/docs/sentadilla-goblet.pdf', ai:'assets/videos/sentadilla-goblet-ia.mp4', real:'assets/videos/sentadilla-goblet-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Sentadilla goblet')">Añadir</button>
@@ -978,16 +918,10 @@
           </article>
 
           <article class="exercise-card" data-category="fuerza" data-title="Peso muerto rumano">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Fuerza</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Fuerza</span></div>
             <div class="exercise-body">
               <h5>Peso muerto rumano</h5>
-              <div class="meta">
-                <span>Bisagra</span>
-                <span>Posterior</span>
-                <span>Barra</span>
-              </div>
+              <div class="meta"><span>Bisagra</span><span>Posterior</span><span>Barra</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Peso muerto rumano', category:'Fuerza', description:'Ficha de ejemplo para trabajo de cadena posterior.', pdf:'assets/docs/peso-muerto-rumano.pdf', ai:'assets/videos/peso-muerto-rumano-ia.mp4', real:'assets/videos/peso-muerto-rumano-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Peso muerto rumano')">Añadir</button>
@@ -1005,16 +939,10 @@
 
         <div class="row-scroll">
           <article class="exercise-card" data-category="crossfit" data-title="Thruster">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Crossfit</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Crossfit</span></div>
             <div class="exercise-body">
               <h5>Thruster</h5>
-              <div class="meta">
-                <span>Full body</span>
-                <span>Potencia</span>
-                <span>Barra</span>
-              </div>
+              <div class="meta"><span>Full body</span><span>Potencia</span><span>Barra</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Thruster', category:'Crossfit', description:'Ejemplo placeholder para un movimiento funcional.', pdf:'assets/docs/thruster.pdf', ai:'assets/videos/thruster-ia.mp4', real:'assets/videos/thruster-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Thruster')">Añadir</button>
@@ -1023,16 +951,10 @@
           </article>
 
           <article class="exercise-card" data-category="crossfit" data-title="Wall ball">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Crossfit</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Crossfit</span></div>
             <div class="exercise-body">
               <h5>Wall ball</h5>
-              <div class="meta">
-                <span>Potencia</span>
-                <span>Metcon</span>
-                <span>Coordinación</span>
-              </div>
+              <div class="meta"><span>Potencia</span><span>Metcon</span><span>Coordinación</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Wall ball', category:'Crossfit', description:'Ejemplo de tarjeta para la categoría de crossfit.', pdf:'assets/docs/wall-ball.pdf', ai:'assets/videos/wall-ball-ia.mp4', real:'assets/videos/wall-ball-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Wall ball')">Añadir</button>
@@ -1041,16 +963,10 @@
           </article>
 
           <article class="exercise-card" data-category="crossfit" data-title="Box step-up">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Crossfit</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Crossfit</span></div>
             <div class="exercise-body">
               <h5>Box step-up</h5>
-              <div class="meta">
-                <span>Pierna</span>
-                <span>Escalón</span>
-                <span>Control</span>
-              </div>
+              <div class="meta"><span>Pierna</span><span>Escalón</span><span>Control</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Box step-up', category:'Crossfit', description:'Ejemplo editable para tu biblioteca funcional.', pdf:'assets/docs/box-step-up.pdf', ai:'assets/videos/box-step-up-ia.mp4', real:'assets/videos/box-step-up-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Box step-up')">Añadir</button>
@@ -1068,16 +984,10 @@
 
         <div class="row-scroll">
           <article class="exercise-card" data-category="estiramientos" data-title="Estiramiento isquiotibial">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Estiramientos</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Estiramientos</span></div>
             <div class="exercise-body">
               <h5>Estiramiento isquiotibial</h5>
-              <div class="meta">
-                <span>Pierna</span>
-                <span>Movilidad</span>
-                <span>Suelo</span>
-              </div>
+              <div class="meta"><span>Pierna</span><span>Movilidad</span><span>Suelo</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Estiramiento isquiotibial', category:'Estiramientos', description:'Modelo placeholder para la sección de estiramientos.', pdf:'assets/docs/estiramiento-isquios.pdf', ai:'assets/videos/estiramiento-isquios-ia.mp4', real:'assets/videos/estiramiento-isquios-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Estiramiento isquiotibial')">Añadir</button>
@@ -1086,16 +996,10 @@
           </article>
 
           <article class="exercise-card" data-category="estiramientos" data-title="Apertura de cadera">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Estiramientos</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Estiramientos</span></div>
             <div class="exercise-body">
               <h5>Apertura de cadera</h5>
-              <div class="meta">
-                <span>Cadera</span>
-                <span>Movilidad</span>
-                <span>Control</span>
-              </div>
+              <div class="meta"><span>Cadera</span><span>Movilidad</span><span>Control</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Apertura de cadera', category:'Estiramientos', description:'Plantilla visual para estiramientos y movilidad.', pdf:'assets/docs/apertura-cadera.pdf', ai:'assets/videos/apertura-cadera-ia.mp4', real:'assets/videos/apertura-cadera-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Apertura de cadera')">Añadir</button>
@@ -1104,16 +1008,10 @@
           </article>
 
           <article class="exercise-card" data-category="estiramientos" data-title="Movilidad torácica">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Estiramientos</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Estiramientos</span></div>
             <div class="exercise-body">
               <h5>Movilidad torácica</h5>
-              <div class="meta">
-                <span>Columna</span>
-                <span>Movilidad</span>
-                <span>Respiración</span>
-              </div>
+              <div class="meta"><span>Columna</span><span>Movilidad</span><span>Respiración</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Movilidad torácica', category:'Estiramientos', description:'Ejemplo editable para tu biblioteca de movilidad.', pdf:'assets/docs/movilidad-toracica.pdf', ai:'assets/videos/movilidad-toracica-ia.mp4', real:'assets/videos/movilidad-toracica-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Movilidad torácica')">Añadir</button>
@@ -1131,16 +1029,10 @@
 
         <div class="row-scroll">
           <article class="exercise-card" data-category="rehabilitacion" data-title="Puente de glúteo">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Rehabilitación</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Rehabilitación</span></div>
             <div class="exercise-body">
               <h5>Puente de glúteo</h5>
-              <div class="meta">
-                <span>Core</span>
-                <span>Cadera</span>
-                <span>Control motor</span>
-              </div>
+              <div class="meta"><span>Core</span><span>Cadera</span><span>Control motor</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Puente de glúteo', category:'Rehabilitación', description:'Ejercicio placeholder para la categoría de rehabilitación.', pdf:'assets/docs/puente-gluteo.pdf', ai:'assets/videos/puente-gluteo-ia.mp4', real:'assets/videos/puente-gluteo-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Puente de glúteo')">Añadir</button>
@@ -1149,16 +1041,10 @@
           </article>
 
           <article class="exercise-card" data-category="rehabilitacion" data-title="Equilibrio unipodal">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Rehabilitación</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Rehabilitación</span></div>
             <div class="exercise-body">
               <h5>Equilibrio unipodal</h5>
-              <div class="meta">
-                <span>Propiocepción</span>
-                <span>Tobillo</span>
-                <span>Control</span>
-              </div>
+              <div class="meta"><span>Propiocepción</span><span>Tobillo</span><span>Control</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Equilibrio unipodal', category:'Rehabilitación', description:'Plantilla para una ficha clínica o deportiva.', pdf:'assets/docs/equilibrio-unipodal.pdf', ai:'assets/videos/equilibrio-unipodal-ia.mp4', real:'assets/videos/equilibrio-unipodal-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Equilibrio unipodal')">Añadir</button>
@@ -1167,16 +1053,10 @@
           </article>
 
           <article class="exercise-card" data-category="rehabilitacion" data-title="Step down controlado">
-            <div class="exercise-thumb">
-              <span class="exercise-label">Rehabilitación</span>
-            </div>
+            <div class="exercise-thumb"><span class="exercise-label">Rehabilitación</span></div>
             <div class="exercise-body">
               <h5>Step down controlado</h5>
-              <div class="meta">
-                <span>Rodilla</span>
-                <span>Excéntrico</span>
-                <span>Readaptación</span>
-              </div>
+              <div class="meta"><span>Rodilla</span><span>Excéntrico</span><span>Readaptación</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Step down controlado', category:'Rehabilitación', description:'Ejemplo preparado para la arquitectura general.', pdf:'assets/docs/step-down-controlado.pdf', ai:'assets/videos/step-down-controlado-ia.mp4', real:'assets/videos/step-down-controlado-real.mp4' })">Ver ficha</button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Step down controlado')">Añadir</button>
@@ -1188,7 +1068,7 @@
     </section>
 
     <footer class="footer">
-      Kinisiteca · Plataforma premium de ejercicios para entrenadores y clientes.
+      KINISITECA
     </footer>
   </main>
 
@@ -1233,10 +1113,39 @@
     </div>
   </dialog>
 
+  <dialog id="addClientDialog" aria-labelledby="addClientTitle">
+    <div class="dialog-head">
+      <div>
+        <h3 id="addClientTitle">Añadir cliente</h3>
+        <p>Crea un nuevo cliente para asignarle una rutina personalizada.</p>
+      </div>
+      <button type="button" class="dialog-close" aria-label="Cerrar" onclick="closeAddClientDialog()">×</button>
+    </div>
+
+    <form id="addClientForm" class="form-grid">
+      <label class="field">
+        <input type="text" id="clientNameInput" placeholder="Nombre del cliente" required />
+      </label>
+
+      <label class="field">
+        <input type="text" id="clientRoutineInput" placeholder="Nombre inicial de la rutina" />
+      </label>
+
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary" onclick="closeAddClientDialog()">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Crear cliente</button>
+      </div>
+    </form>
+  </dialog>
+
   <script>
     const modeButtons = document.querySelectorAll('[data-mode-button]');
     const modePanels = document.querySelectorAll('[data-mode-panel]');
     const dialog = document.getElementById('exerciseDialog');
+    const addClientDialog = document.getElementById('addClientDialog');
+    const addClientForm = document.getElementById('addClientForm');
+    const clientNameInput = document.getElementById('clientNameInput');
+    const clientRoutineInput = document.getElementById('clientRoutineInput');
 
     const exerciseTitle = document.getElementById('exerciseTitle');
     const exerciseSubtitle = document.getElementById('exerciseSubtitle');
@@ -1257,9 +1166,12 @@
     const clientRoutineGrid = document.getElementById('clientRoutineGrid');
     const savedRoutines = document.getElementById('savedRoutines');
     const clientSelect = document.getElementById('clientSelect');
+    const clientsList = document.getElementById('clientsList');
     const routineName = document.getElementById('routineName');
+    const clientViewText = document.getElementById('clientViewText');
 
     let selectedExercises = [];
+    let clients = [];
 
     modeButtons.forEach(button => {
       button.addEventListener('click', () => setMode(button.dataset.modeButton));
@@ -1308,6 +1220,46 @@
       dialog.close();
     }
 
+    function openAddClientDialog(){
+      clientNameInput.value = '';
+      clientRoutineInput.value = '';
+      if (typeof addClientDialog.showModal === 'function') {
+        addClientDialog.showModal();
+      }
+    }
+
+    function closeAddClientDialog(){
+      addClientDialog.close();
+    }
+
+    addClientForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const name = clientNameInput.value.trim();
+      const routine = clientRoutineInput.value.trim() || `Rutina de ${name}`;
+
+      if(!name) return;
+
+      const client = {
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random()),
+        name,
+        routineName: routine,
+        exercises: []
+      };
+
+      clients.push(client);
+      syncClientSelect();
+      renderClients();
+      renderSavedRoutines();
+
+      clientSelect.value = client.id;
+      routineName.value = client.routineName;
+      selectedExercises = [];
+      renderSelectedExercises();
+
+      closeAddClientDialog();
+    });
+
     function addToRoutine(name){
       if(!selectedExercises.includes(name)){
         selectedExercises.push(name);
@@ -1338,33 +1290,99 @@
       `).join('');
     }
 
+    function renderClients(){
+      if(clients.length === 0){
+        clientsList.innerHTML = `
+          <div class="list-item">
+            <div>
+              <strong>Aún no hay clientes</strong>
+              <span>Pulsa “Añadir cliente” para crear el primero.</span>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      clientsList.innerHTML = clients.map(client => `
+        <div class="list-item">
+          <div>
+            <strong>${client.name}</strong>
+            <span>${client.exercises.length ? client.exercises.length + ' ejercicios asignados.' : 'Sin rutina guardada todavía.'}</span>
+          </div>
+          <button type="button" class="mini-btn" onclick="selectClient('${client.id}')">Seleccionar</button>
+        </div>
+      `).join('');
+    }
+
+    function syncClientSelect(){
+      if(clients.length === 0){
+        clientSelect.innerHTML = `<option value="">Añade primero un cliente</option>`;
+        return;
+      }
+
+      clientSelect.innerHTML = clients.map(client => `
+        <option value="${client.id}">${client.name}</option>
+      `).join('');
+    }
+
+    function selectClient(id){
+      const client = clients.find(item => item.id === id);
+      if(!client) return;
+
+      clientSelect.value = client.id;
+      routineName.value = client.routineName || `Rutina de ${client.name}`;
+      selectedExercises = [...client.exercises];
+      renderSelectedExercises();
+      setMode('trainer');
+      scrollToPanels();
+    }
+
     function saveRoutine(){
-      const client = clientSelect.value;
-      const name = routineName.value.trim() || 'Entrenamiento sin nombre';
+      const clientId = clientSelect.value;
+      const client = clients.find(item => item.id === clientId);
+
+      if(!client){
+        alert('Añade primero un cliente.');
+        return;
+      }
 
       if(selectedExercises.length === 0){
         alert('Añade al menos un ejercicio al entrenamiento.');
         return;
       }
 
-      const total = selectedExercises.length;
-
-      const wrapper = document.createElement('div');
-      wrapper.className = 'list-item';
-      wrapper.innerHTML = `
-        <div>
-          <strong>${name} · ${client}</strong>
-          <span>${total} ejercicios asignados.</span>
-        </div>
-        <button type="button" class="mini-btn">Enviar al cliente</button>
-      `;
-
-      wrapper.querySelector('button').addEventListener('click', () => {
-        loadClientRoutine([...selectedExercises], client, name);
-      });
-
-      savedRoutines.prepend(wrapper);
+      client.routineName = routineName.value.trim() || `Rutina de ${client.name}`;
+      client.exercises = [...selectedExercises];
+      renderClients();
+      renderSavedRoutines();
+      loadClientRoutine(client);
       alert('Entrenamiento guardado correctamente.');
+    }
+
+    function renderSavedRoutines(){
+      const clientsWithRoutines = clients.filter(client => client.exercises.length);
+
+      if(clientsWithRoutines.length === 0){
+        savedRoutines.innerHTML = `
+          <div class="list-item">
+            <div>
+              <strong>Aún no hay rutinas guardadas</strong>
+              <span>Crea un cliente, añade ejercicios y guarda su entrenamiento.</span>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      savedRoutines.innerHTML = clientsWithRoutines.map(client => `
+        <div class="list-item">
+          <div>
+            <strong>${client.routineName} · ${client.name}</strong>
+            <span>${client.exercises.length} ejercicios asignados.</span>
+          </div>
+          <button type="button" class="mini-btn" onclick="loadClientRoutineById('${client.id}')">Ver rutina</button>
+        </div>
+      `).join('');
     }
 
     function clearRoutine(){
@@ -1372,22 +1390,23 @@
       renderSelectedExercises();
     }
 
-    function selectClient(name){
-      clientSelect.value = name;
-      setMode('trainer');
-      scrollToPanels();
+    function loadClientRoutineById(id){
+      const client = clients.find(item => item.id === id);
+      if(!client) return;
+      loadClientRoutine(client);
     }
 
-    function loadClientRoutine(exercises, client, name){
+    function loadClientRoutine(client){
       setMode('client');
       clientRoutineGrid.innerHTML = '';
+      clientViewText.textContent = `${client.name} visualiza aquí los ejercicios asignados en “${client.routineName}”.`;
 
-      exercises.forEach(exercise => {
+      client.exercises.forEach(exercise => {
         const card = document.createElement('article');
         card.className = 'routine-card';
         card.innerHTML = `
           <h4>${exercise}</h4>
-          <p>Entrenamiento asignado a ${client}: ${name}.</p>
+          <p>Ejercicio asignado dentro de la rutina personalizada de ${client.name}.</p>
           <button type="button" class="mini-btn primary">Abrir ejercicio</button>
         `;
 
@@ -1408,11 +1427,6 @@
       scrollToPanels();
     }
 
-    function loadDemoRoutine(){
-      selectedExercises = ['Press banca', 'Puente de glúteo', 'Movilidad torácica'];
-      renderSelectedExercises();
-    }
-
     function slugify(text){
       return text
         .toLowerCase()
@@ -1429,10 +1443,8 @@
       cards.forEach(card => {
         const title = card.dataset.title.toLowerCase();
         const cardCategory = card.dataset.category;
-
         const matchQuery = title.includes(query);
         const matchCategory = category === 'all' || cardCategory === category;
-
         card.style.display = (matchQuery && matchCategory) ? '' : 'none';
       });
 
@@ -1444,6 +1456,14 @@
 
     searchInput.addEventListener('input', filterCards);
     categoryFilter.addEventListener('change', filterCards);
+
+    clientSelect.addEventListener('change', (event) => {
+      const client = clients.find(item => item.id === event.target.value);
+      if(!client) return;
+      routineName.value = client.routineName || `Rutina de ${client.name}`;
+      selectedExercises = [...client.exercises];
+      renderSelectedExercises();
+    });
 
     function scrollToPanels(){
       document.getElementById('paneles').scrollIntoView({ behavior:'smooth', block:'start' });
@@ -1463,6 +1483,22 @@
 
       if (!clickedInside) dialog.close();
     });
+
+    addClientDialog.addEventListener('click', (event) => {
+      const rect = addClientDialog.getBoundingClientRect();
+      const clickedInside =
+        rect.top <= event.clientY &&
+        event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.left + rect.width;
+
+      if (!clickedInside) addClientDialog.close();
+    });
+
+    renderClients();
+    syncClientSelect();
+    renderSavedRoutines();
+    renderSelectedExercises();
   </script>
 </body>
 </html>
