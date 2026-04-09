@@ -1220,6 +1220,8 @@
     const routineName = document.getElementById('routineName');
     const clientViewText = document.getElementById('clientViewText');
 
+    const STORAGE_KEY = 'kinisiteca-data-v1';
+
     let selectedExercises = [];
     let clients = [];
 
@@ -1229,6 +1231,29 @@
 
     function createId(){
       return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random());
+    }
+
+    function saveAppState(){
+      try{
+        const data = { clients };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch(error){
+        console.error('No se pudo guardar el estado:', error);
+      }
+    }
+
+    function loadAppState(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw) return;
+
+        const parsed = JSON.parse(raw);
+        if(parsed && Array.isArray(parsed.clients)){
+          clients = parsed.clients;
+        }
+      } catch(error){
+        console.error('No se pudo cargar el estado:', error);
+      }
     }
 
     function setMode(mode){
@@ -1323,6 +1348,7 @@
       clientSelect.value = client.id;
       syncRoutineSelect();
       clearRoutine();
+      saveAppState();
 
       closeAddClientDialog();
     });
@@ -1354,6 +1380,7 @@
       loadRoutineIntoEditor(routine);
       renderClients();
       renderSavedRoutines();
+      saveAppState();
       closeAddRoutineDialog();
     });
 
@@ -1515,6 +1542,7 @@
       renderClients();
       renderSavedRoutines();
       loadClientRoutines(client);
+      saveAppState();
       alert('Rutina guardada correctamente.');
     }
 
@@ -1565,6 +1593,7 @@
       syncRoutineSelect();
       renderClients();
       renderSavedRoutines();
+      saveAppState();
 
       if(client.routines.length){
         loadClientRoutines(client);
@@ -1721,10 +1750,16 @@
     enableBackdropClose(addClientDialog);
     enableBackdropClose(addRoutineDialog);
 
+    loadAppState();
     renderClients();
     syncClientSelect();
     renderSavedRoutines();
     renderSelectedExercises();
+
+    if(clients.length){
+      clientSelect.value = clients[0].id;
+      syncRoutineSelect();
+    }
   </script>
 </body>
 </html>
