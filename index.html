@@ -740,28 +740,10 @@
 
       <nav class="nav" aria-label="Selector de versión">
         <div class="mode-tabs" role="tablist" aria-label="Modo de acceso">
-          <button
-            type="button"
-            class="mode-btn is-active"
-            role="tab"
-            aria-selected="true"
-            aria-controls="panel-trainer"
-            id="tab-trainer"
-            data-mode-button="trainer"
-            tabindex="0"
-          >
+          <button type="button" class="mode-btn is-active" role="tab" aria-selected="true" aria-controls="panel-trainer" id="tab-trainer" data-mode-button="trainer" tabindex="0">
             Entrenador
           </button>
-          <button
-            type="button"
-            class="mode-btn"
-            role="tab"
-            aria-selected="false"
-            aria-controls="panel-client"
-            id="tab-client"
-            data-mode-button="client"
-            tabindex="-1"
-          >
+          <button type="button" class="mode-btn" role="tab" aria-selected="false" aria-controls="panel-client" id="tab-client" data-mode-button="client" tabindex="-1">
             Cliente
           </button>
         </div>
@@ -924,9 +906,7 @@
           <select id="categoryFilter">
             <option value="all">Todas las categorías</option>
             <option value="fuerza">Fuerza</option>
-            <option value="crossfit">Crossfit</option>
             <option value="estiramientos">Estiramientos</option>
-            <option value="rehabilitacion">Rehabilitación</option>
           </select>
         </label>
       </div>
@@ -944,11 +924,7 @@
               <h5>Press banca</h5>
               <div class="meta"><span>Pectoral</span><span>Empuje</span><span>Barra</span></div>
               <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Press banca', category:'Fuerza', description:'Ejemplo placeholder para sustituir después por tu contenido real.', pdf:'assets/docs/press-banca.pdf', ai:'assets/videos/press-banca-ia.mp4', real:'assets/videos/press-banca-real.mp4' })"
-                >
+                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press banca', category:'Fuerza', description:'Ejemplo placeholder para sustituir después por tu contenido real.', pdf:'assets/docs/press-banca.pdf', real:'assets/videos/press-banca-real.mp4' })">
                   Ver ficha
                 </button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Press banca')">Añadir</button>
@@ -962,11 +938,7 @@
               <h5>Sentadilla con barra</h5>
               <div class="meta"><span>Pierna</span><span>Fuerza</span><span>Barra</span></div>
               <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Sentadilla con barra', category:'Fuerza', description:'Ficha técnica de sentadilla con barra.', pdf:'pdf/ficha_sentadilla_con_barra.pdf', ai:'assets/videos/sentadilla-con-barra-ia.mp4', real:'assets/videos/sentadilla-con-barra-real.mp4' })"
-                >
+                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Sentadilla con barra', category:'Fuerza', description:'Ficha técnica de sentadilla con barra.', pdf:'pdf/ficha_sentadilla_con_barra.pdf', real:'assets/videos/sentadilla-con-barra-real.mp4' })">
                   Ver ficha
                 </button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Sentadilla con barra')">Añadir</button>
@@ -980,77 +952,10 @@
               <h5>Peso muerto rumano</h5>
               <div class="meta"><span>Bisagra</span><span>Posterior</span><span>Barra</span></div>
               <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Peso muerto rumano', category:'Fuerza', description:'Ficha de ejemplo para trabajo de cadena posterior.', pdf:'assets/docs/peso-muerto-rumano.pdf', ai:'assets/videos/peso-muerto-rumano-ia.mp4', real:'assets/videos/peso-muerto-rumano-real.mp4' })"
-                >
+                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Peso muerto rumano', category:'Fuerza', description:'Ficha de ejemplo para trabajo de cadena posterior.', pdf:'assets/docs/peso-muerto-rumano.pdf', real:'assets/videos/peso-muerto-rumano-real.mp4' })">
                   Ver ficha
                 </button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Peso muerto rumano')">Añadir</button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="crossfit">
-        <div class="row-head">
-          <h4>Crossfit</h4>
-          <p>Movimientos funcionales para rendimiento y acondicionamiento.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="crossfit" data-title="Thruster">
-            <div class="exercise-thumb"><span class="exercise-label">Crossfit</span></div>
-            <div class="exercise-body">
-              <h5>Thruster</h5>
-              <div class="meta"><span>Full body</span><span>Potencia</span><span>Barra</span></div>
-              <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Thruster', category:'Crossfit', description:'Ejemplo placeholder para un movimiento funcional.', pdf:'assets/docs/thruster.pdf', ai:'assets/videos/thruster-ia.mp4', real:'assets/videos/thruster-real.mp4' })"
-                >
-                  Ver ficha
-                </button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Thruster')">Añadir</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="crossfit" data-title="Wall ball">
-            <div class="exercise-thumb"><span class="exercise-label">Crossfit</span></div>
-            <div class="exercise-body">
-              <h5>Wall ball</h5>
-              <div class="meta"><span>Potencia</span><span>Metcon</span><span>Coordinación</span></div>
-              <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Wall ball', category:'Crossfit', description:'Ejemplo de tarjeta para la categoría de crossfit.', pdf:'assets/docs/wall-ball.pdf', ai:'assets/videos/wall-ball-ia.mp4', real:'assets/videos/wall-ball-real.mp4' })"
-                >
-                  Ver ficha
-                </button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Wall ball')">Añadir</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="crossfit" data-title="Box step-up">
-            <div class="exercise-thumb"><span class="exercise-label">Crossfit</span></div>
-            <div class="exercise-body">
-              <h5>Box step-up</h5>
-              <div class="meta"><span>Pierna</span><span>Escalón</span><span>Control</span></div>
-              <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Box step-up', category:'Crossfit', description:'Ejemplo editable para tu biblioteca funcional.', pdf:'assets/docs/box-step-up.pdf', ai:'assets/videos/box-step-up-ia.mp4', real:'assets/videos/box-step-up-real.mp4' })"
-                >
-                  Ver ficha
-                </button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Box step-up')">Añadir</button>
               </div>
             </div>
           </article>
@@ -1070,11 +975,7 @@
               <h5>Estiramiento isquiotibial</h5>
               <div class="meta"><span>Pierna</span><span>Movilidad</span><span>Suelo</span></div>
               <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Estiramiento isquiotibial', category:'Estiramientos', description:'Modelo placeholder para la sección de estiramientos.', pdf:'assets/docs/estiramiento-isquios.pdf', ai:'assets/videos/estiramiento-isquios-ia.mp4', real:'assets/videos/estiramiento-isquios-real.mp4' })"
-                >
+                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Estiramiento isquiotibial', category:'Estiramientos', description:'Modelo placeholder para la sección de estiramientos.', pdf:'assets/docs/estiramiento-isquios.pdf', real:'assets/videos/estiramiento-isquios-real.mp4' })">
                   Ver ficha
                 </button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Estiramiento isquiotibial')">Añadir</button>
@@ -1088,11 +989,7 @@
               <h5>Apertura de cadera</h5>
               <div class="meta"><span>Cadera</span><span>Movilidad</span><span>Control</span></div>
               <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Apertura de cadera', category:'Estiramientos', description:'Plantilla visual para estiramientos y movilidad.', pdf:'assets/docs/apertura-cadera.pdf', ai:'assets/videos/apertura-cadera-ia.mp4', real:'assets/videos/apertura-cadera-real.mp4' })"
-                >
+                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Apertura de cadera', category:'Estiramientos', description:'Plantilla visual para estiramientos y movilidad.', pdf:'assets/docs/apertura-cadera.pdf', real:'assets/videos/apertura-cadera-real.mp4' })">
                   Ver ficha
                 </button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Apertura de cadera')">Añadir</button>
@@ -1106,77 +1003,10 @@
               <h5>Movilidad torácica</h5>
               <div class="meta"><span>Columna</span><span>Movilidad</span><span>Respiración</span></div>
               <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Movilidad torácica', category:'Estiramientos', description:'Ejemplo editable para tu biblioteca de movilidad.', pdf:'assets/docs/movilidad-toracica.pdf', ai:'assets/videos/movilidad-toracica-ia.mp4', real:'assets/videos/movilidad-toracica-real.mp4' })"
-                >
+                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Movilidad torácica', category:'Estiramientos', description:'Ejemplo editable para tu biblioteca de movilidad.', pdf:'assets/docs/movilidad-toracica.pdf', real:'assets/videos/movilidad-toracica-real.mp4' })">
                   Ver ficha
                 </button>
                 <button type="button" class="mini-btn" onclick="addToRoutine('Movilidad torácica')">Añadir</button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="rehabilitacion">
-        <div class="row-head">
-          <h4>Rehabilitación</h4>
-          <p>Ejercicios enfocados a control motor, recuperación y readaptación.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="rehabilitacion" data-title="Puente de glúteo">
-            <div class="exercise-thumb"><span class="exercise-label">Rehabilitación</span></div>
-            <div class="exercise-body">
-              <h5>Puente de glúteo</h5>
-              <div class="meta"><span>Core</span><span>Cadera</span><span>Control motor</span></div>
-              <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Puente de glúteo', category:'Rehabilitación', description:'Ejercicio placeholder para la categoría de rehabilitación.', pdf:'assets/docs/puente-gluteo.pdf', ai:'assets/videos/puente-gluteo-ia.mp4', real:'assets/videos/puente-gluteo-real.mp4' })"
-                >
-                  Ver ficha
-                </button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Puente de glúteo')">Añadir</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="rehabilitacion" data-title="Equilibrio unipodal">
-            <div class="exercise-thumb"><span class="exercise-label">Rehabilitación</span></div>
-            <div class="exercise-body">
-              <h5>Equilibrio unipodal</h5>
-              <div class="meta"><span>Propiocepción</span><span>Tobillo</span><span>Control</span></div>
-              <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Equilibrio unipodal', category:'Rehabilitación', description:'Plantilla para una ficha clínica o deportiva.', pdf:'assets/docs/equilibrio-unipodal.pdf', ai:'assets/videos/equilibrio-unipodal-ia.mp4', real:'assets/videos/equilibrio-unipodal-real.mp4' })"
-                >
-                  Ver ficha
-                </button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Equilibrio unipodal')">Añadir</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="rehabilitacion" data-title="Step down controlado">
-            <div class="exercise-thumb"><span class="exercise-label">Rehabilitación</span></div>
-            <div class="exercise-body">
-              <h5>Step down controlado</h5>
-              <div class="meta"><span>Rodilla</span><span>Excéntrico</span><span>Readaptación</span></div>
-              <div class="card-actions">
-                <button
-                  type="button"
-                  class="mini-btn primary"
-                  onclick="openExercise({ title:'Step down controlado', category:'Rehabilitación', description:'Ejemplo preparado para la arquitectura general.', pdf:'assets/docs/step-down-controlado.pdf', ai:'assets/videos/step-down-controlado-ia.mp4', real:'assets/videos/step-down-controlado-real.mp4' })"
-                >
-                  Ver ficha
-                </button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Step down controlado')">Añadir</button>
               </div>
             </div>
           </article>
@@ -1206,25 +1036,14 @@
         <a id="pdfLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
       </section>
 
-      <div style="display: grid; gap: 18px;">
-        <section class="resource">
-          <h4>Vídeo IA</h4>
-          <p>Espacio preparado para la versión generada del ejercicio.</p>
-          <div class="placeholder" id="aiPlaceholder">
-            Sustituye este bloque por tu vídeo IA, embed o reproductor.
-          </div>
-          <a id="aiLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">Abrir vídeo IA</a>
-        </section>
-
-        <section class="resource">
-          <h4>Vídeo real</h4>
-          <p>Espacio preparado para la demostración grabada real del ejercicio.</p>
-          <div class="placeholder" id="realPlaceholder">
-            Sustituye este bloque por tu vídeo real, embed o reproductor.
-          </div>
-          <a id="realLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">Abrir vídeo real</a>
-        </section>
-      </div>
+      <section class="resource">
+        <h4>Vídeo real</h4>
+        <p>Espacio preparado para la demostración grabada real del ejercicio.</p>
+        <div class="placeholder" id="realPlaceholder">
+          Sustituye este bloque por tu vídeo real, embed o reproductor.
+        </div>
+        <a id="realLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">Abrir vídeo real</a>
+      </section>
     </div>
   </dialog>
 
@@ -1284,10 +1103,8 @@
     const exerciseSubtitle = document.getElementById("exerciseSubtitle");
     const exerciseDescription = document.getElementById("exerciseDescription");
     const pdfLink = document.getElementById("pdfLink");
-    const aiLink = document.getElementById("aiLink");
     const realLink = document.getElementById("realLink");
     const pdfPlaceholder = document.getElementById("pdfPlaceholder");
-    const aiPlaceholder = document.getElementById("aiPlaceholder");
     const realPlaceholder = document.getElementById("realPlaceholder");
     const searchInput = document.getElementById("searchInput");
     const categoryFilter = document.getElementById("categoryFilter");
@@ -1353,12 +1170,9 @@
       exerciseSubtitle.textContent = exercise.category;
       exerciseDescription.textContent = exercise.description;
       pdfLink.href = exercise.pdf;
-      aiLink.href = exercise.ai;
       realLink.href = exercise.real;
       pdfPlaceholder.textContent = `Archivo vinculado: ${exercise.pdf}`;
-      aiPlaceholder.textContent = `Vídeo IA vinculado: ${exercise.ai}`;
       realPlaceholder.textContent = `Vídeo real vinculado: ${exercise.real}`;
-
       if (typeof dialog.showModal === "function") dialog.showModal();
     }
 
@@ -1381,7 +1195,6 @@
         alert("Añade o selecciona primero un cliente.");
         return;
       }
-
       routineNameInput.value = "";
       addRoutineDialog.showModal();
     }
@@ -1404,7 +1217,6 @@
       event.preventDefault();
       const name = clientNameInput.value.trim();
       if (!name) return;
-
       const client = { id: createId(), name, routines: [] };
       clients.push(client);
       syncClientSelect();
@@ -1421,7 +1233,6 @@
       event.preventDefault();
       const client = getSelectedClient();
       if (!client) return;
-
       const name = routineNameInput.value.trim();
       if (!name) return;
 
@@ -1522,9 +1333,7 @@
         return;
       }
 
-      clientSelect.innerHTML = clients
-        .map((client) => `<option value="${client.id}">${client.name}</option>`)
-        .join("");
+      clientSelect.innerHTML = clients.map((client) => `<option value="${client.id}">${client.name}</option>`).join("");
     }
 
     function syncRoutineSelect() {
@@ -1544,9 +1353,7 @@
         return;
       }
 
-      routineSelect.innerHTML = client.routines
-        .map((routine) => `<option value="${routine.id}">${routine.name}</option>`)
-        .join("");
+      routineSelect.innerHTML = client.routines.map((routine) => `<option value="${routine.id}">${routine.name}</option>`).join("");
 
       const selectedRoutine = client.routines.find((routine) => routine.id === routineSelect.value) || client.routines[0];
       routineSelect.value = selectedRoutine.id;
@@ -1738,7 +1545,6 @@
               category: routine.name,
               description: `Ejercicio enviado dentro de la rutina ${routine.name}.`,
               pdf: `assets/docs/${slugify(exercise)}.pdf`,
-              ai: `assets/videos/${slugify(exercise)}-ia.mp4`,
               real: `assets/videos/${slugify(exercise)}-real.mp4`
             });
           });
