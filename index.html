@@ -8,10 +8,9 @@
     name="description"
     content="Kinisiteca, plataforma premium para entrenadores y clientes con entrenamientos personalizados y biblioteca interactiva."
   />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap"
+  //fonts.googleapis.com" />
+  //fonts.gstatic.com" crossorigin />
+  //fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet"
   />
   <style>
@@ -406,6 +405,7 @@
       overflow-x: auto;
       padding-bottom: 8px;
       scroll-snap-type: x proximity;
+      align-items: stretch;
     }
 
     .row-scroll::-webkit-scrollbar { height: 10px; }
@@ -422,6 +422,9 @@
       border: 1px solid var(--line);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
       transition: 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
     }
 
     .exercise-card:hover {
@@ -439,6 +442,21 @@
         linear-gradient(180deg, #132039, #0d1628);
     }
 
+    .exercise-thumb.has-image {
+      padding: 0;
+      background: #0d1628;
+      overflow: hidden;
+    }
+
+    .exercise-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      aspect-ratio: 16 / 10;
+    }
+
     .exercise-label {
       display: inline-flex;
       align-items: center;
@@ -454,8 +472,10 @@
 
     .exercise-body {
       padding: 16px;
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 10px;
+      flex: 1;
     }
 
     .exercise-body h5 {
@@ -485,7 +505,7 @@
     .card-actions {
       display: flex;
       gap: 10px;
-      margin-top: 2px;
+      margin-top: auto;
     }
 
     .card-actions button { flex: 1; }
@@ -735,11 +755,11 @@
             </div>
 
             <div class="field-grid">
-              <label class="field">
+              abel class="field">
                 <select id="clientSelect"></select>
               </label>
 
-              <label class="field">
+              abel class="field">
                 <select id="routineSelect"></select>
               </label>
 
@@ -748,7 +768,7 @@
                 <button type="button" class="mini-btn danger" onclick="deleteCurrentRoutine()">Eliminar rutina actual</button>
               </div>
 
-              <label class="field">
+              abel class="field">
                 <input type="text" id="routineName" placeholder="Nombre de la rutina" value="" />
               </label>
 
@@ -862,11 +882,11 @@
       </div>
 
       <div class="library-toolbar">
-        <label class="field">
+        abel class="field">
           <input type="text" id="searchInput" placeholder="Buscar ejercicio" />
         </label>
 
-        <label class="field">
+        abel class="field">
           <select id="categoryFilter">
             <option value="all">Todas las categorías</option>
             <option value="fuerza">Fuerza</option>
@@ -879,87 +899,102 @@
           <h4>Pecho</h4>
           <p>Ejercicios de empuje horizontal y trabajo analítico para pectoral.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Press banca con barra">
-            <div class="exercise-thumb"><span class="exercise-label">Pecho</span></div>
+            <div class="exercise-thumb has-image">
+              <img src="images/press-banca-con-barra.jpg" alt="Miniatura del ejercicio press banca con barra" width="1600" height="1000" loading="lazy">
+            </div>
             <div class="exercise-body">
               <h5>Press banca con barra</h5>
               <div class="meta"><span>Pecho</span><span>Barra</span><span>Empuje</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press banca con barra', category:'Pecho', description:'Ficha técnica del press banca con barra.', pdf:'pdf/press_banca_con_barra.pdf', real:'assets/videos/press-banca-con-barra-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press banca con barra')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-banca-con-barra-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
 
           <article class="exercise-card" data-category="fuerza" data-title="Press plano con mancuernas">
-            <div class="exercise-thumb"><span class="exercise-label">Pecho</span></div>
+            <div class="exercise-thumb has-image">
+              <img src="images/press-plano-con-mancuernas.jpg" alt="Miniatura del ejercicio press plano con mancuernas" width="1600" height="1000" loading="lazy">
+            </div>
             <div class="exercise-body">
               <h5>Press plano con mancuernas</h5>
               <div class="meta"><span>Pecho</span><span>Mancuernas</span><span>Empuje</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press plano con mancuernas', category:'Pecho', description:'Ficha técnica del press plano con mancuernas.', pdf:'pdf/press_plano_con_mancuernas.pdf', real:'assets/videos/press-plano-con-mancuernas-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press plano con mancuernas')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-plano-con-mancuernas-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
 
           <article class="exercise-card" data-category="fuerza" data-title="Press plano smith">
-            <div class="exercise-thumb"><span class="exercise-label">Pecho</span></div>
+            <div class="exercise-thumb has-image">
+              <img src="images/press-plano-smith.jpg" alt="Miniatura del ejercicio press plano smith" width="1600" height="1000" loading="lazy">
+            </div>
             <div class="exercise-body">
               <h5>Press plano smith</h5>
               <div class="meta"><span>Pecho</span><span>Smith</span><span>Empuje</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press plano smith', category:'Pecho', description:'Ficha técnica del press plano smith.', pdf:'pdf/press_plano_smith.pdf', real:'assets/videos/press-plano-smith-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press plano smith')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-plano-smith-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
 
           <article class="exercise-card" data-category="fuerza" data-title="Press inclinado con mancuernas">
-            <div class="exercise-thumb"><span class="exercise-label">Pecho</span></div>
+            <div class="exercise-thumb has-image">
+              <img src="images/press-inclinado-con-mancuernas.jpg" alt="Miniatura del ejercicio press inclinado con mancuernas" width="1600" height="1000" loading="lazy">
+            </div>
             <div class="exercise-body">
               <h5>Press inclinado con mancuernas</h5>
               <div class="meta"><span>Pecho</span><span>Mancuernas</span><span>Inclinado</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press inclinado con mancuernas', category:'Pecho', description:'Ficha técnica del press inclinado con mancuernas.', pdf:'pdf/press_inclinado_con_mancuernas.pdf', real:'assets/videos/press-inclinado-con-mancuernas-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press inclinado con mancuernas')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-inclinado-con-mancuernas-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
 
           <article class="exercise-card" data-category="fuerza" data-title="Press inclinado smith">
-            <div class="exercise-thumb"><span class="exercise-label">Pecho</span></div>
+            <div class="exercise-thumb has-image">
+              <img src="images/press-inclinado-smith.jpg" alt="Miniatura del ejercicio press inclinado smith" width="1600" height="1000" loading="lazy">
+            </div>
             <div class="exercise-body">
               <h5>Press inclinado smith</h5>
               <div class="meta"><span>Pecho</span><span>Smith</span><span>Inclinado</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press inclinado smith', category:'Pecho', description:'Ficha técnica del press inclinado smith.', pdf:'pdf/press_inclinado_smith.pdf', real:'assets/videos/press-inclinado-smith-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press inclinado smith')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-inclinado-smith-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
 
-          <article class="exercise-card" data-category="fuerza" data-title="Peca deck">
-            <div class="exercise-thumb"><span class="exercise-label">Pecho</span></div>
+          <article class="exercise-card" data-category="fuerza" data-title="Peck deck">
+            <div class="exercise-thumb has-image">
+              <img src="images/peck-deck.jpg" alt="Miniatura del ejercicio peck deck" width="1600" height="1000" loading="lazy">
+            </div>
             <div class="exercise-body">
-              <h5>Peca deck</h5>
+              <h5>Peck deck</h5>
               <div class="meta"><span>Pecho</span><span>Máquina</span><span>Aislamiento</span></div>
               <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Peca deck', category:'Pecho', description:'Ficha técnica de la peca deck.', pdf:'pdf/peca_deck.pdf', real:'assets/videos/peca-deck-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Peca deck')">Añadir</button>
+                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Peck deck', category:'Pecho', description:'Ficha técnica del peck deck.', pdf:'pdf/peck_deck.pdf', real:'assets/videos/peck-deck-real.mp4' })">Ver ficha</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/peck-deck-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
 
           <article class="exercise-card" data-category="fuerza" data-title="Cruces en polea">
-            <div class="exercise-thumb"><span class="exercise-label">Pecho</span></div>
+            <div class="exercise-thumb has-image">
+              <img src="images/cruces-en-polea.jpg" alt="Miniatura del ejercicio cruces en polea" width="1600" height="1000" loading="lazy">
+            </div>
             <div class="exercise-body">
               <h5>Cruces en polea</h5>
               <div class="meta"><span>Pecho</span><span>Polea</span><span>Aislamiento</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Cruces en polea', category:'Pecho', description:'Ficha técnica de los cruces en polea.', pdf:'pdf/cruces_en_polea.pdf', real:'assets/videos/cruces-en-polea-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Cruces en polea')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/cruces-en-polea-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -971,6 +1006,7 @@
           <h4>Espalda</h4>
           <p>Tirones verticales y horizontales para dorsal, romboides y musculatura media de la espalda.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Jalón al pecho abierto">
             <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
@@ -979,7 +1015,7 @@
               <div class="meta"><span>Espalda</span><span>Polea</span><span>Tirón</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Jalón al pecho abierto', category:'Espalda', description:'Ficha técnica del jalón al pecho abierto.', pdf:'pdf/jalon_al_pecho_abierto.pdf', real:'assets/videos/jalon-al-pecho-abierto-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Jalón al pecho abierto')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/jalon-al-pecho-abierto-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -991,7 +1027,7 @@
               <div class="meta"><span>Espalda</span><span>Polea</span><span>Tirón</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Jalón al pecho cerrado', category:'Espalda', description:'Ficha técnica del jalón al pecho cerrado.', pdf:'pdf/jalon_al_pecho_cerrado.pdf', real:'assets/videos/jalon-al-pecho-cerrado-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Jalón al pecho cerrado')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/jalon-al-pecho-cerrado-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1003,7 +1039,7 @@
               <div class="meta"><span>Espalda</span><span>Polea</span><span>Aislamiento</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Pull over', category:'Espalda', description:'Ficha técnica del pull over.', pdf:'pdf/pull_over.pdf', real:'assets/videos/pull-over-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Pull over')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/pull-over-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1015,7 +1051,7 @@
               <div class="meta"><span>Espalda</span><span>Peso corporal</span><span>Tirón</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Dominadas', category:'Espalda', description:'Ficha técnica de las dominadas.', pdf:'pdf/dominadas.pdf', real:'assets/videos/dominadas-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Dominadas')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/dominadas-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1027,7 +1063,7 @@
               <div class="meta"><span>Espalda</span><span>Barra</span><span>Remo</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Remo gironda', category:'Espalda', description:'Ficha técnica del remo gironda.', pdf:'pdf/remo_gironda.pdf', real:'assets/videos/remo-gironda-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Remo gironda')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/remo-gironda-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1039,7 +1075,7 @@
               <div class="meta"><span>Espalda</span><span>Máquina</span><span>Remo</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Remo bajo en máquina', category:'Espalda', description:'Ficha técnica del remo bajo en máquina.', pdf:'pdf/remo_bajo_en_maquina.pdf', real:'assets/videos/remo-bajo-en-maquina-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Remo bajo en máquina')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/remo-bajo-en-maquina-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1051,7 +1087,7 @@
               <div class="meta"><span>Espalda</span><span>Barra T</span><span>Remo</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Remo en T', category:'Espalda', description:'Ficha técnica del remo en T.', pdf:'pdf/remo_en_t.pdf', real:'assets/videos/remo-en-t-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Remo en T')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/remo-en-t-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1063,6 +1099,7 @@
           <h4>Bíceps</h4>
           <p>Trabajo analítico de flexión de codo con diferentes perfiles de resistencia.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Curl 21">
             <div class="exercise-thumb"><span class="exercise-label">Bíceps</span></div>
@@ -1071,7 +1108,7 @@
               <div class="meta"><span>Bíceps</span><span>Barra</span><span>Aislamiento</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl 21', category:'Bíceps', description:'Ficha técnica del curl 21.', pdf:'pdf/curl_21.pdf', real:'assets/videos/curl-21-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Curl 21')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/curl-21-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1083,7 +1120,7 @@
               <div class="meta"><span>Bíceps</span><span>Mancuernas</span><span>Braquial</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl martillo', category:'Bíceps', description:'Ficha técnica del curl martillo.', pdf:'pdf/curl_martillo.pdf', real:'assets/videos/curl-martillo-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Curl martillo')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/curl-martillo-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1095,7 +1132,7 @@
               <div class="meta"><span>Bíceps</span><span>Máquina</span><span>Predicador</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl predicador en máquina', category:'Bíceps', description:'Ficha técnica del curl predicador en máquina.', pdf:'pdf/curl_predicador_en_maquina.pdf', real:'assets/videos/curl-predicador-en-maquina-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Curl predicador en máquina')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/curl-predicador-en-maquina-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1107,7 +1144,7 @@
               <div class="meta"><span>Bíceps</span><span>Barra</span><span>Predicador</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl predicador en barra', category:'Bíceps', description:'Ficha técnica del curl predicador en barra.', pdf:'pdf/curl_predicador_en_barra.pdf', real:'assets/videos/curl-predicador-en-barra-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Curl predicador en barra')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/curl-predicador-en-barra-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1119,7 +1156,7 @@
               <div class="meta"><span>Bíceps</span><span>Polea</span><span>Perfil largo</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl bayesian', category:'Bíceps', description:'Ficha técnica del curl bayesian.', pdf:'pdf/curl_bayesian.pdf', real:'assets/videos/curl-bayesian-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Curl bayesian')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/curl-bayesian-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1131,6 +1168,7 @@
           <h4>Tríceps</h4>
           <p>Extensión de codo en polea y cargas libres para trabajo específico de tríceps.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Extensión en polea">
             <div class="exercise-thumb"><span class="exercise-label">Tríceps</span></div>
@@ -1139,7 +1177,7 @@
               <div class="meta"><span>Tríceps</span><span>Polea</span><span>Aislamiento</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Extensión en polea', category:'Tríceps', description:'Ficha técnica de la extensión en polea.', pdf:'pdf/extension_en_polea.pdf', real:'assets/videos/extension-en-polea-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Extensión en polea')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/extension-en-polea-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1151,7 +1189,7 @@
               <div class="meta"><span>Tríceps</span><span>Barra</span><span>Carga libre</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press francés', category:'Tríceps', description:'Ficha técnica del press francés.', pdf:'pdf/press_frances.pdf', real:'assets/videos/press-frances-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press francés')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-frances-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1163,7 +1201,7 @@
               <div class="meta"><span>Tríceps</span><span>Polea</span><span>Overhead</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press katana', category:'Tríceps', description:'Ficha técnica del press katana.', pdf:'pdf/press_katana.pdf', real:'assets/videos/press-katana-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press katana')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-katana-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1175,6 +1213,7 @@
           <h4>Hombro</h4>
           <p>Ejercicios de empuje vertical y trabajo analítico para deltoides anterior, medio y posterior.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Press militar">
             <div class="exercise-thumb"><span class="exercise-label">Hombro</span></div>
@@ -1183,7 +1222,7 @@
               <div class="meta"><span>Hombro</span><span>Barra</span><span>Empuje</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press militar', category:'Hombro', description:'Ficha técnica del press militar.', pdf:'pdf/press_militar.pdf', real:'assets/videos/press-militar-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Press militar')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/press-militar-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1195,7 +1234,7 @@
               <div class="meta"><span>Hombro</span><span>Mancuernas</span><span>Deltoides medio</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Elevación lateral', category:'Hombro', description:'Ficha técnica de la elevación lateral.', pdf:'pdf/elevacion_lateral.pdf', real:'assets/videos/elevacion-lateral-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Elevación lateral')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/elevacion-lateral-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1207,7 +1246,7 @@
               <div class="meta"><span>Hombro</span><span>Mancuernas</span><span>Deltoides anterior</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Elevación frontal', category:'Hombro', description:'Ficha técnica de la elevación frontal.', pdf:'pdf/elevacion_frontal.pdf', real:'assets/videos/elevacion-frontal-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Elevación frontal')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/elevacion-frontal-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1219,7 +1258,7 @@
               <div class="meta"><span>Hombro</span><span>Polea</span><span>Posterior</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Vuelo posterior en polea', category:'Hombro', description:'Ficha técnica del vuelo posterior en polea.', pdf:'pdf/vuelo_posterior_en_polea.pdf', real:'assets/videos/vuelo-posterior-en-polea-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Vuelo posterior en polea')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/vuelo-posterior-en-polea-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1231,6 +1270,7 @@
           <h4>Abdominal</h4>
           <p>Trabajo específico del tronco en máquina y polea.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Abdominal en máquina">
             <div class="exercise-thumb"><span class="exercise-label">Abdominal</span></div>
@@ -1239,7 +1279,7 @@
               <div class="meta"><span>Core</span><span>Máquina</span><span>Flexión</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Abdominal en máquina', category:'Abdominal', description:'Ficha técnica del abdominal en máquina.', pdf:'pdf/abdominal_en_maquina.pdf', real:'assets/videos/abdominal-en-maquina-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Abdominal en máquina')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/abdominal-en-maquina-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1251,7 +1291,7 @@
               <div class="meta"><span>Core</span><span>Polea</span><span>Flexión</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Abdominal en polea', category:'Abdominal', description:'Ficha técnica del abdominal en polea.', pdf:'pdf/abdominal_en_polea.pdf', real:'assets/videos/abdominal-en-polea-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Abdominal en polea')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/abdominal-en-polea-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1263,6 +1303,7 @@
           <h4>Cuádriceps y glúteo</h4>
           <p>Patrones dominantes de rodilla y cadera donde cuádriceps y glúteo trabajan de forma sinérgica.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Extensión">
             <div class="exercise-thumb"><span class="exercise-label">Cuádriceps y glúteo</span></div>
@@ -1271,7 +1312,7 @@
               <div class="meta"><span>Cuádriceps</span><span>Máquina</span><span>Aislamiento</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Extensión', category:'Cuádriceps y glúteo', description:'Ficha técnica de la extensión de rodilla.', pdf:'pdf/extension.pdf', real:'assets/videos/extension-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Extensión')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/extension-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1283,7 +1324,7 @@
               <div class="meta"><span>Cuádriceps</span><span>Glúteo</span><span>Barra</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Sentadilla con barra', category:'Cuádriceps y glúteo', description:'Ficha técnica de la sentadilla con barra.', pdf:'pdf/ficha_sentadilla_con_barra.pdf', real:'assets/videos/sentadilla-con-barra-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Sentadilla con barra')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/sentadilla-con-barra-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1295,7 +1336,7 @@
               <div class="meta"><span>Cuádriceps</span><span>Glúteo</span><span>Unilateral</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Zancadas', category:'Cuádriceps y glúteo', description:'Ficha técnica de las zancadas.', pdf:'pdf/zancadas.pdf', real:'assets/videos/zancadas-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Zancadas')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/zancadas-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1307,7 +1348,7 @@
               <div class="meta"><span>Cuádriceps</span><span>Glúteo</span><span>Máquina</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Prensa', category:'Cuádriceps y glúteo', description:'Ficha técnica de la prensa.', pdf:'pdf/prensa.pdf', real:'assets/videos/prensa-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Prensa')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/prensa-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1319,7 +1360,7 @@
               <div class="meta"><span>Cuádriceps</span><span>Glúteo</span><span>Unilateral</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Búlgaras', category:'Cuádriceps y glúteo', description:'Ficha técnica de las búlgaras.', pdf:'pdf/bulgaras.pdf', real:'assets/videos/bulgaras-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Búlgaras')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/bulgaras-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1331,7 +1372,7 @@
               <div class="meta"><span>Cuádriceps</span><span>Glúteo</span><span>Máquina</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Hack squat', category:'Cuádriceps y glúteo', description:'Ficha técnica del hack squat.', pdf:'pdf/hack_squat.pdf', real:'assets/videos/hack-squat-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Hack squat')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/hack-squat-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1343,7 +1384,7 @@
               <div class="meta"><span>Glúteo</span><span>Cadera</span><span>Barra</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Hip thrust', category:'Cuádriceps y glúteo', description:'Ficha técnica del hip thrust.', pdf:'pdf/hip_thrust.pdf', real:'assets/videos/hip-thrust-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Hip thrust')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/hip-thrust-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1355,6 +1396,7 @@
           <h4>Isquiotibiales</h4>
           <p>Trabajo dominante de cadera y flexión de rodilla para la cadena posterior.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Curl femoral">
             <div class="exercise-thumb"><span class="exercise-label">Isquiotibiales</span></div>
@@ -1363,7 +1405,7 @@
               <div class="meta"><span>Isquios</span><span>Máquina</span><span>Flexión de rodilla</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl femoral', category:'Isquiotibiales', description:'Ficha técnica del curl femoral.', pdf:'pdf/curl_femoral.pdf', real:'assets/videos/curl-femoral-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Curl femoral')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/curl-femoral-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1375,7 +1417,7 @@
               <div class="meta"><span>Isquios</span><span>Barra</span><span>Bisagra</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Peso muerto rumano', category:'Isquiotibiales', description:'Ficha técnica del peso muerto rumano.', pdf:'pdf/peso_muerto_rumano.pdf', real:'assets/videos/peso-muerto-rumano-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Peso muerto rumano')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/peso-muerto-rumano-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1385,8 +1427,9 @@
       <section class="row-section" data-category-section="fuerza">
         <div class="row-head">
           <h4>Gemelo</h4>
-          <p>Trabajo específico de flexión plantar para la musculatura de la pantorrilla.</p>
+          <p>Trabajo específico del tríceps sural mediante elevación plantar.</p>
         </div>
+
         <div class="row-scroll">
           <article class="exercise-card" data-category="fuerza" data-title="Elevación de talón">
             <div class="exercise-thumb"><span class="exercise-label">Gemelo</span></div>
@@ -1395,7 +1438,7 @@
               <div class="meta"><span>Gemelo</span><span>Tobillo</span><span>Plantarflexión</span></div>
               <div class="card-actions">
                 <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Elevación de talón', category:'Gemelo', description:'Ficha técnica de la elevación de talón.', pdf:'pdf/elevacion_de_talon.pdf', real:'assets/videos/elevacion-de-talon-real.mp4' })">Ver ficha</button>
-                <button type="button" class="mini-btn" onclick="addToRoutine('Elevación de talón')">Añadir</button>
+                <button type="button" class="mini-btn" onclick="openVideo('assets/videos/elevacion-de-talon-real.mp4')">Ver vídeo</button>
               </div>
             </div>
           </article>
@@ -1446,7 +1489,7 @@
     </div>
 
     <form id="addClientForm" class="form-grid">
-      <label class="field">
+      abel class="field">
         <input type="text" id="clientNameInput" placeholder="Nombre del cliente" required />
       </label>
 
@@ -1467,7 +1510,7 @@
     </div>
 
     <form id="addRoutineForm" class="form-grid">
-      <label class="field">
+      abel class="field">
         <input type="text" id="routineNameInput" placeholder="Nombre de la rutina" required />
       </label>
 
@@ -1545,6 +1588,10 @@
 
     function closeExercise() {
       dialog.close();
+    }
+
+    function openVideo(url) {
+      window.open(url, "_blank", "noopener,noreferrer");
     }
 
     function openAddClientDialog() {
@@ -1905,8 +1952,8 @@
               title: exercise,
               category: routine.name,
               description: `Ejercicio enviado dentro de la rutina ${routine.name}.`,
-              pdf: `pdf/${slugify(exercise)}.pdf`,
-              real: `assets/videos/${slugify(exercise).replaceAll("_","-")}-real.mp4`
+              pdf: `pdf/${slugifyPdf(exercise)}.pdf`,
+              real: `assets/videos/${slugifyVideo(exercise)}-real.mp4`
             });
           });
         });
@@ -1917,13 +1964,22 @@
       scrollToPanels();
     }
 
-    function slugify(text) {
+    function slugifyPdf(text) {
       return text
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
         .replace(/[^a-z0-9]+/g, "_")
         .replace(/^_+|_+$/g, "");
+    }
+
+    function slugifyVideo(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
     }
 
     function filterCards() {
