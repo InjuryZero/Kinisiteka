@@ -3,2076 +3,739 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kinisiteca</title>
-  <meta
-    name="description"
-    content="Kinisiteca, plataforma premium para entrenadores y clientes con entrenamientos personalizados y biblioteca interactiva."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <title>Kinisiteca · Estructura original</title>
   <style>
-    :root {
-      --bg: #060914;
-      --surface: rgba(255, 255, 255, 0.035);
-      --surface-2: rgba(255, 255, 255, 0.025);
-      --line: rgba(255, 255, 255, 0.08);
-      --text: #f6f8ff;
-      --muted: #94a0bc;
-      --muted-2: #77839f;
-      --brand: #90adff;
-      --brand-2: #7d82ff;
-      --brand-3: #b6abff;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
-      --max: 1240px;
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: "Sora", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 0 0, rgba(144, 173, 255, 0.1), transparent 22%),
-        radial-gradient(circle at 100% 0, rgba(182, 171, 255, 0.09), transparent 20%),
-        linear-gradient(180deg, #050811 0%, #080d19 100%);
-    }
-
-    a { text-decoration: none; color: inherit; }
-    button, input, select { font: inherit; }
-
-    .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      backdrop-filter: blur(16px);
-      background: rgba(5, 8, 16, 0.78);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .topbar-inner {
-      min-height: 96px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 1.55rem;
-      font-weight: 800;
-      letter-spacing: 0.28em;
-      line-height: 1;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    .mode-tabs {
-      display: flex;
-      gap: 10px;
-      padding: 6px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .mode-btn {
-      min-height: 46px;
-      padding: 0 18px;
-      border: none;
-      border-radius: 999px;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-weight: 700;
-      transition: 0.25s ease;
-    }
-
-    .mode-btn.is-active {
-      color: white;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      box-shadow: 0 10px 24px rgba(125, 130, 255, 0.22);
-    }
-
-    .hero {
-      padding: 34px 0 18px;
-      text-align: center;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .btn {
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      transition: 0.25s ease;
-      font-weight: 700;
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2) 60%, var(--brand-3));
-      box-shadow: 0 14px 30px rgba(125, 130, 255, 0.22);
-    }
-
-    .btn-secondary {
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-    }
-
-    .section { margin: 22px 0; }
-
-    .card {
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, var(--surface), var(--surface-2));
-      box-shadow: var(--shadow);
-    }
-
-    .panel { padding: 28px; }
-
-    .section-head {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .section-head h3 {
-      margin: 0;
-      font-size: 1.18rem;
-      letter-spacing: -0.03em;
-    }
-
-    .section-head p {
-      margin: 8px 0 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.8;
-      max-width: 64ch;
-    }
-
-    [data-mode-panel] { display: none; }
-    [data-mode-panel].is-active { display: grid; gap: 22px; }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1.06fr 0.94fr;
-      gap: 22px;
-    }
-
-    .field-grid { display: grid; gap: 14px; }
-
-    .field {
-      min-height: 56px;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .field input,
-    .field select {
-      width: 100%;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: var(--text);
-    }
-
-    .field select option {
-      background: #0b1020;
-      color: white;
-    }
-
-    .stack-actions,
-    .actions-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .selected-exercises {
-      min-height: 170px;
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px dashed rgba(255, 255, 255, 0.14);
-      background: rgba(255, 255, 255, 0.02);
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .selected-empty {
-      color: var(--muted);
-      font-size: 0.92rem;
-      line-height: 1.85;
-    }
-
-    .selected-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--line);
-    }
-
-    .selected-item strong {
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-
-    .selected-item button {
-      min-height: 36px;
-      padding: 0 12px;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    .list { display: grid; gap: 12px; }
-
-    .list-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.025);
-    }
-
-    .list-item strong {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.92rem;
-    }
-
-    .list-item span {
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.7;
-    }
-
-    .mini-btn {
-      min-height: 40px;
-      padding: 0 14px;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      color: var(--text);
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--line);
-      font-weight: 600;
-    }
-
-    .mini-btn.primary {
-      color: white;
-      border: none;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-    }
-
-    .mini-btn.full {
-      width: 100%;
-      justify-content: center;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .mini-btn.danger {
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255, 255, 255, 0.03);
-      color: #ffd8d8;
-    }
-
-    .routine-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .routine-card {
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.025);
-      display: grid;
-      gap: 12px;
-    }
-
-    .routine-card h4 {
-      margin: 0;
-      font-size: 0.98rem;
-    }
-
-    .routine-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.8;
-    }
-
-    .routine-days {
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .routine-day {
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .routine-day strong { font-size: 0.92rem; }
-    .routine-day span {
-      color: var(--muted);
-      font-size: 0.84rem;
-    }
-
-    .library-toolbar {
-      display: grid;
-      grid-template-columns: 1.4fr 0.8fr;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .toolbar-field {
-      display: block;
-    }
-
-    .toolbar-search,
-    .toolbar-select {
-      width: 100%;
-      min-height: 56px;
-      padding: 0 16px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.025);
-      color: var(--text);
-      outline: none;
-      box-shadow: none;
-    }
-
-    .toolbar-search::placeholder {
-      color: var(--muted);
-    }
-
-    .toolbar-select option {
-      background: #0b1020;
-      color: white;
-    }
-
-    .row-section {
-      display: grid;
-      gap: 14px;
-      margin-top: 22px;
-    }
-
-    .row-head h4 {
-      margin: 0;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-    }
-
-    .row-head p {
-      margin: 6px 0 0;
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.8;
-    }
-
-    .row-scroll {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 285px;
-      gap: 16px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      scroll-snap-type: x proximity;
-      align-items: stretch;
-    }
-
-    .row-scroll::-webkit-scrollbar { height: 10px; }
-
-    .row-scroll::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
-    }
-
-    .exercise-card {
-      scroll-snap-align: start;
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.02));
-      transition: 0.25s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .exercise-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(144, 173, 255, 0.34);
-    }
-
-    .exercise-thumb {
-      aspect-ratio: 16 / 10;
-      padding: 18px;
-      display: flex;
-      align-items: flex-end;
-      background:
-        linear-gradient(135deg, rgba(144, 173, 255, 0.12), rgba(182, 171, 255, 0.08)),
-        linear-gradient(180deg, #132039, #0d1628);
-    }
-
-    .exercise-thumb.has-image {
-      padding: 0;
-      background: #0d1628;
-      overflow: hidden;
-    }
-
-    .exercise-thumb img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center;
-      aspect-ratio: 16 / 10;
-    }
-
-    .exercise-label {
-      display: inline-flex;
-      align-items: center;
-      min-height: 31px;
-      padding: 0 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(7, 10, 18, 0.5);
-      color: #e8eeff;
-      font-size: 0.76rem;
-      font-weight: 700;
-    }
-
-    .exercise-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
-    }
-
-    .exercise-body h5 {
-      margin: 0;
-      font-size: 0.98rem;
-    }
-
-    .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .meta span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      padding: 0 10px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--muted);
-      font-size: 0.76rem;
-      font-weight: 600;
-    }
-
-    .card-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: auto;
-    }
-
-    .card-actions button,
-    .card-actions a {
-      flex: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    dialog {
-      width: min(980px, calc(100% - 24px));
-      padding: 0;
-      border: none;
-      border-radius: 28px;
-      background: #0a1224;
-      color: white;
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.52);
-    }
-
-    dialog::backdrop {
-      background: rgba(4, 8, 16, 0.8);
-      backdrop-filter: blur(8px);
-    }
-
-    .dialog-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 24px 24px 12px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .dialog-head h3 {
-      margin: 0 0 6px;
-      font-size: 1.24rem;
-    }
-
-    .dialog-head p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .dialog-close {
-      width: 42px;
-      height: 42px;
-      border: none;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--line);
-      color: white;
-      cursor: pointer;
-    }
-
-    .dialog-body {
-      padding: 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .resource {
-      min-height: 220px;
-      padding: 18px;
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.03);
-      display: grid;
-      gap: 12px;
-      align-content: start;
-    }
-
-    .resource h4 {
-      margin: 0;
-      font-size: 0.98rem;
-    }
-
-    .resource p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.8;
-    }
-
-    .placeholder {
-      min-height: 140px;
-      border-radius: 16px;
-      border: 1px dashed rgba(255, 255, 255, 0.14);
-      background: linear-gradient(135deg, rgba(144, 173, 255, 0.11), rgba(182, 171, 255, 0.07), rgba(255, 255, 255, 0.02));
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: #dfe7ff;
-      line-height: 1.8;
-      padding: 16px;
-      font-size: 0.88rem;
-    }
-
-    .resource-link {
-      min-height: 44px;
-      padding: 0 14px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      color: white;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-    }
-
-    .form-grid {
-      display: grid;
-      gap: 14px;
-      padding: 24px;
-    }
-
-    .dialog-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 4px;
-    }
-
-    .footer {
-      padding: 8px 0 42px;
-      color: var(--muted-2);
-      text-align: center;
-      font-size: 0.84rem;
-      letter-spacing: 0.24em;
-    }
-
-    @media (max-width: 1024px) {
-      .grid-2,
-      .dialog-body {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 820px) {
-      .topbar-inner {
-        padding: 14px 0;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav {
-        width: 100%;
-        justify-content: flex-start;
-      }
-
-      .brand h1 {
-        font-size: 1.25rem;
-        letter-spacing: 0.18em;
-      }
-
-      .library-toolbar,
-      .routine-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 28px;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .panel { padding: 18px; }
-
-      .mode-tabs { width: 100%; }
-
-      .mode-btn {
-        flex: 1;
-        padding: 0 12px;
-      }
-
-      .row-scroll {
-        grid-auto-columns: 86%;
-      }
-
-      .dialog-actions,
-      .stack-actions,
-      .actions-row,
-      .card-actions {
-        flex-direction: column;
-      }
-
-      .dialog-actions button,
-      .stack-actions button,
-      .actions-row button,
-      .card-actions button,
-      .card-actions a {
-        width: 100%;
-      }
+    :root{
+      --bg:#050505;
+      --panel:#0f0f10;
+      --panel2:#141415;
+      --line:#262626;
+      --text:#f3f3f3;
+      --muted:#b9b9b9;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:linear-gradient(180deg,#040404,#0a0a0a);
+      color:var(--text);
+    }
+    .wrap{
+      max-width:1440px;
+      margin:0 auto;
+      padding:24px;
+    }
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+    }
+    .brand{
+      font-size:28px;
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+    .top-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    button{
+      border:1px solid #303030;
+      background:#151515;
+      color:#fff;
+      border-radius:12px;
+      padding:10px 14px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    button.primary{
+      background:#f3f3f3;
+      color:#050505;
+      border-color:#f3f3f3;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .card{
+      background:linear-gradient(180deg,#111112,#0d0d0e);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 14px 35px rgba(0,0,0,.22);
+    }
+    .title-lg{
+      font-size:32px;
+      font-weight:900;
+      line-height:1.05;
+      margin-bottom:10px;
+    }
+    .muted{color:var(--muted)}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin-top:16px;
+    }
+    .stat{
+      background:#161617;
+      border:1px solid #252525;
+      border-radius:16px;
+      padding:14px;
+    }
+    .stat .n{
+      font-size:22px;
+      font-weight:900;
+    }
+    .section-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      align-items:start;
+    }
+    .module-card{
+      background:linear-gradient(180deg,#111112,#0d0d0e);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:18px;
+    }
+    .module-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .module-title{
+      font-size:22px;
+      font-weight:900;
+    }
+    .chip{
+      display:inline-block;
+      padding:7px 10px;
+      border:1px solid #303030;
+      border-radius:999px;
+      background:#161616;
+      color:#ddd;
+      font-size:12px;
+    }
+    .panel{
+      background:#0f0f10;
+      border:1px solid #252525;
+      border-radius:18px;
+      padding:14px;
+    }
+    .search{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid #2b2b2b;
+      background:#0e0e0f;
+      color:#fff;
+      margin-bottom:12px;
+    }
+    .patient{
+      padding:14px;
+      border:1px solid #232323;
+      border-radius:16px;
+      background:#131314;
+      margin-bottom:10px;
+    }
+    .patient.active{
+      border-color:#484848;
+      background:#181818;
+    }
+    .patient .name{font-weight:800}
+    .patient .meta{
+      font-size:13px;
+      color:#bdbdbd;
+      margin-top:4px;
+    }
+    .map-box{
+      height:360px;
+      border:1px solid #282828;
+      border-radius:18px;
+      background:radial-gradient(circle at 50% 20%,rgba(255,255,255,.06),transparent 16%),linear-gradient(180deg,#111,#0d0d0d);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-weight:800;
+      letter-spacing:.04em;
+      margin-bottom:12px;
+    }
+    .small-note{
+      font-size:13px;
+      color:#bdbdbd;
+    }
+    .sheet-wrap{
+      background:#0d0d0d;
+      border:1px solid #252525;
+      border-radius:20px;
+      padding:18px;
+      max-height:74vh;
+      overflow:auto;
+      margin-top:14px;
+    }
+    .page{
+      width:210mm;
+      min-height:297mm;
+      margin:0 auto 20px;
+      background:#111111;
+      border:1px solid #242424;
+      box-shadow:0 18px 45px rgba(0,0,0,.35);
+      padding:18mm 14mm 16mm;
+      position:relative;
+    }
+    .page-number{
+      position:absolute;
+      right:12mm;
+      bottom:9mm;
+      color:#d8d8d8;
+      font-size:13px;
+    }
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .header .title{
+      text-align:center;
+      flex:1;
+      font-weight:900;
+      font-size:28px;
+      line-height:1.05;
+      letter-spacing:.02em;
+      color:#f3f3f3;
+    }
+    .logo-box{
+      width:150px;
+      text-align:right;
+      font-size:12px;
+      color:#b8b8b8;
+      font-weight:700;
+    }
+    .logo-chip{
+      border:1px solid #303030;
+      background:#171717;
+      color:#fff;
+      border-radius:999px;
+      padding:7px 12px;
+      display:inline-block;
+      font-size:11px;
+      letter-spacing:.08em;
+    }
+    h2.section{
+      margin:12px 0 8px;
+      font-size:20px;
+      letter-spacing:.02em;
+      font-weight:900;
+      color:#fff;
+    }
+    h3.block-title{
+      margin:0 0 6px;
+      font-size:15px;
+      font-weight:900;
+      color:#fff;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+    }
+    .box{
+      border:1.5px solid #303030;
+      background:linear-gradient(180deg,#131313,#101010);
+      padding:10px;
+      margin-bottom:12px;
+    }
+    .grid-2,.grid-3,.grid-4{
+      display:grid;
+      gap:0;
+      border:1.5px solid #303030;
+      margin-bottom:12px;
+    }
+    .grid-2{grid-template-columns:1fr 1fr}
+    .grid-3{grid-template-columns:1.1fr .8fr .9fr}
+    .grid-4{grid-template-columns:1fr 1fr 1fr 1fr}
+    .cell{
+      min-height:54px;
+      border-right:1.5px solid #303030;
+      border-bottom:1.5px solid #303030;
+      padding:8px 10px;
+      background:#111;
+    }
+    .grid-2 .cell:nth-child(2n),
+    .grid-3 .cell:nth-child(3n),
+    .grid-4 .cell:nth-child(4n){
+      border-right:none;
+    }
+    .label{
+      font-size:12px;
+      font-weight:800;
+      color:#d8d8d8;
+      margin-bottom:6px;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+    .fill{
+      min-height:20px;
+      border-bottom:1px solid #5a5a5a;
+    }
+    .area{
+      min-height:110px;
+      border:1.5px solid #303030;
+      background:#111;
+      padding:10px;
+      margin-bottom:12px;
+    }
+    .area.tall{min-height:180px}
+    .area.xtall{min-height:260px}
+    .subnote{
+      color:#d0d0d0;
+      font-size:13px;
+      margin-bottom:8px;
+    }
+    .map-wrap{
+      border:1.5px solid #303030;
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(180deg,#0d0d0d,#141414);
+      padding:14px;
+    }
+    .draw-toolbar{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:12px;
+    }
+    .draw-toolbar .tool{
+      background:#171717;
+      border:1px solid #2e2e2e;
+      color:#f5f5f5;
+    }
+    .draw-toolbar .tool.active{
+      border-color:#f3f3f3;
+      box-shadow:0 0 0 2px rgba(255,255,255,.18) inset;
+    }
+    .draw-stage{
+      position:relative;
+      border:1px solid #2f2f2f;
+      border-radius:16px;
+      overflow:hidden;
+      background:#0f1114;
+    }
+    .body-image{
+      display:block;
+      width:100%;
+      filter:grayscale(1) contrast(1.06) brightness(.8) sepia(.08) hue-rotate(165deg) saturate(.62);
+    }
+    canvas{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      touch-action:none;
+      cursor:crosshair;
+    }
+    .hint{
+      font-size:12px;
+      color:#a9a9a9;
+      margin-top:8px;
+    }
+    .eva-scale{
+      display:grid;
+      grid-template-columns:repeat(11,1fr);
+      gap:6px;
+      margin:10px 0 8px;
+    }
+    .eva-step{
+      padding:10px 0;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.08);
+      font-weight:800;
+      color:#111;
+    }
+    .eva-step[data-value='0']{background:#22c55e}
+    .eva-step[data-value='1']{background:#4ade80}
+    .eva-step[data-value='2']{background:#84cc16}
+    .eva-step[data-value='3']{background:#a3e635}
+    .eva-step[data-value='4']{background:#facc15}
+    .eva-step[data-value='5']{background:#fbbf24}
+    .eva-step[data-value='6']{background:#fb923c}
+    .eva-step[data-value='7']{background:#f97316}
+    .eva-step[data-value='8']{background:#ef4444}
+    .eva-step[data-value='9']{background:#dc2626}
+    .eva-step[data-value='10']{background:#b91c1c;color:#111}
+    .eva-step.active{
+      outline:3px solid rgba(255,255,255,.95);
+      transform:translateY(-1px);
+    }
+    .eva-selected{
+      margin:6px 0 10px;
+      color:#ddd;
+      font-size:14px;
+    }
+    .objective-table,.treatment-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+    }
+    .objective-table td,.objective-table th,
+    .treatment-table th,.treatment-table td{
+      border:1.5px solid #303030;
+      padding:10px;
+      vertical-align:top;
+      min-height:48px;
+    }
+    .objective-table th{
+      width:22%;
+      color:#f3f3f3;
+      text-align:left;
+      background:#141414;
+      font-size:14px;
+    }
+    .treatment-table th{
+      background:#141414;
+      color:#fff;
+      text-align:left;
+    }
+    .signature{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:22px;
+    }
+    .sign-line{
+      border-top:1.5px solid #6a6a6a;
+      padding-top:8px;
+      color:#d8d8d8;
+      text-align:center;
+      margin-top:38px;
+    }
+    @media (max-width:1200px){
+      .hero,.section-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="brand">
-        <h1>KINISITECA</h1>
+  <div class="wrap">
+    <div class="topbar">
+      <div>
+        <div class="brand">KINISITECA</div>
+        <div class="muted">Vista con estructura anterior: módulos principales arriba y contenido integrado sin cambiar la organización base.</div>
       </div>
-
-      <nav class="nav" aria-label="Selector de versión">
-        <div class="mode-tabs" role="tablist" aria-label="Modo de acceso">
-          <button
-            type="button"
-            class="mode-btn is-active"
-            role="tab"
-            aria-selected="true"
-            aria-controls="panel-trainer"
-            id="tab-trainer"
-            data-mode-button="trainer"
-            tabindex="0"
-          >
-            Entrenador
-          </button>
-          <button
-            type="button"
-            class="mode-btn"
-            role="tab"
-            aria-selected="false"
-            aria-controls="panel-client"
-            id="tab-client"
-            data-mode-button="client"
-            tabindex="-1"
-          >
-            Cliente
-          </button>
-        </div>
-      </nav>
+      <div class="top-actions">
+        <button>Compartir</button>
+        <button>Exportar PDF</button>
+        <button class="primary" onclick="window.print()">Imprimir</button>
+      </div>
     </div>
-  </header>
 
-  <main class="container">
     <section class="hero">
-      <div class="hero-actions">
-        <button type="button" class="btn btn-primary" onclick="scrollToPanels()">Ver entrenamientos</button>
-        <button type="button" class="btn btn-secondary" onclick="scrollToLibrary()">Explorar biblioteca</button>
-      </div>
-    </section>
-
-    <section class="section" id="paneles">
-      <div id="panel-trainer" data-mode-panel class="is-active" role="tabpanel" aria-labelledby="tab-trainer">
-        <div class="grid-2">
-          <article class="card panel">
-            <div class="section-head">
-              <div>
-                <h3>Crear entrenamiento</h3>
-                <p>Selecciona un cliente, elige una de sus rutinas o crea una nueva para asignarle ejercicios.</p>
-              </div>
-            </div>
-
-            <div class="field-grid">
-              <label class="field">
-                <select id="clientSelect"></select>
-              </label>
-
-              <label class="field">
-                <select id="routineSelect"></select>
-              </label>
-
-              <div class="stack-actions">
-                <button type="button" class="mini-btn primary" onclick="openAddRoutineDialog()">Añadir rutina</button>
-                <button type="button" class="mini-btn danger" onclick="deleteCurrentRoutine()">Eliminar rutina actual</button>
-              </div>
-
-              <label class="field">
-                <input type="text" id="routineName" placeholder="Nombre de la rutina" value="" />
-              </label>
-
-              <div class="selected-exercises" id="selectedExercises">
-                <div class="selected-empty">
-                  Todavía no has añadido ejercicios. Utiliza el botón Añadir desde cualquier tarjeta de la biblioteca interactiva.
-                </div>
-              </div>
-
-              <div class="actions-row">
-                <button type="button" class="btn btn-primary" onclick="saveRoutine()">Guardar rutina</button>
-                <button type="button" class="btn btn-secondary" onclick="clearRoutine()">Vaciar selección</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="card panel">
-            <div class="section-head">
-              <div>
-                <h3>Clientes</h3>
-                <p>Añade clientes nuevos y organiza varias rutinas para cada uno, por ejemplo una por día de la semana.</p>
-              </div>
-            </div>
-
-            <div class="list" id="clientsList"></div>
-
-            <div style="margin-top: 14px;">
-              <button type="button" class="mini-btn primary full" onclick="openAddClientDialog()">Añadir cliente</button>
-            </div>
-          </article>
+      <div class="card">
+        <div class="title-lg">Plataforma de fisioterapia premium</div>
+        <div class="muted">Misma estructura general que antes, manteniendo la jerarquía principal y añadiendo la historia clínica solo donde corresponde.</div>
+        <div class="stats">
+          <div class="stat"><div class="n">124</div><div class="muted">Pacientes</div></div>
+          <div class="stat"><div class="n">39</div><div class="muted">Historias activas</div></div>
+          <div class="stat"><div class="n">40</div><div class="muted">Ejercicios publicados</div></div>
         </div>
+      </div>
 
-        <article class="card panel" style="margin-top: 22px;">
-          <div class="section-head">
-            <div>
-              <h3>Entrenamientos guardados</h3>
-              <p>Resumen de clientes y de las rutinas que ya tienen creadas dentro de la plataforma.</p>
-            </div>
+      <div class="card">
+        <div class="module-header">
+          <div>
+            <div class="module-title">Acceso rápido</div>
+            <div class="muted">Estructura intacta, separación clara entre módulos.</div>
           </div>
+          <span class="chip">Como cliente</span>
+        </div>
+        <div class="panel">
+          <div class="chip">Historia Clínica</div>
+          <div class="chip">Rehabilitación</div>
+          <div style="height:12px"></div>
+          <div class="small-note">La historia clínica queda integrada en su módulo, mientras rehabilitación conserva su mapa anatómico y su lógica previa sin alteraciones.</div>
+        </div>
+      </div>
+    </section>
 
-          <div class="list" id="savedRoutines">
-            <div class="list-item">
-              <div>
-                <strong>Aún no hay rutinas guardadas</strong>
-                <span>Crea un cliente, añade una rutina y guarda sus ejercicios.</span>
-              </div>
-            </div>
+    <section class="section-grid">
+      <article class="module-card">
+        <div class="module-header">
+          <div>
+            <div class="module-title">Historia Clínica</div>
+            <div class="muted">Pacientes, documentos, guardado, exportación e impresión.</div>
           </div>
-        </article>
-      </div>
-
-      <div id="panel-client" data-mode-panel role="tabpanel" aria-labelledby="tab-client" hidden>
-        <div class="grid-2">
-          <article class="card panel">
-            <div class="section-head">
-              <div>
-                <h3>Mi entrenamiento</h3>
-                <p id="clientViewText">El cliente visualiza aquí sus rutinas y abre los ejercicios asignados.</p>
-              </div>
-            </div>
-
-            <div class="routine-grid" id="clientRoutineGrid">
-              <article class="routine-card">
-                <h4>Sin rutinas asignadas</h4>
-                <p>Aquí aparecerán las rutinas cuando el entrenador guarde un plan para un cliente.</p>
-              </article>
-            </div>
-          </article>
-
-          <article class="card panel">
-            <div class="section-head">
-              <div>
-                <h3>Estado del plan</h3>
-                <p>Bloque reservado para futuras funciones de seguimiento, adherencia y progreso.</p>
-              </div>
-            </div>
-
-            <div class="list">
-              <div class="list-item">
-                <div>
-                  <strong>Plan activo</strong>
-                  <span>Se actualizará cuando el entrenador guarde una o varias rutinas personalizadas.</span>
-                </div>
-              </div>
-
-              <div class="list-item">
-                <div>
-                  <strong>Última actualización</strong>
-                  <span>Visible cuando el plan haya sido asignado.</span>
-                </div>
-              </div>
-
-              <div class="list-item">
-                <div>
-                  <strong>Próximo paso</strong>
-                  <span>Historial, feedback, checklists y seguimiento.</span>
-                </div>
-              </div>
-            </div>
-          </article>
+          <span class="chip">Activo</span>
         </div>
-      </div>
+
+        <div class="panel">
+          <input class="search" placeholder="Buscar paciente" />
+          <div class="patient active">
+            <div class="name">Lucía Martín Gómez</div>
+            <div class="meta">3 historias · Última edición hoy</div>
+          </div>
+          <div class="patient">
+            <div class="name">Carlos Peña Ruiz</div>
+            <div class="meta">5 historias · Seguimiento</div>
+          </div>
+          <div class="patient">
+            <div class="name">Ana Torres Vidal</div>
+            <div class="meta">2 historias · Archivada</div>
+          </div>
+        </div>
+
+        <div class="sheet-wrap">
+          <section class="page">
+            <div class="header">
+              <div class="logo-box"><span class="logo-chip">KINISITECA</span></div>
+              <div class="title">HOJA DE REGISTRO<br />EN FISIOTERAPIA</div>
+              <div class="logo-box">Plantilla editable<br />Historia clínica</div>
+            </div>
+
+            <h2 class="section">Datos básicos del paciente</h2>
+
+            <div class="grid-3">
+              <div class="cell"><div class="label">Apellidos</div><div class="fill" contenteditable="true">Martín Gómez</div></div>
+              <div class="cell"><div class="label">Nombre</div><div class="fill" contenteditable="true">Lucía</div></div>
+              <div class="cell"><div class="label">Profesión</div><div class="fill" contenteditable="true">Diseñadora</div></div>
+              <div class="cell"><div class="label">Sexo</div><div class="fill" contenteditable="true">Mujer</div></div>
+              <div class="cell"><div class="label">F. nacimiento</div><div class="fill" contenteditable="true">14/02/1992</div></div>
+              <div class="cell"><div class="label">Diagnóstico médico / CIE 11</div><div class="fill" contenteditable="true">Cervicalgia mecánica</div></div>
+            </div>
+
+            <div class="grid-2">
+              <div class="cell"><div class="label">Domicilio</div><div class="fill" contenteditable="true">Calle Mayor 18</div></div>
+              <div class="cell"><div class="label">Localidad</div><div class="fill" contenteditable="true">Madrid</div></div>
+              <div class="cell"><div class="label">Código postal</div><div class="fill" contenteditable="true">28013</div></div>
+              <div class="cell"><div class="label">Teléfonos / email</div><div class="fill" contenteditable="true">600000000 · lucia@email.com</div></div>
+            </div>
+
+            <div class="box">
+              <h3 class="block-title">Identificación de problemas fisioterapéuticos</h3>
+              <div class="subnote">Limitación funcional, deterioro, disfunción, impotencia funcional, discapacidad y dependencia.</div>
+              <div class="area tall" contenteditable="true">Dolor cervical y dorsal alto asociado a carga postural mantenida, rigidez matutina y disminución de tolerancia al trabajo de escritorio.</div>
+            </div>
+
+            <div class="grid-4">
+              <div class="cell"><div class="label">Fecha 1ª valoración</div><div class="fill" contenteditable="true">24/06/2026</div></div>
+              <div class="cell"><div class="label">Comienzo tratamiento</div><div class="fill" contenteditable="true">24/06/2026</div></div>
+              <div class="cell"><div class="label">Frecuencia tratamiento</div><div class="fill" contenteditable="true">2/semana</div></div>
+              <div class="cell"><div class="label">Nº sesiones</div><div class="fill" contenteditable="true">8</div></div>
+            </div>
+
+            <div class="grid-2">
+              <div class="cell"><div class="label">Fecha de alta</div><div class="fill" contenteditable="true"></div></div>
+              <div class="cell"><div class="label">Tratamientos afines</div><div class="fill" contenteditable="true">Ejercicio terapéutico domiciliario</div></div>
+            </div>
+
+            <div class="area" contenteditable="true"><strong>Observaciones:</strong> paciente muy adherente y motivada.</div>
+            <div class="page-number">1</div>
+          </section>
+
+          <section class="page">
+            <div class="header">
+              <div class="logo-box"><span class="logo-chip">KINISITECA</span></div>
+              <div class="title">VALORACIÓN ANALÍTICA</div>
+              <div class="logo-box">Historia clínica</div>
+            </div>
+
+            <div class="area" contenteditable="true"><strong>Objetivos del usuario y/o familia</strong><br />disminuir dolor, tolerar jornada laboral completa y retomar entrenamiento.</div>
+
+            <div class="box">
+              <h3 class="block-title">Representación del dolor en el mapa corporal</h3>
+
+              <div class="map-wrap">
+                <div class="draw-toolbar">
+                  <button class="tool active" id="penBtn" type="button">Marcar</button>
+                  <button class="tool" id="eraseBtn" type="button">Borrar</button>
+                  <button class="tool" id="clearBtn" type="button">Limpiar todo</button>
+                </div>
+
+                <div class="draw-stage">
+                  <img class="body-image" id="bodyMap" src="IMG_0817.jpeg" alt="Mapa corporal" />
+                  <canvas id="drawCanvas"></canvas>
+                </div>
+
+                <div class="hint">Compatible con cursor, pantalla táctil y Apple Pencil.</div>
+              </div>
+
+              <div class="grid-2" style="margin-top:12px">
+                <div class="cell"><div class="label">Localización</div><div class="fill" contenteditable="true">Cervical posterior y trapecio superior</div></div>
+                <div class="cell"><div class="label">Calidad</div><div class="fill" contenteditable="true">Opresivo</div></div>
+                <div class="cell"><div class="label">Patrón del dolor</div><div class="fill" contenteditable="true">Mecánico</div></div>
+                <div class="cell"><div class="label">Intensidad</div><div class="fill" contenteditable="true">Moderada</div></div>
+              </div>
+
+              <div class="eva-scale" id="evaScale">
+                <button type="button" class="eva-step" data-value="0">0</button>
+                <button type="button" class="eva-step" data-value="1">1</button>
+                <button type="button" class="eva-step" data-value="2">2</button>
+                <button type="button" class="eva-step" data-value="3">3</button>
+                <button type="button" class="eva-step" data-value="4">4</button>
+                <button type="button" class="eva-step active" data-value="5">5</button>
+                <button type="button" class="eva-step" data-value="6">6</button>
+                <button type="button" class="eva-step" data-value="7">7</button>
+                <button type="button" class="eva-step" data-value="8">8</button>
+                <button type="button" class="eva-step" data-value="9">9</button>
+                <button type="button" class="eva-step" data-value="10">10</button>
+              </div>
+
+              <div class="eva-selected">EVA seleccionada: <strong id="evaValue">5</strong></div>
+              <div class="area" contenteditable="true"><strong>Observaciones:</strong> dolor reproducible con carga postural mantenida.</div>
+            </div>
+
+            <div class="page-number">2</div>
+          </section>
+        </div>
+      </article>
+
+      <article class="module-card">
+        <div class="module-header">
+          <div>
+            <div class="module-title">Rehabilitación</div>
+            <div class="muted">Mapa anatómico y estructura previa conservados.</div>
+          </div>
+          <span class="chip">Sin cambios</span>
+        </div>
+
+        <div class="panel">
+          <div class="map-box">MAPA ANATÓMICO · REHABILITACIÓN</div>
+          <input class="search" placeholder="Buscar región muscular" />
+          <div class="small-note">Este módulo se mantiene intacto: mapa anatómico, búsqueda de regiones y estructura previa sin introducir la historia clínica dentro de aquí.</div>
+          <div style="height:14px"></div>
+          <div class="patient"><div class="name">Fuerza</div><div class="meta">20 ejercicios iniciales</div></div>
+          <div class="patient"><div class="name">Estiramientos</div><div class="meta">20 ejercicios iniciales</div></div>
+        </div>
+      </article>
     </section>
-
-    <section class="section card panel" id="biblioteca">
-      <div class="section-head">
-        <div>
-          <h3>Biblioteca interactiva</h3>
-          <p>Explora la base de ejercicios y añade los que necesites a la rutina activa.</p>
-        </div>
-      </div>
-
-      <div class="library-toolbar">
-        <label class="toolbar-field">
-          <input type="text" id="searchInput" class="toolbar-search" placeholder="Buscar ejercicio" />
-        </label>
-
-        <label class="toolbar-field">
-          <select id="categoryFilter" class="toolbar-select">
-            <option value="all">Todas las categorías</option>
-            <option value="fuerza">Fuerza</option>
-          </select>
-        </label>
-      </div>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Pecho</h4>
-          <p>Ejercicios de empuje horizontal y trabajo analítico para pectoral.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Press banca con barra">
-            <div class="exercise-thumb has-image">
-              <img src="images/press-banca-con-barra.jpg" alt="Miniatura del ejercicio press banca con barra" width="1600" height="1000" loading="lazy">
-            </div>
-            <div class="exercise-body">
-              <h5>Press banca con barra</h5>
-              <div class="meta"><span>Pecho</span><span>Barra</span><span>Empuje</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press banca con barra', category:'Pecho', description:'Ficha técnica del press banca con barra.', pdf:'pdf/press_banca_con_barra.pdf', real:'assets/videos/press-banca-con-barra-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-banca-con-barra-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Press plano con mancuernas">
-            <div class="exercise-thumb has-image">
-              <img src="images/press-plano-con-mancuernas.jpg" alt="Miniatura del ejercicio press plano con mancuernas" width="1600" height="1000" loading="lazy">
-            </div>
-            <div class="exercise-body">
-              <h5>Press plano con mancuernas</h5>
-              <div class="meta"><span>Pecho</span><span>Mancuernas</span><span>Empuje</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press plano con mancuernas', category:'Pecho', description:'Ficha técnica del press plano con mancuernas.', pdf:'pdf/press_plano_con_mancuernas.pdf', real:'assets/videos/press-plano-con-mancuernas-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-plano-con-mancuernas-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Press plano smith">
-            <div class="exercise-thumb has-image">
-              <img src="images/press-plano-smith.jpg" alt="Miniatura del ejercicio press plano smith" width="1600" height="1000" loading="lazy">
-            </div>
-            <div class="exercise-body">
-              <h5>Press plano smith</h5>
-              <div class="meta"><span>Pecho</span><span>Smith</span><span>Empuje</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press plano smith', category:'Pecho', description:'Ficha técnica del press plano smith.', pdf:'pdf/press_plano_smith.pdf', real:'assets/videos/press-plano-smith-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-plano-smith-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Press inclinado con mancuernas">
-            <div class="exercise-thumb has-image">
-              <img src="images/press-inclinado-con-mancuernas.jpg" alt="Miniatura del ejercicio press inclinado con mancuernas" width="1600" height="1000" loading="lazy">
-            </div>
-            <div class="exercise-body">
-              <h5>Press inclinado con mancuernas</h5>
-              <div class="meta"><span>Pecho</span><span>Mancuernas</span><span>Inclinado</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press inclinado con mancuernas', category:'Pecho', description:'Ficha técnica del press inclinado con mancuernas.', pdf:'pdf/press_inclinado_con_mancuernas.pdf', real:'assets/videos/press-inclinado-con-mancuernas-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-inclinado-con-mancuernas-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Press inclinado smith">
-            <div class="exercise-thumb has-image">
-              <img src="images/press-inclinado-smith.jpg" alt="Miniatura del ejercicio press inclinado smith" width="1600" height="1000" loading="lazy">
-            </div>
-            <div class="exercise-body">
-              <h5>Press inclinado smith</h5>
-              <div class="meta"><span>Pecho</span><span>Smith</span><span>Inclinado</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press inclinado smith', category:'Pecho', description:'Ficha técnica del press inclinado smith.', pdf:'pdf/press_inclinado_smith.pdf', real:'assets/videos/press-inclinado-smith-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-inclinado-smith-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Peck deck">
-            <div class="exercise-thumb has-image">
-              <img src="images/peck-deck.jpg" alt="Miniatura del ejercicio peck deck" width="1600" height="1000" loading="lazy">
-            </div>
-            <div class="exercise-body">
-              <h5>Peck deck</h5>
-              <div class="meta"><span>Pecho</span><span>Máquina</span><span>Aislamiento</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Peck deck', category:'Pecho', description:'Ficha técnica del peck deck.', pdf:'pdf/peck_deck.pdf', real:'assets/videos/peck-deck-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/peck-deck-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Cruces en polea">
-            <div class="exercise-thumb has-image">
-              <img src="images/cruces-en-polea.jpg" alt="Miniatura del ejercicio cruces en polea" width="1600" height="1000" loading="lazy">
-            </div>
-            <div class="exercise-body">
-              <h5>Cruces en polea</h5>
-              <div class="meta"><span>Pecho</span><span>Polea</span><span>Aislamiento</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Cruces en polea', category:'Pecho', description:'Ficha técnica de los cruces en polea.', pdf:'pdf/cruces_en_polea.pdf', real:'assets/videos/cruces-en-polea-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/cruces-en-polea-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Espalda</h4>
-          <p>Tirones verticales y horizontales para dorsal, romboides y musculatura media de la espalda.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Jalón al pecho abierto">
-            <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
-            <div class="exercise-body">
-              <h5>Jalón al pecho abierto</h5>
-              <div class="meta"><span>Espalda</span><span>Polea</span><span>Tirón</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Jalón al pecho abierto', category:'Espalda', description:'Ficha técnica del jalón al pecho abierto.', pdf:'pdf/jalon_al_pecho_abierto.pdf', real:'assets/videos/jalon-al-pecho-abierto-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/jalon-al-pecho-abierto-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Jalón al pecho cerrado">
-            <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
-            <div class="exercise-body">
-              <h5>Jalón al pecho cerrado</h5>
-              <div class="meta"><span>Espalda</span><span>Polea</span><span>Tirón</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Jalón al pecho cerrado', category:'Espalda', description:'Ficha técnica del jalón al pecho cerrado.', pdf:'pdf/jalon_al_pecho_cerrado.pdf', real:'assets/videos/jalon-al-pecho-cerrado-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/jalon-al-pecho-cerrado-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Pull over">
-            <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
-            <div class="exercise-body">
-              <h5>Pull over</h5>
-              <div class="meta"><span>Espalda</span><span>Polea</span><span>Aislamiento</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Pull over', category:'Espalda', description:'Ficha técnica del pull over.', pdf:'pdf/pull_over.pdf', real:'assets/videos/pull-over-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/pull-over-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Dominadas">
-            <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
-            <div class="exercise-body">
-              <h5>Dominadas</h5>
-              <div class="meta"><span>Espalda</span><span>Peso corporal</span><span>Tirón</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Dominadas', category:'Espalda', description:'Ficha técnica de las dominadas.', pdf:'pdf/dominadas.pdf', real:'assets/videos/dominadas-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/dominadas-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Remo gironda">
-            <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
-            <div class="exercise-body">
-              <h5>Remo gironda</h5>
-              <div class="meta"><span>Espalda</span><span>Barra</span><span>Remo</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Remo gironda', category:'Espalda', description:'Ficha técnica del remo gironda.', pdf:'pdf/remo_gironda.pdf', real:'assets/videos/remo-gironda-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/remo-gironda-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Remo bajo en máquina">
-            <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
-            <div class="exercise-body">
-              <h5>Remo bajo en máquina</h5>
-              <div class="meta"><span>Espalda</span><span>Máquina</span><span>Remo</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Remo bajo en máquina', category:'Espalda', description:'Ficha técnica del remo bajo en máquina.', pdf:'pdf/remo_bajo_en_maquina.pdf', real:'assets/videos/remo-bajo-en-maquina-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/remo-bajo-en-maquina-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Remo en T">
-            <div class="exercise-thumb"><span class="exercise-label">Espalda</span></div>
-            <div class="exercise-body">
-              <h5>Remo en T</h5>
-              <div class="meta"><span>Espalda</span><span>Barra T</span><span>Remo</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Remo en T', category:'Espalda', description:'Ficha técnica del remo en T.', pdf:'pdf/remo_en_t.pdf', real:'assets/videos/remo-en-t-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/remo-en-t-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Bíceps</h4>
-          <p>Trabajo analítico de flexión de codo con diferentes perfiles de resistencia.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Curl 21">
-            <div class="exercise-thumb"><span class="exercise-label">Bíceps</span></div>
-            <div class="exercise-body">
-              <h5>Curl 21</h5>
-              <div class="meta"><span>Bíceps</span><span>Barra</span><span>Aislamiento</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl 21', category:'Bíceps', description:'Ficha técnica del curl 21.', pdf:'pdf/curl_21.pdf', real:'assets/videos/curl-21-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/curl-21-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Curl martillo">
-            <div class="exercise-thumb"><span class="exercise-label">Bíceps</span></div>
-            <div class="exercise-body">
-              <h5>Curl martillo</h5>
-              <div class="meta"><span>Bíceps</span><span>Mancuernas</span><span>Braquial</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl martillo', category:'Bíceps', description:'Ficha técnica del curl martillo.', pdf:'pdf/curl_martillo.pdf', real:'assets/videos/curl-martillo-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/curl-martillo-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Curl predicador en máquina">
-            <div class="exercise-thumb"><span class="exercise-label">Bíceps</span></div>
-            <div class="exercise-body">
-              <h5>Curl predicador en máquina</h5>
-              <div class="meta"><span>Bíceps</span><span>Máquina</span><span>Predicador</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl predicador en máquina', category:'Bíceps', description:'Ficha técnica del curl predicador en máquina.', pdf:'pdf/curl_predicador_en_maquina.pdf', real:'assets/videos/curl-predicador-en-maquina-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/curl-predicador-en-maquina-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Curl predicador en barra">
-            <div class="exercise-thumb"><span class="exercise-label">Bíceps</span></div>
-            <div class="exercise-body">
-              <h5>Curl predicador en barra</h5>
-              <div class="meta"><span>Bíceps</span><span>Barra</span><span>Predicador</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl predicador en barra', category:'Bíceps', description:'Ficha técnica del curl predicador en barra.', pdf:'pdf/curl_predicador_en_barra.pdf', real:'assets/videos/curl-predicador-en-barra-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/curl-predicador-en-barra-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Curl bayesian">
-            <div class="exercise-thumb"><span class="exercise-label">Bíceps</span></div>
-            <div class="exercise-body">
-              <h5>Curl bayesian</h5>
-              <div class="meta"><span>Bíceps</span><span>Polea</span><span>Perfil largo</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl bayesian', category:'Bíceps', description:'Ficha técnica del curl bayesian.', pdf:'pdf/curl_bayesian.pdf', real:'assets/videos/curl-bayesian-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/curl-bayesian-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Tríceps</h4>
-          <p>Extensión de codo en polea y cargas libres para trabajo específico de tríceps.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Extensión en polea">
-            <div class="exercise-thumb"><span class="exercise-label">Tríceps</span></div>
-            <div class="exercise-body">
-              <h5>Extensión en polea</h5>
-              <div class="meta"><span>Tríceps</span><span>Polea</span><span>Aislamiento</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Extensión en polea', category:'Tríceps', description:'Ficha técnica de la extensión en polea.', pdf:'pdf/extension_en_polea.pdf', real:'assets/videos/extension-en-polea-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/extension-en-polea-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Press francés">
-            <div class="exercise-thumb"><span class="exercise-label">Tríceps</span></div>
-            <div class="exercise-body">
-              <h5>Press francés</h5>
-              <div class="meta"><span>Tríceps</span><span>Barra</span><span>Carga libre</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press francés', category:'Tríceps', description:'Ficha técnica del press francés.', pdf:'pdf/press_frances.pdf', real:'assets/videos/press-frances-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-frances-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Press katana">
-            <div class="exercise-thumb"><span class="exercise-label">Tríceps</span></div>
-            <div class="exercise-body">
-              <h5>Press katana</h5>
-              <div class="meta"><span>Tríceps</span><span>Polea</span><span>Overhead</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press katana', category:'Tríceps', description:'Ficha técnica del press katana.', pdf:'pdf/press_katana.pdf', real:'assets/videos/press-katana-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-katana-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Hombro</h4>
-          <p>Ejercicios de empuje vertical y trabajo analítico para deltoides anterior, medio y posterior.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Press militar">
-            <div class="exercise-thumb"><span class="exercise-label">Hombro</span></div>
-            <div class="exercise-body">
-              <h5>Press militar</h5>
-              <div class="meta"><span>Hombro</span><span>Barra</span><span>Empuje</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Press militar', category:'Hombro', description:'Ficha técnica del press militar.', pdf:'pdf/press_militar.pdf', real:'assets/videos/press-militar-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/press-militar-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Elevación lateral">
-            <div class="exercise-thumb"><span class="exercise-label">Hombro</span></div>
-            <div class="exercise-body">
-              <h5>Elevación lateral</h5>
-              <div class="meta"><span>Hombro</span><span>Mancuernas</span><span>Deltoides medio</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Elevación lateral', category:'Hombro', description:'Ficha técnica de la elevación lateral.', pdf:'pdf/elevacion_lateral.pdf', real:'assets/videos/elevacion-lateral-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/elevacion-lateral-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Elevación frontal">
-            <div class="exercise-thumb"><span class="exercise-label">Hombro</span></div>
-            <div class="exercise-body">
-              <h5>Elevación frontal</h5>
-              <div class="meta"><span>Hombro</span><span>Mancuernas</span><span>Deltoides anterior</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Elevación frontal', category:'Hombro', description:'Ficha técnica de la elevación frontal.', pdf:'pdf/elevacion_frontal.pdf', real:'assets/videos/elevacion-frontal-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/elevacion-frontal-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Vuelo posterior en polea">
-            <div class="exercise-thumb"><span class="exercise-label">Hombro</span></div>
-            <div class="exercise-body">
-              <h5>Vuelo posterior en polea</h5>
-              <div class="meta"><span>Hombro</span><span>Polea</span><span>Posterior</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Vuelo posterior en polea', category:'Hombro', description:'Ficha técnica del vuelo posterior en polea.', pdf:'pdf/vuelo_posterior_en_polea.pdf', real:'assets/videos/vuelo-posterior-en-polea-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/vuelo-posterior-en-polea-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Abdominal</h4>
-          <p>Trabajo específico del tronco en máquina y polea.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Abdominal en máquina">
-            <div class="exercise-thumb"><span class="exercise-label">Abdominal</span></div>
-            <div class="exercise-body">
-              <h5>Abdominal en máquina</h5>
-              <div class="meta"><span>Core</span><span>Máquina</span><span>Flexión</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Abdominal en máquina', category:'Abdominal', description:'Ficha técnica del abdominal en máquina.', pdf:'pdf/abdominal_en_maquina.pdf', real:'assets/videos/abdominal-en-maquina-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/abdominal-en-maquina-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Abdominal en polea">
-            <div class="exercise-thumb"><span class="exercise-label">Abdominal</span></div>
-            <div class="exercise-body">
-              <h5>Abdominal en polea</h5>
-              <div class="meta"><span>Core</span><span>Polea</span><span>Flexión</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Abdominal en polea', category:'Abdominal', description:'Ficha técnica del abdominal en polea.', pdf:'pdf/abdominal_en_polea.pdf', real:'assets/videos/abdominal-en-polea-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/abdominal-en-polea-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Cuádriceps</h4>
-          <p>Patrones dominantes de rodilla para desarrollo de fuerza y masa del tren inferior.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Extensión">
-            <div class="exercise-thumb"><span class="exercise-label">Cuádriceps</span></div>
-            <div class="exercise-body">
-              <h5>Extensión</h5>
-              <div class="meta"><span>Cuádriceps</span><span>Máquina</span><span>Aislamiento</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Extensión', category:'Cuádriceps', description:'Ficha técnica de la extensión de rodilla.', pdf:'pdf/extension.pdf', real:'assets/videos/extension-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/extension-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Sentadilla con barra">
-            <div class="exercise-thumb"><span class="exercise-label">Cuádriceps</span></div>
-            <div class="exercise-body">
-              <h5>Sentadilla con barra</h5>
-              <div class="meta"><span>Cuádriceps</span><span>Barra</span><span>Sentadilla</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Sentadilla con barra', category:'Cuádriceps', description:'Ficha técnica de la sentadilla con barra.', pdf:'pdf/ficha_sentadilla_con_barra.pdf', real:'assets/videos/sentadilla-con-barra-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/sentadilla-con-barra-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Zancadas">
-            <div class="exercise-thumb"><span class="exercise-label">Cuádriceps</span></div>
-            <div class="exercise-body">
-              <h5>Zancadas</h5>
-              <div class="meta"><span>Cuádriceps</span><span>Unilateral</span><span>Desplazamiento</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Zancadas', category:'Cuádriceps', description:'Ficha técnica de las zancadas.', pdf:'pdf/zancadas.pdf', real:'assets/videos/zancadas-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/zancadas-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Prensa">
-            <div class="exercise-thumb"><span class="exercise-label">Cuádriceps</span></div>
-            <div class="exercise-body">
-              <h5>Prensa</h5>
-              <div class="meta"><span>Cuádriceps</span><span>Máquina</span><span>Empuje</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Prensa', category:'Cuádriceps', description:'Ficha técnica de la prensa.', pdf:'pdf/prensa.pdf', real:'assets/videos/prensa-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/prensa-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Búlgaras">
-            <div class="exercise-thumb"><span class="exercise-label">Cuádriceps</span></div>
-            <div class="exercise-body">
-              <h5>Búlgaras</h5>
-              <div class="meta"><span>Cuádriceps</span><span>Unilateral</span><span>Banco</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Búlgaras', category:'Cuádriceps', description:'Ficha técnica de las búlgaras.', pdf:'pdf/bulgaras.pdf', real:'assets/videos/bulgaras-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/bulgaras-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Hacka">
-            <div class="exercise-thumb"><span class="exercise-label">Cuádriceps</span></div>
-            <div class="exercise-body">
-              <h5>Hacka</h5>
-              <div class="meta"><span>Cuádriceps</span><span>Máquina</span><span>Sentadilla</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Hacka', category:'Cuádriceps', description:'Ficha técnica de la hacka.', pdf:'pdf/hacka.pdf', real:'assets/videos/hacka-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/hacka-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Isquiotibiales</h4>
-          <p>Trabajo dominante de cadera y flexión de rodilla para la cadena posterior.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Curl femoral">
-            <div class="exercise-thumb"><span class="exercise-label">Isquiotibiales</span></div>
-            <div class="exercise-body">
-              <h5>Curl femoral</h5>
-              <div class="meta"><span>Isquios</span><span>Máquina</span><span>Flexión de rodilla</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Curl femoral', category:'Isquiotibiales', description:'Ficha técnica del curl femoral.', pdf:'pdf/curl_femoral.pdf', real:'assets/videos/curl-femoral-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/curl-femoral-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="exercise-card" data-category="fuerza" data-title="Peso muerto rumano">
-            <div class="exercise-thumb"><span class="exercise-label">Isquiotibiales</span></div>
-            <div class="exercise-body">
-              <h5>Peso muerto rumano</h5>
-              <div class="meta"><span>Isquios</span><span>Barra</span><span>Bisagra</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Peso muerto rumano', category:'Isquiotibiales', description:'Ficha técnica del peso muerto rumano.', pdf:'pdf/peso_muerto_rumano.pdf', real:'assets/videos/peso-muerto-rumano-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/peso-muerto-rumano-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Elevación de talón</h4>
-          <p>Trabajo específico de gemelo mediante elevación plantar.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Elevación de talón">
-            <div class="exercise-thumb"><span class="exercise-label">Gemelo</span></div>
-            <div class="exercise-body">
-              <h5>Elevación de talón</h5>
-              <div class="meta"><span>Gemelo</span><span>Tobillo</span><span>Plantarflexión</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Elevación de talón', category:'Gemelo', description:'Ficha técnica de la elevación de talón.', pdf:'pdf/elevacion_de_talon.pdf', real:'assets/videos/elevacion-de-talon-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/elevacion-de-talon-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="row-section" data-category-section="fuerza">
-        <div class="row-head">
-          <h4>Hip thrust</h4>
-          <p>Ejercicio principal de extensión de cadera para glúteo.</p>
-        </div>
-
-        <div class="row-scroll">
-          <article class="exercise-card" data-category="fuerza" data-title="Hip thrust">
-            <div class="exercise-thumb"><span class="exercise-label">Glúteo</span></div>
-            <div class="exercise-body">
-              <h5>Hip thrust</h5>
-              <div class="meta"><span>Glúteo</span><span>Barra</span><span>Extensión de cadera</span></div>
-              <div class="card-actions">
-                <button type="button" class="mini-btn primary" onclick="openExercise({ title:'Hip thrust', category:'Glúteo', description:'Ficha técnica del hip thrust.', pdf:'pdf/hip_thrust.pdf', real:'assets/videos/hip-thrust-real.mp4' })">Ver ficha</button>
-                <a class="mini-btn" href="assets/videos/hip-thrust-real.mp4" target="_blank" rel="noopener noreferrer">Ver vídeo</a>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </section>
-
-    <footer class="footer">KINISITECA</footer>
-  </main>
-
-  <dialog id="exerciseDialog" aria-labelledby="exerciseTitle">
-    <div class="dialog-head">
-      <div>
-        <h3 id="exerciseTitle">Ejercicio</h3>
-        <p id="exerciseSubtitle">Categoría</p>
-      </div>
-      <button type="button" class="dialog-close" aria-label="Cerrar" onclick="closeExercise()">×</button>
-    </div>
-
-    <div class="dialog-body">
-      <section class="resource">
-        <h4>Documento PDF</h4>
-        <p id="exerciseDescription">Descripción del ejercicio.</p>
-        <div class="placeholder" id="pdfPlaceholder">
-          Aquí podrás mostrar tu documento PDF o enlazar el archivo correspondiente.
-        </div>
-        <a id="pdfLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">Abrir PDF</a>
-      </section>
-
-      <section class="resource">
-        <h4>Vídeo real</h4>
-        <p>Espacio preparado para la demostración grabada real del ejercicio.</p>
-        <div class="placeholder" id="realPlaceholder">
-          Sustituye este bloque por tu vídeo real, embed o reproductor.
-        </div>
-        <a id="realLink" class="resource-link" href="#" target="_blank" rel="noopener noreferrer">Abrir vídeo real</a>
-      </section>
-    </div>
-  </dialog>
-
-  <dialog id="addClientDialog" aria-labelledby="addClientTitle">
-    <div class="dialog-head">
-      <div>
-        <h3 id="addClientTitle">Añadir cliente</h3>
-        <p>Crea un nuevo cliente para asignarle varias rutinas personalizadas.</p>
-      </div>
-      <button type="button" class="dialog-close" aria-label="Cerrar" onclick="closeAddClientDialog()">×</button>
-    </div>
-
-    <form id="addClientForm" class="form-grid">
-      <label class="field">
-        <input type="text" id="clientNameInput" placeholder="Nombre del cliente" required />
-      </label>
-
-      <div class="dialog-actions">
-        <button type="button" class="btn btn-secondary" onclick="closeAddClientDialog()">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Crear cliente</button>
-      </div>
-    </form>
-  </dialog>
-
-  <dialog id="addRoutineDialog" aria-labelledby="addRoutineTitle">
-    <div class="dialog-head">
-      <div>
-        <h3 id="addRoutineTitle">Añadir rutina</h3>
-        <p>Crea una nueva rutina para el cliente seleccionado, por ejemplo Lunes o Pierna.</p>
-      </div>
-      <button type="button" class="dialog-close" aria-label="Cerrar" onclick="closeAddRoutineDialog()">×</button>
-    </div>
-
-    <form id="addRoutineForm" class="form-grid">
-      <label class="field">
-        <input type="text" id="routineNameInput" placeholder="Nombre de la rutina" required />
-      </label>
-
-      <div class="dialog-actions">
-        <button type="button" class="btn btn-secondary" onclick="closeAddRoutineDialog()">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Crear rutina</button>
-      </div>
-    </form>
-  </dialog>
+  </div>
 
   <script>
-    const modeButtons = document.querySelectorAll("[data-mode-button]");
-    const modePanels = document.querySelectorAll("[data-mode-panel]");
-    const dialog = document.getElementById("exerciseDialog");
-    const addClientDialog = document.getElementById("addClientDialog");
-    const addRoutineDialog = document.getElementById("addRoutineDialog");
-    const addClientForm = document.getElementById("addClientForm");
-    const addRoutineForm = document.getElementById("addRoutineForm");
-    const clientNameInput = document.getElementById("clientNameInput");
-    const routineNameInput = document.getElementById("routineNameInput");
-    const exerciseTitle = document.getElementById("exerciseTitle");
-    const exerciseSubtitle = document.getElementById("exerciseSubtitle");
-    const exerciseDescription = document.getElementById("exerciseDescription");
-    const pdfLink = document.getElementById("pdfLink");
-    const realLink = document.getElementById("realLink");
-    const pdfPlaceholder = document.getElementById("pdfPlaceholder");
-    const realPlaceholder = document.getElementById("realPlaceholder");
-    const searchInput = document.getElementById("searchInput");
-    const categoryFilter = document.getElementById("categoryFilter");
-    const cards = document.querySelectorAll(".exercise-card");
-    const sections = document.querySelectorAll("[data-category-section]");
-    const selectedExercisesContainer = document.getElementById("selectedExercises");
-    const clientRoutineGrid = document.getElementById("clientRoutineGrid");
-    const savedRoutines = document.getElementById("savedRoutines");
-    const clientSelect = document.getElementById("clientSelect");
-    const routineSelect = document.getElementById("routineSelect");
-    const clientsList = document.getElementById("clientsList");
-    const routineName = document.getElementById("routineName");
+    const stage = document.querySelector('.draw-stage');
+    const canvas = document.getElementById('drawCanvas');
+    const ctx = canvas.getContext('2d');
+    const penBtn = document.getElementById('penBtn');
+    const eraseBtn = document.getElementById('eraseBtn');
+    const clearBtn = document.getElementById('clearBtn');
+    let drawing = false;
+    let erase = false;
+    let last = null;
 
-    let selectedExercises = [];
-    let clients = [];
-
-    modeButtons.forEach((button) => button.addEventListener("click", () => setMode(button.dataset.modeButton)));
-
-    function createId() {
-      return crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random());
-    }
-
-    function setMode(mode) {
-      modeButtons.forEach((btn) => {
-        const active = btn.dataset.modeButton === mode;
-        btn.classList.toggle("is-active", active);
-        btn.setAttribute("aria-selected", active ? "true" : "false");
-        btn.tabIndex = active ? 0 : -1;
-      });
-
-      modePanels.forEach((panel) => {
-        const active = panel.id === `panel-${mode}`;
-        panel.classList.toggle("is-active", active);
-        if (active) panel.removeAttribute("hidden");
-        else panel.setAttribute("hidden", "");
-      });
-    }
-
-    function openExercise(exercise) {
-      exerciseTitle.textContent = exercise.title;
-      exerciseSubtitle.textContent = exercise.category;
-      exerciseDescription.textContent = exercise.description;
-      pdfLink.href = exercise.pdf;
-      realLink.href = exercise.real;
-      pdfPlaceholder.textContent = `Archivo vinculado: ${exercise.pdf}`;
-      realPlaceholder.textContent = `Vídeo real vinculado: ${exercise.real}`;
-      if (typeof dialog.showModal === "function") dialog.showModal();
-    }
-
-    function closeExercise() {
-      dialog.close();
-    }
-
-    function openAddClientDialog() {
-      clientNameInput.value = "";
-      addClientDialog.showModal();
-    }
-
-    function closeAddClientDialog() {
-      addClientDialog.close();
-    }
-
-    function openAddRoutineDialog() {
-      const client = getSelectedClient();
-      if (!client) {
-        alert("Añade o selecciona primero un cliente.");
-        return;
+    function resizeCanvas() {
+      const rect = stage.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      const tmp = document.createElement('canvas');
+      tmp.width = canvas.width;
+      tmp.height = canvas.height;
+      if (canvas.width && canvas.height) {
+        tmp.getContext('2d').drawImage(canvas, 0, 0);
       }
-      routineNameInput.value = "";
-      addRoutineDialog.showModal();
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      if (tmp.width && tmp.height) {
+        ctx.drawImage(tmp, 0, 0, rect.width, rect.height);
+      }
     }
 
-    function closeAddRoutineDialog() {
-      addRoutineDialog.close();
+    function point(e) {
+      const rect = canvas.getBoundingClientRect();
+      const t = e.touches && e.touches[0] ? e.touches[0] : e;
+      return { x: t.clientX - rect.left, y: t.clientY - rect.top };
     }
 
-    function getSelectedClient() {
-      return clients.find((client) => client.id === clientSelect.value);
+    function drawDot(p) {
+      ctx.save();
+      if (erase) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 12, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgba(239,68,68,.92)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 7, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
     }
 
-    function getSelectedRoutine() {
-      const client = getSelectedClient();
-      if (!client) return null;
-      return client.routines.find((routine) => routine.id === routineSelect.value);
+    function start(e) {
+      drawing = true;
+      last = point(e);
+      drawDot(last);
+      e.preventDefault();
     }
 
-    addClientForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const name = clientNameInput.value.trim();
-      if (!name) return;
-      const client = { id: createId(), name, routines: [] };
-      clients.push(client);
-      syncClientSelect();
-      renderClients();
-      renderSavedRoutines();
-      clientSelect.value = client.id;
-      syncRoutineSelect();
-      clearRoutine();
-      closeAddClientDialog();
+    function move(e) {
+      if (!drawing) return;
+      const p = point(e);
+      ctx.save();
+      if (erase) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = 24;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = 'rgba(239,68,68,.92)';
+        ctx.lineWidth = 14;
+      }
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(last.x, last.y);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+      ctx.restore();
+      last = p;
+      e.preventDefault();
+    }
+
+    function end() {
+      drawing = false;
+      last = null;
+    }
+
+    canvas.addEventListener('pointerdown', start);
+    canvas.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', end);
+    canvas.addEventListener('touchstart', start, { passive:false });
+    canvas.addEventListener('touchmove', move, { passive:false });
+    canvas.addEventListener('touchend', end);
+
+    penBtn.addEventListener('click', () => {
+      erase = false;
+      penBtn.classList.add('active');
+      eraseBtn.classList.remove('active');
     });
 
-    addRoutineForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const client = getSelectedClient();
-      if (!client) return;
-      const name = routineNameInput.value.trim();
-      if (!name) return;
-
-      const exists = client.routines.some((routine) => routine.name.toLowerCase() === name.toLowerCase());
-      if (exists) {
-        alert("Ese cliente ya tiene una rutina con ese nombre.");
-        return;
-      }
-
-      const routine = { id: createId(), name, exercises: [] };
-      client.routines.push(routine);
-      syncRoutineSelect();
-      routineSelect.value = routine.id;
-      loadRoutineIntoEditor(routine);
-      renderClients();
-      renderSavedRoutines();
-      closeAddRoutineDialog();
+    eraseBtn.addEventListener('click', () => {
+      erase = true;
+      eraseBtn.classList.add('active');
+      penBtn.classList.remove('active');
     });
 
-    function addToRoutine(name) {
-      const client = getSelectedClient();
-      const routine = getSelectedRoutine();
+    clearBtn.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height));
 
-      if (!client) {
-        alert("Selecciona primero un cliente.");
-        return;
-      }
+    window.addEventListener('load', resizeCanvas);
+    window.addEventListener('resize', resizeCanvas);
 
-      if (!routine) {
-        alert("Crea o selecciona primero una rutina.");
-        return;
-      }
-
-      if (!selectedExercises.includes(name)) selectedExercises.push(name);
-      renderSelectedExercises();
-    }
-
-    function removeFromRoutine(name) {
-      selectedExercises = selectedExercises.filter((item) => item !== name);
-      renderSelectedExercises();
-    }
-
-    function renderSelectedExercises() {
-      if (selectedExercises.length === 0) {
-        selectedExercisesContainer.innerHTML = `
-          <div class="selected-empty">
-            Todavía no has añadido ejercicios. Utiliza el botón Añadir desde cualquier tarjeta de la biblioteca interactiva.
-          </div>
-        `;
-        return;
-      }
-
-      selectedExercisesContainer.innerHTML = selectedExercises
-        .map(
-          (item) => `
-            <div class="selected-item">
-              <strong>${item}</strong>
-              <button type="button" onclick='removeFromRoutine(${JSON.stringify(item)})'>Quitar</button>
-            </div>
-          `
-        )
-        .join("");
-    }
-
-    function renderClients() {
-      if (clients.length === 0) {
-        clientsList.innerHTML = `
-          <div class="list-item">
-            <div>
-              <strong>Aún no hay clientes</strong>
-              <span>Pulsa Añadir cliente para crear el primero.</span>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      clientsList.innerHTML = clients
-        .map(
-          (client) => `
-            <div class="list-item">
-              <div>
-                <strong>${client.name}</strong>
-                <span>${client.routines.length ? `${client.routines.length} rutinas creadas.` : "Sin rutinas todavía."}</span>
-              </div>
-              <button type="button" class="mini-btn" onclick='selectClient(${JSON.stringify(client.id)})'>Seleccionar</button>
-            </div>
-          `
-        )
-        .join("");
-    }
-
-    function syncClientSelect() {
-      if (clients.length === 0) {
-        clientSelect.innerHTML = `<option value="">Añade primero un cliente</option>`;
-        routineSelect.innerHTML = `<option value="">Añade primero una rutina</option>`;
-        return;
-      }
-      clientSelect.innerHTML = clients.map((client) => `<option value="${client.id}">${client.name}</option>`).join("");
-    }
-
-    function syncRoutineSelect() {
-      const client = getSelectedClient();
-
-      if (!client) {
-        routineSelect.innerHTML = `<option value="">Selecciona un cliente</option>`;
-        routineName.value = "";
-        clearRoutine();
-        return;
-      }
-
-      if (client.routines.length === 0) {
-        routineSelect.innerHTML = `<option value="">Añade primero una rutina</option>`;
-        routineName.value = "";
-        clearRoutine();
-        return;
-      }
-
-      routineSelect.innerHTML = client.routines.map((routine) => `<option value="${routine.id}">${routine.name}</option>`).join("");
-      const selectedRoutine = client.routines.find((routine) => routine.id === routineSelect.value) || client.routines[0];
-      routineSelect.value = selectedRoutine.id;
-      loadRoutineIntoEditor(selectedRoutine);
-    }
-
-    function loadRoutineIntoEditor(routine) {
-      routineName.value = routine.name;
-      selectedExercises = [...routine.exercises];
-      renderSelectedExercises();
-    }
-
-    function selectClient(id) {
-      const client = clients.find((item) => item.id === id);
-      if (!client) return;
-      clientSelect.value = client.id;
-      syncRoutineSelect();
-      setMode("trainer");
-      scrollToPanels();
-    }
-
-    function saveRoutine() {
-      const client = getSelectedClient();
-      const routine = getSelectedRoutine();
-
-      if (!client) {
-        alert("Añade primero un cliente.");
-        return;
-      }
-
-      if (!routine) {
-        alert("Añade primero una rutina.");
-        return;
-      }
-
-      if (selectedExercises.length === 0) {
-        alert("Añade al menos un ejercicio a la rutina.");
-        return;
-      }
-
-      const newName = routineName.value.trim() || routine.name;
-      const duplicateName = client.routines.some(
-        (item) => item.id !== routine.id && item.name.toLowerCase() === newName.toLowerCase()
-      );
-
-      if (duplicateName) {
-        alert("Ese cliente ya tiene otra rutina con ese nombre.");
-        return;
-      }
-
-      routine.name = newName;
-      routine.exercises = [...selectedExercises];
-      syncRoutineSelect();
-      routineSelect.value = routine.id;
-      renderClients();
-      renderSavedRoutines();
-      loadClientRoutines(client);
-      alert("Rutina guardada correctamente.");
-    }
-
-    function renderSavedRoutines() {
-      const clientsWithRoutines = clients.filter((client) => client.routines.length);
-
-      if (clientsWithRoutines.length === 0) {
-        savedRoutines.innerHTML = `
-          <div class="list-item">
-            <div>
-              <strong>Aún no hay rutinas guardadas</strong>
-              <span>Crea un cliente, añade una rutina y guarda sus ejercicios.</span>
-            </div>
-          </div>
-        `;
-        return;
-      }
-
-      savedRoutines.innerHTML = clientsWithRoutines
-        .map(
-          (client) => `
-            <div class="list-item">
-              <div>
-                <strong>${client.name}</strong>
-                <span>${client.routines.length} rutinas creadas.</span>
-              </div>
-              <button type="button" class="mini-btn" onclick='loadClientRoutinesById(${JSON.stringify(client.id)})'>Ver rutinas</button>
-            </div>
-          `
-        )
-        .join("");
-    }
-
-    function clearRoutine() {
-      selectedExercises = [];
-      renderSelectedExercises();
-    }
-
-    function deleteCurrentRoutine() {
-      const client = getSelectedClient();
-      const routine = getSelectedRoutine();
-
-      if (!client || !routine) {
-        alert("Selecciona una rutina para eliminar.");
-        return;
-      }
-
-      const confirmed = window.confirm(`¿Eliminar la rutina ${routine.name}?`);
-      if (!confirmed) return;
-
-      client.routines = client.routines.filter((item) => item.id !== routine.id);
-      syncRoutineSelect();
-      renderClients();
-      renderSavedRoutines();
-
-      if (client.routines.length) loadClientRoutines(client);
-      else {
-        clientRoutineGrid.innerHTML = `
-          <article class="routine-card">
-            <h4>Sin rutinas asignadas</h4>
-            <p>Aquí aparecerán las rutinas cuando el entrenador guarde un plan para un cliente.</p>
-          </article>
-        `;
-        document.getElementById("clientViewText").textContent = `${client.name} todavía no tiene rutinas guardadas.`;
-      }
-    }
-
-    function loadClientRoutinesById(id) {
-      const client = clients.find((item) => item.id === id);
-      if (!client) return;
-      loadClientRoutines(client);
-    }
-
-    function loadClientRoutines(client) {
-      setMode("client");
-      clientRoutineGrid.innerHTML = "";
-
-      if (!client.routines.length) {
-        document.getElementById("clientViewText").textContent = `${client.name} todavía no tiene rutinas guardadas.`;
-        clientRoutineGrid.innerHTML = `
-          <article class="routine-card">
-            <h4>Sin rutinas asignadas</h4>
-            <p>Aquí aparecerán las rutinas cuando el entrenador guarde un plan para un cliente.</p>
-          </article>
-        `;
-        scrollToPanels();
-        return;
-      }
-
-      document.getElementById("clientViewText").textContent = `${client.name} visualiza aquí sus rutinas semanales o por bloques de trabajo.`;
-
-      client.routines.forEach((routine) => {
-        const card = document.createElement("article");
-        card.className = "routine-card";
-
-        const exercisesMarkup = routine.exercises.length
-          ? routine.exercises
-              .map(
-                (exercise) => `
-                  <div class="routine-day">
-                    <div>
-                      <strong>${exercise}</strong>
-                      <span>Ejercicio incluido en ${routine.name}</span>
-                    </div>
-                    <button type="button" class="mini-btn primary" data-open-exercise="${exercise}">Abrir</button>
-                  </div>
-                `
-              )
-              .join("")
-          : `
-              <div class="routine-day">
-                <div>
-                  <strong>Sin ejercicios</strong>
-                  <span>Esta rutina aún no tiene ejercicios guardados.</span>
-                </div>
-              </div>
-            `;
-
-        card.innerHTML = `
-          <h4>${routine.name}</h4>
-          <p>${routine.exercises.length ? `${routine.exercises.length} ejercicios asignados.` : "Rutina creada sin ejercicios todavía."}</p>
-          <div class="routine-days">${exercisesMarkup}</div>
-        `;
-
-        card.querySelectorAll("[data-open-exercise]").forEach((button) => {
-          button.addEventListener("click", () => {
-            const exercise = button.getAttribute("data-open-exercise");
-            openExercise({
-              title: exercise,
-              category: routine.name,
-              description: `Ejercicio enviado dentro de la rutina ${routine.name}.`,
-              pdf: `pdf/${slugify(exercise)}.pdf`,
-              real: `assets/videos/${slugify(exercise)}-real.mp4`
-            });
-          });
-        });
-
-        clientRoutineGrid.appendChild(card);
+    document.querySelectorAll('.eva-step').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.eva-step').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('evaValue').textContent = btn.dataset.value;
       });
-
-      scrollToPanels();
-    }
-
-    function slugify(text) {
-      return text
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/[^a-z0-9]+/g, "_")
-        .replace(/^_+|_+$/g, "");
-    }
-
-    function filterCards() {
-      const query = searchInput.value.trim().toLowerCase();
-      const category = categoryFilter.value;
-
-      cards.forEach((card) => {
-        const title = card.dataset.title.toLowerCase();
-        const cardCategory = card.dataset.category;
-        const matchQuery = title.includes(query);
-        const matchCategory = category === "all" || cardCategory === category;
-        card.style.display = matchQuery && matchCategory ? "" : "none";
-      });
-
-      sections.forEach((section) => {
-        const visibleCards = [...section.querySelectorAll(".exercise-card")].filter((card) => card.style.display !== "none");
-        section.style.display = visibleCards.length ? "" : "none";
-      });
-    }
-
-    searchInput.addEventListener("input", filterCards);
-    categoryFilter.addEventListener("change", filterCards);
-    clientSelect.addEventListener("change", syncRoutineSelect);
-
-    routineSelect.addEventListener("change", () => {
-      const routine = getSelectedRoutine();
-      if (!routine) {
-        routineName.value = "";
-        clearRoutine();
-        return;
-      }
-      loadRoutineIntoEditor(routine);
     });
-
-    function scrollToPanels() {
-      document.getElementById("paneles").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function scrollToLibrary() {
-      document.getElementById("biblioteca").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function enableBackdropClose(targetDialog) {
-      targetDialog.addEventListener("click", (event) => {
-        const rect = targetDialog.getBoundingClientRect();
-        const clickedInside =
-          rect.top <= event.clientY &&
-          event.clientY <= rect.top + rect.height &&
-          rect.left <= event.clientX &&
-          event.clientX <= rect.left + rect.width;
-
-        if (!clickedInside) targetDialog.close();
-      });
-    }
-
-    enableBackdropClose(dialog);
-    enableBackdropClose(addClientDialog);
-    enableBackdropClose(addRoutineDialog);
-
-    renderClients();
-    syncClientSelect();
-    renderSavedRoutines();
-    renderSelectedExercises();
   </script>
 </body>
 </html>
