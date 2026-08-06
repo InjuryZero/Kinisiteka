@@ -9,628 +9,616 @@
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
 
   <style>
-    :root {
-      --bg: #ffffff;
-      --surface: #f5f5f5;
-      --surface-2: #ededed;
-      --border: #d9d9d9;
-      --text: #0f0f0f;
-      --muted: #5c5c5c;
-      --inverse: #ffffff;
-      --accent: #000000;
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --shadow-sm: 0 8px 24px rgba(0,0,0,.06);
-      --shadow-md: 0 16px 40px rgba(0,0,0,.08);
-      --transition: 180ms cubic-bezier(.16,1,.3,1);
+    :root{
+      --bg:#0a0a0a;
+      --surface:#111111;
+      --surface-2:#181818;
+      --surface-3:#1f1f1f;
+      --border:#2a2a2a;
+      --border-soft:#222222;
+      --text:#f5f5f5;
+      --muted:#b3b3b3;
+      --muted-2:#8c8c8c;
+      --inverse:#0a0a0a;
+      --accent:#ffffff;
+      --radius-sm:10px;
+      --radius-md:18px;
+      --radius-lg:28px;
+      --shadow-sm:0 10px 30px rgba(0,0,0,.28);
+      --shadow-md:0 20px 50px rgba(0,0,0,.34);
+      --transition:180ms cubic-bezier(.16,1,.3,1);
 
-      --text-xs: clamp(0.75rem, 0.72rem + 0.12vw, 0.82rem);
-      --text-sm: clamp(0.88rem, 0.84rem + 0.2vw, 0.98rem);
-      --text-base: clamp(1rem, 0.97rem + 0.2vw, 1.08rem);
-      --text-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.45rem);
-      --text-xl: clamp(1.45rem, 1.2rem + 0.9vw, 2rem);
+      --text-xs:clamp(.75rem,.72rem + .12vw,.82rem);
+      --text-sm:clamp(.88rem,.84rem + .2vw,.98rem);
+      --text-base:clamp(1rem,.97rem + .2vw,1.08rem);
+      --text-lg:clamp(1.15rem,1.05rem + .5vw,1.45rem);
+      --text-xl:clamp(1.45rem,1.2rem + .9vw,2rem);
 
-      --space-2: .5rem;
-      --space-3: .75rem;
-      --space-4: 1rem;
-      --space-5: 1.25rem;
-      --space-6: 1.5rem;
-      --space-8: 2rem;
-      --space-10: 2.5rem;
-      --space-12: 3rem;
+      --space-2:.5rem;
+      --space-3:.75rem;
+      --space-4:1rem;
+      --space-5:1.25rem;
+      --space-6:1.5rem;
+      --space-8:2rem;
+      --space-10:2.5rem;
+      --space-12:3rem;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
-    body {
-      font-family: 'Satoshi', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.5;
-      overflow: hidden;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Satoshi',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+      overflow:hidden;
     }
 
-    button, input, select, textarea { font: inherit; }
-    a { color: inherit; text-decoration: none; }
+    button,input,select,textarea{font:inherit}
+    a{text-decoration:none;color:inherit}
 
-    .app {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      height: 100vh;
+    .app{
+      display:grid;
+      grid-template-columns:280px 1fr;
+      height:100vh;
+      background:var(--bg);
     }
 
-    .sidebar {
-      border-right: 1px solid var(--border);
-      background: #fff;
-      padding: var(--space-8);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-8);
-      overflow-y: auto;
+    .sidebar{
+      border-right:1px solid var(--border);
+      background:var(--surface);
+      padding:var(--space-8);
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-8);
+      overflow-y:auto;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: .9rem;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.9rem;
     }
 
-    .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: #000;
-      display: grid;
-      place-items: center;
-      color: #fff;
-      flex-shrink: 0;
+    .brand-mark{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      background:#000;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      flex-shrink:0;
+      border:1px solid #1d1d1d;
     }
 
-    .brand-text h1 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: -.02em;
+    .brand-text h1{
+      font-size:1.1rem;
+      font-weight:800;
+      letter-spacing:-.02em;
+      color:var(--text);
     }
 
-    .brand-text p {
-      font-size: var(--text-xs);
-      color: var(--muted);
+    .brand-text p{
+      font-size:var(--text-xs);
+      color:var(--muted);
     }
 
-    .nav {
-      display: grid;
-      gap: .5rem;
+    .nav{
+      display:grid;
+      gap:.6rem;
     }
 
-    .nav button {
-      border: 1px solid transparent;
-      background: transparent;
-      color: var(--text);
-      padding: 1rem 1rem;
-      border-radius: 14px;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      gap: .9rem;
-      transition: all var(--transition);
-      min-height: 48px;
-      cursor: pointer;
+    .nav button{
+      border:1px solid transparent;
+      background:transparent;
+      color:var(--text);
+      padding:1rem 1rem;
+      border-radius:16px;
+      text-align:left;
+      display:flex;
+      align-items:center;
+      gap:.9rem;
+      transition:all var(--transition);
+      min-height:48px;
+      cursor:pointer;
     }
 
-    .nav button:hover {
-      background: var(--surface);
+    .nav button:hover{
+      background:var(--surface-2);
+      border-color:var(--border-soft);
     }
 
-    .nav button.active {
-      background: #000;
-      color: #fff;
+    .nav button.active{
+      background:#fff;
+      color:#000;
+      border-color:#fff;
     }
 
-    .nav-icon {
-      width: 18px;
-      height: 18px;
-      border: 1.6px solid currentColor;
-      border-radius: 4px;
-      flex-shrink: 0;
+    .nav-icon{
+      width:18px;
+      height:18px;
+      border:1.6px solid currentColor;
+      border-radius:4px;
+      flex-shrink:0;
     }
 
-    .sidebar-card {
-      margin-top: auto;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: var(--space-5);
-      box-shadow: var(--shadow-sm);
+    .sidebar-card{
+      margin-top:auto;
+      background:var(--surface-2);
+      border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      padding:var(--space-5);
+      box-shadow:var(--shadow-sm);
     }
 
-    .sidebar-card h3 {
-      font-size: var(--text-sm);
-      margin-bottom: .35rem;
+    .sidebar-card h3{
+      font-size:var(--text-sm);
+      margin-bottom:.35rem;
+      color:var(--text);
     }
 
-    .sidebar-card p {
-      color: var(--muted);
-      font-size: var(--text-xs);
-      margin-bottom: 1rem;
+    .sidebar-card p{
+      color:var(--muted);
+      font-size:var(--text-xs);
+      margin-bottom:1rem;
     }
 
-    .sidebar-card .btn {
-      width: 100%;
+    .main{
+      overflow-y:auto;
+      background:var(--bg);
     }
 
-    .main {
-      overflow-y: auto;
-      background: #fff;
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      padding:1.25rem 2rem;
+      border-bottom:1px solid var(--border);
+      background:rgba(10,10,10,.92);
+      backdrop-filter:blur(12px);
     }
 
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      padding: 1.25rem 2rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(12px);
+    .topbar h2{
+      font-size:var(--text-lg);
+      font-weight:700;
+      letter-spacing:-.02em;
+      color:var(--text);
     }
 
-    .topbar h2 {
-      font-size: var(--text-lg);
-      font-weight: 700;
-      letter-spacing: -.02em;
+    .topbar p{
+      font-size:var(--text-xs);
+      color:var(--muted);
     }
 
-    .topbar p {
-      font-size: var(--text-xs);
-      color: var(--muted);
+    .topbar-actions{
+      display:flex;
+      gap:.8rem;
+      align-items:center;
     }
 
-    .topbar-actions {
-      display: flex;
-      gap: .8rem;
-      align-items: center;
+    .search{
+      min-width:300px;
+      border:1px solid var(--border);
+      background:var(--surface);
+      color:var(--text);
+      border-radius:999px;
+      padding:.92rem 1rem;
+      outline:none;
     }
 
-    .search {
-      min-width: 280px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      border-radius: 999px;
-      padding: .9rem 1rem;
-      color: var(--text);
-      outline: none;
+    .search::placeholder{
+      color:var(--muted-2);
     }
 
-    .page {
-      padding: 2rem;
-      display: none;
-      gap: 1.5rem;
+    .page{
+      padding:2rem;
+      display:none;
+      gap:1.25rem;
     }
 
-    .page.active {
-      display: grid;
+    .page.active{
+      display:grid;
     }
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.4fr .8fr;
-      gap: 1.25rem;
+    .panel{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      padding:1.5rem;
+      box-shadow:var(--shadow-sm);
     }
 
-    .panel {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-sm);
+    .hero{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:1.25rem;
     }
 
-    .panel-dark {
-      background: #000;
-      color: #fff;
-      border: 1px solid #000;
-      box-shadow: var(--shadow-md);
+    .hero-dark{
+      background:linear-gradient(180deg,#111111 0%, #0d0d0d 100%);
     }
 
-    .eyebrow {
-      font-size: var(--text-xs);
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      color: var(--muted);
-      margin-bottom: .8rem;
+    .eyebrow{
+      font-size:var(--text-xs);
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--muted);
+      margin-bottom:.8rem;
     }
 
-    .panel-dark .eyebrow {
-      color: rgba(255,255,255,.68);
+    .headline{
+      font-size:var(--text-xl);
+      line-height:1.05;
+      letter-spacing:-.04em;
+      max-width:14ch;
+      margin-bottom:1rem;
+      font-weight:800;
+      color:var(--text);
     }
 
-    .headline {
-      font-size: var(--text-xl);
-      line-height: 1.05;
-      letter-spacing: -.04em;
-      max-width: 14ch;
-      margin-bottom: 1rem;
-      font-weight: 800;
+    .subtext{
+      font-size:var(--text-base);
+      color:var(--muted);
+      max-width:60ch;
     }
 
-    .subtext {
-      font-size: var(--text-base);
-      color: var(--muted);
-      max-width: 56ch;
+    .quick-stats{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:1rem;
     }
 
-    .panel-dark .subtext {
-      color: rgba(255,255,255,.78);
+    .stat{
+      border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      padding:1rem;
+      background:var(--surface-2);
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-top: 1.5rem;
+    .stat strong{
+      display:block;
+      font-size:1.55rem;
+      letter-spacing:-.03em;
+      margin-bottom:.22rem;
+      color:var(--text);
     }
 
-    .stat {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1rem;
-      background: var(--surface);
+    .stat span{
+      font-size:var(--text-xs);
+      color:var(--muted);
     }
 
-    .stat strong {
-      display: block;
-      font-size: 1.6rem;
-      letter-spacing: -.03em;
-      margin-bottom: .25rem;
+    .section-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:1rem;
     }
 
-    .stat span {
-      font-size: var(--text-xs);
-      color: var(--muted);
+    .section-title h3{
+      font-size:var(--text-lg);
+      letter-spacing:-.02em;
+      color:var(--text);
     }
 
-    .section-grid {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 1.25rem;
+    .section-title p{
+      color:var(--muted);
+      font-size:var(--text-sm);
     }
 
-    .section-title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+    .btn{
+      border:1px solid #fff;
+      background:#fff;
+      color:#000;
+      padding:.9rem 1.15rem;
+      border-radius:999px;
+      font-size:var(--text-sm);
+      font-weight:700;
+      transition:all var(--transition);
+      cursor:pointer;
+      min-height:44px;
     }
 
-    .section-title h3 {
-      font-size: var(--text-lg);
-      letter-spacing: -.02em;
+    .btn:hover{
+      background:#eaeaea;
+      border-color:#eaeaea;
     }
 
-    .section-title p {
-      color: var(--muted);
-      font-size: var(--text-sm);
+    .btn-secondary{
+      background:transparent;
+      color:var(--text);
+      border:1px solid var(--border);
     }
 
-    .btn {
-      border: 1px solid #000;
-      background: #000;
-      color: #fff;
-      padding: .9rem 1.15rem;
-      border-radius: 999px;
-      font-size: var(--text-sm);
-      font-weight: 600;
-      transition: all var(--transition);
-      cursor: pointer;
-      min-height: 44px;
+    .btn-secondary:hover{
+      background:var(--surface-2);
+      border-color:#3a3a3a;
     }
 
-    .btn:hover {
-      background: #111;
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:1rem;
     }
 
-    .btn-secondary {
-      background: #fff;
-      color: #000;
-      border: 1px solid var(--border);
+    .field{
+      display:grid;
+      gap:.45rem;
     }
 
-    .btn-secondary:hover {
-      background: var(--surface);
+    .field.full{
+      grid-column:1 / -1;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-    }
-
-    .field {
-      display: grid;
-      gap: .45rem;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    .field label {
-      font-size: var(--text-xs);
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      font-weight: 700;
+    .field label{
+      font-size:var(--text-xs);
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:700;
     }
 
     .field input,
     .field select,
-    .field textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: #fff;
-      border-radius: 14px;
-      padding: .95rem 1rem;
-      outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+    .field textarea{
+      width:100%;
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      color:var(--text);
+      border-radius:14px;
+      padding:.95rem 1rem;
+      outline:none;
+      transition:border-color var(--transition), box-shadow var(--transition), background var(--transition);
     }
 
-    .field textarea {
-      resize: vertical;
-      min-height: 120px;
+    .field textarea{
+      resize:vertical;
+      min-height:120px;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder{
+      color:var(--muted-2);
     }
 
     .field input:focus,
     .field select:focus,
-    .field textarea:focus {
-      border-color: #000;
-      box-shadow: 0 0 0 4px rgba(0,0,0,.08);
+    .field textarea:focus{
+      border-color:#5a5a5a;
+      box-shadow:0 0 0 4px rgba(255,255,255,.06);
+      background:var(--surface-3);
     }
 
-    .records {
-      display: grid;
-      gap: 1rem;
+    .records{
+      display:grid;
+      gap:1rem;
     }
 
-    .record {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 1rem;
-      background: var(--surface);
-      display: grid;
-      gap: .7rem;
+    .record{
+      border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      padding:1rem;
+      background:var(--surface-2);
+      display:grid;
+      gap:.7rem;
     }
 
-    .record-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: flex-start;
+    .record-top{
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:flex-start;
     }
 
-    .record h4 {
-      font-size: 1rem;
-      margin-bottom: .2rem;
+    .record h4{
+      font-size:1rem;
+      margin-bottom:.2rem;
+      color:var(--text);
     }
 
-    .record p {
-      font-size: var(--text-sm);
-      color: var(--muted);
+    .record p{
+      font-size:var(--text-sm);
+      color:var(--muted);
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .4rem;
-      padding: .5rem .75rem;
-      border-radius: 999px;
-      border: 1px solid #000;
-      background: #000;
-      color: #fff;
-      font-size: var(--text-xs);
-      font-weight: 700;
-      white-space: nowrap;
+    .record-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.6rem;
+      color:var(--muted);
+      font-size:var(--text-xs);
     }
 
-    .record-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .6rem;
-      color: var(--muted);
-      font-size: var(--text-xs);
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      padding:.5rem .75rem;
+      border-radius:999px;
+      border:1px solid #fff;
+      background:#fff;
+      color:#000;
+      font-size:var(--text-xs);
+      font-weight:800;
+      white-space:nowrap;
     }
 
-    .zones {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: .9rem;
+    .zones{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:.9rem;
     }
 
-    .zone-btn {
-      border: 1px solid var(--border);
-      background: #fff;
-      border-radius: 18px;
-      padding: 1rem;
-      text-align: left;
-      min-height: 88px;
-      transition: all var(--transition);
-      cursor: pointer;
+    .zone-btn{
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      color:var(--text);
+      border-radius:18px;
+      padding:1rem;
+      text-align:left;
+      min-height:92px;
+      transition:all var(--transition);
+      cursor:pointer;
     }
 
-    .zone-btn:hover {
-      background: var(--surface);
-      transform: translateY(-1px);
+    .zone-btn:hover{
+      background:var(--surface-3);
+      border-color:#3a3a3a;
+      transform:translateY(-1px);
     }
 
-    .zone-btn.active {
-      background: #000;
-      color: #fff;
-      border-color: #000;
+    .zone-btn.active{
+      background:#fff;
+      color:#000;
+      border-color:#fff;
     }
 
-    .zone-btn strong {
-      display: block;
-      font-size: var(--text-sm);
-      margin-bottom: .3rem;
+    .zone-btn strong{
+      display:block;
+      font-size:var(--text-sm);
+      margin-bottom:.3rem;
     }
 
-    .zone-btn span {
-      font-size: var(--text-xs);
-      color: inherit;
-      opacity: .72;
+    .zone-btn span{
+      font-size:var(--text-xs);
+      opacity:.78;
     }
 
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+    .video-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:1rem;
     }
 
-    .video-card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      background: #fff;
-      box-shadow: var(--shadow-sm);
+    .video-card{
+      border:1px solid var(--border);
+      border-radius:var(--radius-md);
+      overflow:hidden;
+      background:var(--surface);
+      box-shadow:var(--shadow-sm);
     }
 
-    .video-wrap {
-      aspect-ratio: 16 / 9;
-      background: #0f0f0f;
+    .video-wrap{
+      aspect-ratio:16/9;
+      background:#050505;
     }
 
     .video-wrap video,
-    .video-wrap iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      object-fit: cover;
+    .video-wrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      object-fit:cover;
     }
 
-    .video-content {
-      padding: 1rem;
-      display: grid;
-      gap: .45rem;
+    .video-content{
+      padding:1rem;
+      display:grid;
+      gap:.45rem;
     }
 
-    .video-content h4 {
-      font-size: 1rem;
-      letter-spacing: -.02em;
+    .video-content h4{
+      font-size:1rem;
+      letter-spacing:-.02em;
+      color:var(--text);
     }
 
-    .video-content p {
-      font-size: var(--text-sm);
-      color: var(--muted);
+    .video-content p{
+      font-size:var(--text-sm);
+      color:var(--muted);
     }
 
-    .mini-list {
-      display: grid;
-      gap: .75rem;
+    .mini-list{
+      display:grid;
+      gap:.75rem;
     }
 
-    .mini-item {
-      padding: .95rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: var(--surface);
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
+    .mini-item{
+      padding:.95rem 1rem;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--surface-2);
+      display:flex;
+      justify-content:space-between;
+      gap:1rem;
+      align-items:center;
     }
 
-    .mini-item strong {
-      display: block;
-      font-size: var(--text-sm);
-      margin-bottom: .15rem;
+    .mini-item strong{
+      display:block;
+      font-size:var(--text-sm);
+      margin-bottom:.15rem;
+      color:var(--text);
     }
 
-    .mini-item span {
-      font-size: var(--text-xs);
-      color: var(--muted);
+    .mini-item span{
+      font-size:var(--text-xs);
+      color:var(--muted);
     }
 
-    .mobile-toggle {
-      display: none;
+    .mobile-toggle{
+      display:none;
     }
 
-    @media (max-width: 1100px) {
-      .hero,
-      .section-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .zones {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    @media (max-width:1100px){
+      .hero{grid-template-columns:1fr}
+      .zones{grid-template-columns:repeat(2,1fr)}
     }
 
-    @media (max-width: 860px) {
-      body {
-        overflow: auto;
+    @media (max-width:860px){
+      body{overflow:auto}
+
+      .app{
+        grid-template-columns:1fr;
+        height:auto;
       }
 
-      .app {
-        grid-template-columns: 1fr;
-        height: auto;
+      .sidebar{
+        position:fixed;
+        inset:0 auto 0 0;
+        width:min(86vw,320px);
+        z-index:60;
+        transform:translateX(-100%);
+        transition:transform var(--transition);
+        box-shadow:var(--shadow-md);
       }
 
-      .sidebar {
-        position: fixed;
-        inset: 0 auto 0 0;
-        width: min(86vw, 320px);
-        z-index: 60;
-        transform: translateX(-100%);
-        transition: transform var(--transition);
-        box-shadow: var(--shadow-md);
+      .sidebar.open{
+        transform:translateX(0);
       }
 
-      .sidebar.open {
-        transform: translateX(0);
+      .main{overflow:visible}
+      .topbar{padding:1rem}
+      .page{padding:1rem}
+      .mobile-toggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        width:44px;
+        height:44px;
+        border-radius:999px;
+        border:1px solid var(--border);
+        background:var(--surface);
+        color:var(--text);
+        cursor:pointer;
       }
 
-      .main {
-        overflow: visible;
+      .search{
+        min-width:0;
+        width:100%;
       }
 
-      .topbar {
-        padding: 1rem;
-      }
-
-      .page {
-        padding: 1rem;
-      }
-
-      .mobile-toggle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        border-radius: 999px;
-        border: 1px solid var(--border);
-        background: #fff;
-        cursor: pointer;
-      }
-
-      .search {
-        min-width: 0;
-        width: 100%;
-      }
-
-      .topbar-actions {
-        flex: 1;
-      }
-
+      .topbar-actions{flex:1}
       .form-grid,
       .video-grid,
-      .zones,
-      .stats {
-        grid-template-columns: 1fr;
+      .zones{
+        grid-template-columns:1fr;
       }
     }
   </style>
@@ -652,27 +640,19 @@
       </div>
 
       <nav class="nav">
-        <button class="nav-link active" data-page="dashboard">
+        <button class="nav-link active" data-page="historias">
           <span class="nav-icon"></span>
-          <span>Panel general</span>
-        </button>
-        <button class="nav-link" data-page="historias">
-          <span class="nav-icon"></span>
-          <span>Historias clínicas</span>
+          <span>Historia clínica</span>
         </button>
         <button class="nav-link" data-page="ejercicios">
           <span class="nav-icon"></span>
           <span>Ejercicios y vídeos</span>
         </button>
-        <button class="nav-link" data-page="biblioteca">
-          <span class="nav-icon"></span>
-          <span>Biblioteca interna</span>
-        </button>
       </nav>
 
       <div class="sidebar-card">
         <h3>Entorno clínico centralizado</h3>
-        <p>Gestiona pacientes, evolución clínica y ejercicios por zona corporal en un único entorno.</p>
+        <p>Registro de pacientes y biblioteca audiovisual de ejercicio terapéutico organizada por región corporal.</p>
         <button class="btn">Nuevo paciente</button>
       </div>
     </aside>
@@ -680,144 +660,45 @@
     <main class="main">
       <header class="topbar">
         <div style="display:flex; align-items:center; gap:.75rem;">
-          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">
-            ☰
-          </button>
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">☰</button>
           <div>
             <h2>Recovery</h2>
-            <p>Centro de control del equipo de fisioterapia</p>
+            <p>Gestión clínica y contenido terapéutico</p>
           </div>
         </div>
 
         <div class="topbar-actions">
-          <input class="search" type="text" placeholder="Buscar paciente, zona corporal o ejercicio" />
+          <input class="search" type="text" placeholder="Buscar paciente, región corporal o ejercicio" />
           <button class="btn btn-secondary">Exportar</button>
         </div>
       </header>
 
-      <section class="page active" id="dashboard">
-        <div class="hero">
-          <article class="panel panel-dark">
-            <div class="eyebrow">Plataforma clínica</div>
-            <h3 class="headline">Historias clínicas y ejercicio terapéutico en una sola interfaz.</h3>
+      <section class="page active" id="historias">
+        <article class="panel hero hero-dark">
+          <div>
+            <div class="eyebrow">Historia clínica</div>
+            <h3 class="headline">Registro estructurado, limpio y premium para cada paciente.</h3>
             <p class="subtext">
-              Recovery está diseñada para centros de fisioterapia que necesitan registrar valoraciones, almacenar evolución de pacientes y organizar vídeos de recuperación y estiramientos por región anatómica.
+              Crea, revisa y organiza la información clínica del paciente en un único espacio con una interfaz pensada para consulta rápida y seguimiento profesional.
             </p>
-          </article>
+          </div>
 
-          <article class="panel">
-            <div class="eyebrow">Actividad</div>
-            <div class="stats">
-              <div class="stat">
-                <strong>128</strong>
-                <span>Pacientes activos</span>
-              </div>
-              <div class="stat">
-                <strong>42</strong>
-                <span>Programas asignados</span>
-              </div>
-              <div class="stat">
-                <strong>16</strong>
-                <span>Vídeos recientes</span>
-              </div>
+          <div class="quick-stats">
+            <div class="stat">
+              <strong>128</strong>
+              <span>Pacientes activos</span>
             </div>
-          </article>
-        </div>
-
-        <div class="section-grid">
-          <article class="panel">
-            <div class="section-title">
-              <div>
-                <h3>Pacientes recientes</h3>
-                <p>Seguimiento clínico rápido</p>
-              </div>
-              <button class="btn btn-secondary">Ver todos</button>
+            <div class="stat">
+              <strong>42</strong>
+              <span>Historias actualizadas</span>
             </div>
-
-            <div class="records">
-              <div class="record">
-                <div class="record-top">
-                  <div>
-                    <h4>Laura Martínez</h4>
-                    <p>Dolor cervical y limitación de movilidad.</p>
-                  </div>
-                  <span class="badge">En tratamiento</span>
-                </div>
-                <div class="record-meta">
-                  <span>Zona: Cervical</span>
-                  <span>Última sesión: 04/08/2026</span>
-                  <span>Fisio responsable: Dr. Ruiz</span>
-                </div>
-              </div>
-
-              <div class="record">
-                <div class="record-top">
-                  <div>
-                    <h4>Álvaro Gómez</h4>
-                    <p>Recuperación de hombro post-lesión deportiva.</p>
-                  </div>
-                  <span class="badge">Revisión</span>
-                </div>
-                <div class="record-meta">
-                  <span>Zona: Hombro</span>
-                  <span>Última sesión: 02/08/2026</span>
-                  <span>Programa: movilidad + fuerza</span>
-                </div>
-              </div>
-
-              <div class="record">
-                <div class="record-top">
-                  <div>
-                    <h4>Marina Pérez</h4>
-                    <p>Lumbalgia mecánica con plan de ejercicio domiciliario.</p>
-                  </div>
-                  <span class="badge">Activo</span>
-                </div>
-                <div class="record-meta">
-                  <span>Zona: Lumbar</span>
-                  <span>Última sesión: 01/08/2026</span>
-                  <span>Seguimiento semanal</span>
-                </div>
-              </div>
+            <div class="stat">
+              <strong>16</strong>
+              <span>Revisiones pendientes</span>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <aside class="panel">
-            <div class="section-title">
-              <div>
-                <h3>Accesos rápidos</h3>
-                <p>Funciones clave</p>
-              </div>
-            </div>
-
-            <div class="mini-list">
-              <div class="mini-item">
-                <div>
-                  <strong>Nueva historia clínica</strong>
-                  <span>Registrar anamnesis y exploración</span>
-                </div>
-                <span>→</span>
-              </div>
-              <div class="mini-item">
-                <div>
-                  <strong>Subir vídeo</strong>
-                  <span>Asignar a una zona corporal</span>
-                </div>
-                <span>→</span>
-              </div>
-              <div class="mini-item">
-                <div>
-                  <strong>Crear programa</strong>
-                  <span>Seleccionar ejercicios y estiramientos</span>
-                </div>
-                <span>→</span>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section class="page" id="historias">
         <article class="panel">
           <div class="section-title">
             <div>
@@ -844,17 +725,20 @@
             </div>
 
             <div class="field">
-              <label>Zona corporal</label>
+              <label>Región principal</label>
               <select>
                 <option>Cervical</option>
-                <option>Hombro</option>
-                <option>Codo</option>
-                <option>Muñeca y mano</option>
-                <option>Dorsal</option>
+                <option>Columna</option>
                 <option>Lumbar</option>
-                <option>Cadera</option>
-                <option>Rodilla</option>
-                <option>Tobillo y pie</option>
+                <option>Sacroilíaca</option>
+                <option>Pubis</option>
+                <option>Músculos miembro superior</option>
+                <option>Músculos miembro inferior</option>
+                <option>Articulaciones miembro superior</option>
+                <option>Articulaciones miembro inferior</option>
+                <option>Pectoral</option>
+                <option>Abdomen</option>
+                <option>Músculos del dorso</option>
               </select>
             </div>
 
@@ -865,17 +749,17 @@
 
             <div class="field full">
               <label>Valoración y exploración</label>
-              <textarea placeholder="ROM, dolor, test clínicos, hallazgos funcionales, palpación, fuerza, control motor..."></textarea>
+              <textarea placeholder="ROM, dolor, test clínicos, palpación, fuerza, control motor, hallazgos funcionales..."></textarea>
             </div>
 
             <div class="field full">
               <label>Plan de tratamiento</label>
-              <textarea placeholder="Objetivos, número estimado de sesiones, técnicas, ejercicio terapéutico, educación, progresión."></textarea>
+              <textarea placeholder="Objetivos, técnicas, educación, ejercicio terapéutico, frecuencia y progresión."></textarea>
             </div>
 
             <div class="field full">
               <label>Observaciones y evolución</label>
-              <textarea placeholder="Registra cambios, adherencia, respuesta al tratamiento y criterios de progresión."></textarea>
+              <textarea placeholder="Registra respuesta al tratamiento, cambios funcionales y criterios de progresión."></textarea>
             </div>
           </form>
         </article>
@@ -884,7 +768,7 @@
           <div class="section-title">
             <div>
               <h3>Historias almacenadas</h3>
-              <p>Ejemplo de listado clínico</p>
+              <p>Vista rápida de pacientes</p>
             </div>
           </div>
 
@@ -893,9 +777,9 @@
               <div class="record-top">
                 <div>
                   <h4>Paciente #001 · Sofía Navarro</h4>
-                  <p>Gonalgia anterior. Déficit de control en valgo dinámico.</p>
+                  <p>Dolor lumbar con baja tolerancia a carga y rigidez matutina.</p>
                 </div>
-                <span class="badge">Rodilla</span>
+                <span class="badge">Lumbar</span>
               </div>
               <div class="record-meta">
                 <span>Fecha alta: 12/07/2026</span>
@@ -908,9 +792,9 @@
               <div class="record-top">
                 <div>
                   <h4>Paciente #002 · Daniel Ortega</h4>
-                  <p>Lumbalgia de esfuerzo con rigidez matutina y baja tolerancia a carga.</p>
+                  <p>Disfunción de articulaciones de miembro superior tras lesión deportiva.</p>
                 </div>
-                <span class="badge">Lumbar</span>
+                <span class="badge">Art. M. superior</span>
               </div>
               <div class="record-meta">
                 <span>Fecha alta: 21/07/2026</span>
@@ -926,44 +810,60 @@
         <article class="panel">
           <div class="section-title">
             <div>
-              <h3>Ejercicios por zona corporal</h3>
-              <p>Selecciona una región anatómica para mostrar tus vídeos</p>
+              <h3>Ejercicios y vídeos</h3>
+              <p>Biblioteca audiovisual por región corporal</p>
             </div>
             <button class="btn btn-secondary">Subir nuevo vídeo</button>
           </div>
 
-          <div class="zones" id="zones">
+          <div class="zones">
             <button class="zone-btn active" data-zone="cervical">
               <strong>Cervical</strong>
-              <span>Movilidad y descarga</span>
+              <span>Movilidad y control</span>
             </button>
-            <button class="zone-btn" data-zone="hombro">
-              <strong>Hombro</strong>
-              <span>Control y fuerza</span>
+            <button class="zone-btn" data-zone="columna">
+              <strong>Columna</strong>
+              <span>Control global</span>
             </button>
             <button class="zone-btn" data-zone="lumbar">
               <strong>Lumbar</strong>
               <span>Estabilidad y movilidad</span>
             </button>
-            <button class="zone-btn" data-zone="rodilla">
-              <strong>Rodilla</strong>
-              <span>Fuerza y reeducación</span>
+            <button class="zone-btn" data-zone="sacroiliaca">
+              <strong>Sacroilíaca</strong>
+              <span>Control lumbopélvico</span>
             </button>
-            <button class="zone-btn" data-zone="cadera">
-              <strong>Cadera</strong>
-              <span>Movilidad y activación</span>
+            <button class="zone-btn" data-zone="pubis">
+              <strong>Pubis</strong>
+              <span>Adductores y control</span>
             </button>
-            <button class="zone-btn" data-zone="tobillo">
-              <strong>Tobillo y pie</strong>
-              <span>Propiocepción</span>
+            <button class="zone-btn" data-zone="musculos-ms">
+              <strong>Músculos miembro superior</strong>
+              <span>Activación y fuerza</span>
             </button>
-            <button class="zone-btn" data-zone="codo">
-              <strong>Codo</strong>
-              <span>Descarga y control</span>
+            <button class="zone-btn" data-zone="musculos-mi">
+              <strong>Músculos miembro inferior</strong>
+              <span>Potenciación y control</span>
             </button>
-            <button class="zone-btn" data-zone="muneca">
-              <strong>Muñeca y mano</strong>
-              <span>Movilidad fina</span>
+            <button class="zone-btn" data-zone="art-ms">
+              <strong>Articulaciones miembro superior</strong>
+              <span>Movilidad articular</span>
+            </button>
+            <button class="zone-btn" data-zone="art-mi">
+              <strong>Articulaciones miembro inferior</strong>
+              <span>Rango y función</span>
+            </button>
+            <button class="zone-btn" data-zone="pectoral">
+              <strong>Pectoral</strong>
+              <span>Elasticidad y descarga</span>
+            </button>
+            <button class="zone-btn" data-zone="abdomen">
+              <strong>Abdomen</strong>
+              <span>Core y control</span>
+            </button>
+            <button class="zone-btn" data-zone="dorso">
+              <strong>Músculos del dorso</strong>
+              <span>Movilidad y fuerza</span>
             </button>
           </div>
         </article>
@@ -977,32 +877,6 @@
           </div>
 
           <div class="video-grid" id="videoGrid"></div>
-        </article>
-      </section>
-
-      <section class="page" id="biblioteca">
-        <article class="panel">
-          <div class="section-title">
-            <div>
-              <h3>Estructura de carga recomendada</h3>
-              <p>Cómo sustituir los vídeos de ejemplo por tus propios recursos</p>
-            </div>
-          </div>
-
-          <div class="records">
-            <div class="record">
-              <h4>Opción 1 · Vídeos locales</h4>
-              <p>Sube tus archivos a una carpeta como <strong>/videos</strong> dentro del proyecto y reemplaza la propiedad <strong>src</strong> en cada objeto del script.</p>
-            </div>
-            <div class="record">
-              <h4>Opción 2 · Vídeos de YouTube/Vimeo</h4>
-              <p>Sustituye el bloque de vídeo por un <strong>iframe</strong> y pega la URL embed correspondiente.</p>
-            </div>
-            <div class="record">
-              <h4>Opción 3 · Catálogo ampliable</h4>
-              <p>Puedes conectar más adelante esta misma interfaz a Firebase, Supabase o una base de datos clínica para persistir pacientes y vídeos.</p>
-            </div>
-          </div>
         </article>
       </section>
     </main>
@@ -1034,129 +908,189 @@
     });
 
     const exerciseData = {
-      cervical: [
+      "cervical": [
         {
           title: "Movilidad cervical suave",
           type: "Recuperación",
-          desc: "Ejercicio orientado a mejorar movilidad controlada en flexión, extensión y rotación.",
+          desc: "Ejercicio orientado a flexión, extensión y rotación controlada.",
           src: "https://www.w3schools.com/html/mov_bbb.mp4"
         },
         {
           title: "Estiramiento cervical lateral",
           type: "Estiramiento",
-          desc: "Trabajo suave para musculatura lateral y reducción de rigidez percibida.",
+          desc: "Rutina para rigidez lateral y mejora de confort cervical.",
           src: "https://www.w3schools.com/html/movie.mp4"
         }
       ],
-      hombro: [
+      "columna": [
         {
-          title: "Movilidad glenohumeral asistida",
+          title: "Movilidad global de columna",
           type: "Recuperación",
-          desc: "Propuesta para fases iniciales o intermedias de recuperación funcional del hombro.",
+          desc: "Secuencia suave de control segmentario y movilidad general.",
           src: "https://www.w3schools.com/html/mov_bbb.mp4"
         },
         {
-          title: "Rotación externa con control",
-          type: "Fortalecimiento",
-          desc: "Ejercicio de control escapulohumeral y activación progresiva.",
+          title: "Control postural espinal",
+          type: "Control",
+          desc: "Ejercicio para conciencia corporal y alineación.",
           src: "https://www.w3schools.com/html/movie.mp4"
         }
       ],
-      lumbar: [
+      "lumbar": [
         {
           title: "Basculación pélvica",
           type: "Recuperación",
-          desc: "Trabajo de conciencia lumbopélvica y movilidad segmentaria.",
+          desc: "Trabajo de movilidad lumbopélvica y control motor.",
           src: "https://www.w3schools.com/html/mov_bbb.mp4"
         },
         {
-          title: "Estiramiento lumbar global",
+          title: "Estiramiento lumbar",
           type: "Estiramiento",
-          desc: "Rutina suave para rigidez lumbar y mejora de confort.",
+          desc: "Propuesta suave para disminuir rigidez lumbar.",
           src: "https://www.w3schools.com/html/movie.mp4"
         }
       ],
-      rodilla: [
+      "sacroiliaca": [
         {
-          title: "Extensión activa de rodilla",
-          type: "Recuperación",
-          desc: "Mejora del control y la activación del cuádriceps.",
-          src: "https://www.w3schools.com/html/mov_bbb.mp4"
-        },
-        {
-          title: "Sentadilla parcial guiada",
-          type: "Fortalecimiento",
-          desc: "Progresión funcional para carga controlada y patrón estable.",
-          src: "https://www.w3schools.com/html/movie.mp4"
-        }
-      ],
-      cadera: [
-        {
-          title: "Movilidad de cadera en descarga",
-          type: "Recuperación",
-          desc: "Movimientos suaves para mejorar rango articular y control.",
-          src: "https://www.w3schools.com/html/mov_bbb.mp4"
-        },
-        {
-          title: "Estiramiento flexores de cadera",
-          type: "Estiramiento",
-          desc: "Rutina para reducir rigidez anterior de cadera.",
-          src: "https://www.w3schools.com/html/movie.mp4"
-        }
-      ],
-      tobillo: [
-        {
-          title: "Movilidad de tobillo en pared",
-          type: "Recuperación",
-          desc: "Trabajo de dorsiflexión y progresión funcional.",
-          src: "https://www.w3schools.com/html/mov_bbb.mp4"
-        },
-        {
-          title: "Equilibrio monopodal",
-          type: "Propiocepción",
-          desc: "Ejercicio básico para control postural y estabilidad.",
-          src: "https://www.w3schools.com/html/movie.mp4"
-        }
-      ],
-      codo: [
-        {
-          title: "Flexo-extensión controlada",
-          type: "Recuperación",
-          desc: "Movilidad activa con control del rango tolerado.",
-          src: "https://www.w3schools.com/html/mov_bbb.mp4"
-        },
-        {
-          title: "Estiramiento de extensores",
-          type: "Estiramiento",
-          desc: "Propuesta útil en sobrecarga de antebrazo y codo.",
-          src: "https://www.w3schools.com/html/movie.mp4"
-        }
-      ],
-      muneca: [
-        {
-          title: "Movilidad de muñeca",
-          type: "Recuperación",
-          desc: "Ejercicio para mejorar flexión, extensión y control articular.",
-          src: "https://www.w3schools.com/html/mov_bbb.mp4"
-        },
-        {
-          title: "Deslizamiento tendinoso",
+          title: "Control lumbopélvico básico",
           type: "Control",
-          desc: "Secuencia suave para mano y dedos con enfoque funcional.",
+          desc: "Ejercicio inicial para estabilidad de la región sacroilíaca.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Movilidad pélvica guiada",
+          type: "Recuperación",
+          desc: "Secuencia suave en descarga para control de pelvis.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "pubis": [
+        {
+          title: "Activación aductora suave",
+          type: "Recuperación",
+          desc: "Trabajo de control y activación progresiva en región púbica.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Estiramiento cadena medial",
+          type: "Estiramiento",
+          desc: "Movilidad suave orientada a aductores y pubis.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "musculos-ms": [
+        {
+          title: "Activación miembro superior",
+          type: "Fortalecimiento",
+          desc: "Ejercicio de activación muscular progresiva del miembro superior.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Control muscular escapular",
+          type: "Control",
+          desc: "Trabajo coordinativo para cadena muscular superior.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "musculos-mi": [
+        {
+          title: "Activación miembro inferior",
+          type: "Fortalecimiento",
+          desc: "Trabajo general de fuerza y control de miembro inferior.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Estabilidad monopodal",
+          type: "Control",
+          desc: "Ejercicio funcional para control y estabilidad.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "art-ms": [
+        {
+          title: "Movilidad articular miembro superior",
+          type: "Movilidad",
+          desc: "Secuencia para recuperar rango articular funcional.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Control articular guiado",
+          type: "Recuperación",
+          desc: "Trabajo suave de movilidad y control articular.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "art-mi": [
+        {
+          title: "Movilidad articular miembro inferior",
+          type: "Movilidad",
+          desc: "Propuesta de recuperación del rango y funcionalidad.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Patrón funcional de carga",
+          type: "Recuperación",
+          desc: "Ejercicio orientado a transición hacia función.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "pectoral": [
+        {
+          title: "Estiramiento pectoral en apertura",
+          type: "Estiramiento",
+          desc: "Trabajo suave para apertura anterior y elasticidad pectoral.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Movilidad torácica anterior",
+          type: "Movilidad",
+          desc: "Ejercicio complementario para la cadena anterior.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "abdomen": [
+        {
+          title: "Activación abdominal básica",
+          type: "Control",
+          desc: "Trabajo de activación y control del core.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Estabilidad abdominal",
+          type: "Fortalecimiento",
+          desc: "Ejercicio de progresión para control central.",
+          src: "https://www.w3schools.com/html/movie.mp4"
+        }
+      ],
+      "dorso": [
+        {
+          title: "Movilidad dorsal",
+          type: "Movilidad",
+          desc: "Secuencia de movilidad para musculatura del dorso.",
+          src: "https://www.w3schools.com/html/mov_bbb.mp4"
+        },
+        {
+          title: "Activación extensora suave",
+          type: "Fortalecimiento",
+          desc: "Ejercicio básico de control y fuerza posterior.",
           src: "https://www.w3schools.com/html/movie.mp4"
         }
       ]
     };
 
     const zoneNames = {
-      cervical: "Cervical",
-      hombro: "Hombro",
-      lumbar: "Lumbar",
-      rodilla: "Rodilla",
-      cadera: "Cadera",
-      tobillo: "Tobillo y pie",
-      codo: "Codo",
-      muneca: "Muñeca y mano"
+      "cervical": "Cervical",
+      "columna": "Columna",
+      "lumbar": "Lumbar",
+      "sacroiliaca": "Sacroilíaca",
+      "pubis": "Pubis",
+      "musculos-ms": "Músculos miembro superior",
+      "musculos-mi": "Músculos miembro inferior",
+      "art-ms": "Articulaciones miembro superior",
+      "art-mi": "Articulaciones miembro inferior",
+      "pectoral": "Pectoral",
+      "abdomen": "Abdomen",
+      "dorso": "Músculos del dorso"
     };
 
     const zoneButtons = document.querySelectorAll('.zone-btn');
