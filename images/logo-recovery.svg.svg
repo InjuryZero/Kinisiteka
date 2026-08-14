@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Recovery</title>
+  <desc id="desc">Símbolo blanco de Recovery sobre fondo negro</desc>
+  <rect width="256" height="256" rx="28" fill="#050505"/>
+  <g fill="#fff">
+    <path d="M61 58h76c45 0 77 29 77 70 0 30-16 52-42 63l-30-31c18-2 30-13 30-31 0-18-14-31-36-31H61z"/>
+    <path d="M61 135c31 8 56 24 78 46l30 38h-47l-19-30c-13-18-27-33-42-43z"/>
+    <path d="M61 154v65h45l30-52c-25-22-49-34-75-41z"/>
+  </g>
+</svg>
