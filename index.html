@@ -28,21 +28,29 @@
     SUPABASE_KEY
   )
 
-  async function probarConexionSupabase() {
+  async function cargarPacientesDeSupabase() {
     const { data, error } = await supabaseClient
-      .from('videos')
-      .select('id, title')
-      .limit(1)
+      .from('clinic_patients')
+      .select(`
+        patient_id,
+        patient:profiles!clinic_patients_patient_id_fkey (
+          full_name
+        )
+      `)
 
     if (error) {
-      alert('Error de Supabase: ' + error.message)
+      alert('Error cargando pacientes: ' + error.message)
       return
     }
 
-    alert('Conexión correcta: ' + JSON.stringify(data))
+    const nombres = (data || []).map((item) => {
+      return item.patient?.full_name || 'Paciente sin nombre'
+    })
+
+    alert('Pacientes encontrados: ' + nombres.join(', '))
   }
 
-  probarConexionSupabase()
+  cargarPacientesDeSupabase()
 </script>  
 <body>
 <div class="auth-corner"><div class="auth-pill"><button class="ghost-btn">Iniciar sesión</button><button class="auth-btn">Registrarse</button></div></div>
