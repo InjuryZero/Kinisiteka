@@ -151,12 +151,25 @@ async function iniciarSesionConSupabase() {
 
   closeAuthModal()
 
-  showStatus(
+    showStatus(
     $('formStatus'),
     'Sesión iniciada correctamente.',
     'ok'
   )
-}  
+}
+
+$('authSubmitBtn').addEventListener(
+  'click',
+  async () => {
+    if (authMode === 'register') {
+      await registrarConSupabase()
+    } else {
+      await iniciarSesionConSupabase()
+    }
+  }
+)
+</script>
+
 </script>  
 <body>
 <div class="auth-corner">
