@@ -102,6 +102,43 @@
     'ok'
   )
 }
+async function iniciarSesionConSupabase() {
+  const email = $('authEmail').value.trim().toLowerCase()
+  const password = $('authPassword').value
+
+  if (!email || !password) {
+    showStatus(
+      $('authStatus'),
+      'Introduce email y contraseña.',
+      'error'
+    )
+    return
+  }
+
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
+      email: email,
+      password: password
+    })
+
+  if (error) {
+    showStatus($('authStatus'), error.message, 'error')
+    return
+  }
+
+  $('loggedOutActions').classList.add('hidden')
+  $('loggedInActions').classList.remove('hidden')
+  $('sessionLabel').textContent = email
+  $('statSession').textContent = email
+
+  closeAuthModal()
+
+  showStatus(
+    $('formStatus'),
+    'Sesión iniciada correctamente.',
+    'ok'
+  )
+}  
 </script>  
 <body>
 <div class="auth-corner"><div class="auth-pill"><button class="ghost-btn">Iniciar sesión</button><button class="auth-btn">Registrarse</button></div></div>
