@@ -43,11 +43,29 @@
       return
     }
 
-    const nombres = (data || []).map((item) => {
-      return item.patient?.full_name || 'Paciente sin nombre'
-    })
+    const lista = document.getElementById('chatList')
 
-    alert('Pacientes encontrados: ' + nombres.join(', '))
+if (!data || data.length === 0) {
+  lista.innerHTML = `
+    <div class="empty">
+      No hay pacientes relacionados.
+    </div>
+  `
+  return
+}
+
+lista.innerHTML = data.map((item) => {
+  const nombre =
+    item.patient?.full_name || 'Paciente sin nombre'
+
+  return `
+    <button class="chat-item">
+      <strong>${nombre}</strong>
+      <span>Paciente relacionado · Chat privado</span>
+    </button>
+  `
+}).join('')
+
   }
 
   cargarPacientesDeSupabase()
