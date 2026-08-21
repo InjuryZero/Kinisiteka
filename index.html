@@ -24,9 +24,12 @@
   const SUPABASE_KEY = 'sb_publishable_ad6mFCc8LZN3Ua1yEgMwIA_moH8Ekzk'
 
   const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  )
+  SUPABASE_URL,
+  SUPABASE_KEY
+)
+
+let authMode = 'login'
+
 
   async function cargarPacientesDeSupabase() {
     const { data, error } = await supabaseClient
