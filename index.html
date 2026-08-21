@@ -121,7 +121,7 @@
 )
 
 let authMode = 'login'
-
+const $ = (id) => document.getElementById(id)
 
   async function cargarPacientesDeSupabase() {
     const { data, error } = await supabaseClient
