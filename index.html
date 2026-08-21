@@ -209,11 +209,7 @@ lista.innerHTML = data.map((item) => {
 
   closeAuthModal()
 
-  showStatus(
-    $('formStatus'),
-    'Cuenta creada correctamente.',
-    'ok'
-  )
+ alert('Cuenta creada correctamente.')
 }
 async function iniciarSesionConSupabase() {
   const email = $('authEmail').value.trim().toLowerCase()
@@ -245,11 +241,7 @@ async function iniciarSesionConSupabase() {
   $('statSession').textContent = email
 
   closeAuthModal()
-  showStatus(
-    $('formStatus'),
-    'Sesión iniciada correctamente.',
-    'ok'
-  )
+  alert('Sesión iniciada correctamente.')
 }
 
 $('authSubmitBtn').addEventListener(
