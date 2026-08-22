@@ -60,7 +60,91 @@ async function cargarPacientesDeSupabase(){const {data,error}=await supabaseClie
 cargarPacientesDeSupabase();
 </script>
 <script>
-const regions=['Abdomen','Articulaciones miembro inferior','Articulaciones miembro superior','Cervical','Columna','Lumbar','Músculos del dorso','Músculos miembro inferior','Músculos miembro superior','Pectoral','Pubis','Sacroilíaca'];const videoLibrary=regions.flatMap(region=>[{id:`${region}-1`,title:`Ejercicio de ${region}`,region},{id:`${region}-2`,title:`Estiramiento de ${region}`,region}]);let selectedPatientId=null;const nav=document.querySelectorAll('.nav-link');const pages=document.querySelectorAll('.page');const patientsKey='recovery_patients_v1';const planKey='recovery_plan_v1';function getPatients(){try{return JSON.parse(localStorage.getItem(patientsKey)||'[]')}catch{return[]}}function setPatients(value){localStorage.setItem(patientsKey,JSON.stringify(value))}function getPlan(){return localStorage.getItem(planKey)||'premium'}function limitForPlan(){const plan=getPlan();return plan==='standard'?5:plan==='premium'?15:Infinity}function openPage(id){nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));pages.forEach(p=>p.classList.toggle('active',p.id===id));if(innerWidth<=860)$('sidebar').classList.remove('open')}nav.forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));$('mobileToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));function populateRegions(){ $('zones').innerHTML=regions.map((region,i)=>`<button class="zone-btn ${i?'':'active'}" data-region="${region}"><strong>${region}</strong></button>`).join('');document.querySelectorAll('.zone-btn').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.zone-btn').forEach(item=>item.classList.remove('active'));button.classList.add('active');renderVideos(button.dataset.region)}))}function renderVideos(region){$('videoSectionTitle').textContent=`Vídeos de rehabilitación · ${region}`;const videos=videoLibrary.filter(video=>video.region===region);$('videoGrid').innerHTML=videos.map(video=>`<article class="video-card"><div class="video-placeholder"><div class="video-placeholder-inner"><div class="video-placeholder-icon">▶</div><strong>Vídeo pendiente de subida</strong><span>${video.title} aparecerá aquí cuando lo subas.</span></div></div><div class="video-content"><h4>${video.title}</h4><p>Contenido de ${region} categorizado por Recovery.</p></div></article>`).join('')}function renderPatients(){const patients=getPatients();$('statPatients').textContent=patients.length;$('statChats').textContent=patients.length;$('statSentVideos').textContent=patients.reduce((total,patient)=>total+(patient.sentVideos?.length||0),0);const list=$('chatList');if(!patients.length){list.innerHTML='<div class="empty">Todavía no hay pacientes. Pulsa “Añadir paciente” para crear el primer chat.</div>';selectedPatientId=null;return}list.innerHTML=patients.map((patient,index)=>`<button class="chat-item ${index===0?'active':''}" data-id="${patient.id}"><strong>${patient.name}</strong><span>${patient.region||'Sin región'} · Chat privado</span></button>`).join('');selectedPatientId=patients[0].id}function savePatientsAndRender(patients){setPatients(patients);renderPatients()}$('addPatientButton').addEventListener('click',()=>{$('patientModal').classList.add('open')});$('closePatientModal').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('cancelPatientButton').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('savePatientButton').addEventListener('click',()=>{const name=$('newPatientName').value.trim();const region=$('newPatientRegion').value.trim();if(!name){showStatus($('patientStatus'),'Escribe el nombre del paciente.','error');return}const patients=getPatients();patients.unshift({id:String(Date.now()),name,region,messages:[],sentVideos:[]});savePatientsAndRender(patients);$('newPatientName').value='';$('newPatientRegion').value='';$('patientModal').classList.remove('open')});populateRegions();renderVideos(regions[0]);renderPatients();
+const regions=['Abdomen','Articulaciones miembro inferior','Articulaciones miembro superior','Cervical','Columna','Lumbar','Músculos del dorso','Músculos miembro inferior','Músculos miembro superior','Pectoral','Pubis','Sacroilíaca'];const videoLibrary=regions.flatMap(region=>[{id:`${region}-1`,title:`Ejercicio de ${region}`,region},{id:`${region}-2`,title:`Estiramiento de ${region}`,region}]);let selectedPatientId=null;const nav=document.querySelectorAll('.nav-link');const pages=document.querySelectorAll('.page');const patientsKey='recovery_patients_v1';const planKey='recovery_plan_v1';function getPatients(){try{return JSON.parse(localStorage.getItem(patientsKey)||'[]')}catch{return[]}}function setPatients(value){localStorage.setItem(patientsKey,JSON.stringify(value))}function getPlan(){return localStorage.getItem(planKey)||'premium'}function limitForPlan(){const plan=getPlan();return plan==='standard'?5:plan==='premium'?15:Infinity}function openPage(id){nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));pages.forEach(p=>p.classList.toggle('active',p.id===id));if(innerWidth<=860)$('sidebar').classList.remove('open')}nav.forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));$('mobileToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));function populateRegions(){ $('zones').innerHTML=regions.map((region,i)=>`<button class="zone-btn ${i?'':'active'}" data-region="${region}"><strong>${region}</strong></button>`).join('');document.querySelectorAll('.zone-btn').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.zone-btn').forEach(item=>item.classList.remove('active'));button.classList.add('active');renderVideos(button.dataset.region)}))}function renderVideos(region){$('videoSectionTitle').textContent=`Vídeos de rehabilitación · ${region}`;const videos=videoLibrary.filter(video=>video.region===region);$('videoGrid').innerHTML=videos.map(video=>`<article class="video-card"><div class="video-placeholder"><div class="video-placeholder-inner"><div class="video-placeholder-icon">▶</div><strong>Vídeo pendiente de subida</strong><span>${video.title} aparecerá aquí cuando lo subas.</span></div></div><div class="video-content"><h4>${video.title}</h4><p>Contenido de ${region} categorizado por Recovery.</p></div></article>`).join('')}function renderPatients() {
+  const list = $('chatList')
+
+  const loggedIn =
+    !$('loggedInActions').classList.contains('hidden')
+
+  if (!loggedIn) {
+    $('statPatients').textContent = '0'
+    $('statChats').textContent = '0'
+    $('statSentVideos').textContent = '0'
+
+    list.innerHTML = `
+      <div class="empty">
+        Inicia sesión para ver tus pacientes.
+      </div>
+    `
+
+    selectedPatientId = null
+    return
+  }
+
+  const patients = getPatients()
+
+  $('statPatients').textContent =
+    patients.length
+
+  $('statChats').textContent =
+    patients.length
+
+  $('statSentVideos').textContent =
+    patients.reduce(
+      (total, patient) =>
+        total + (patient.sentVideos?.length || 0),
+      0
+    )
+
+  if (!patients.length) {
+    list.innerHTML = `
+      <div class="empty">
+        Todavía no hay pacientes.
+      </div>
+    `
+
+    selectedPatientId = null
+    return
+  }
+
+  list.innerHTML = patients.map((patient, index) => `
+    <button
+      class="chat-item ${index === 0 ? 'active' : ''}"
+      data-id="${patient.id}"
+    >
+      <strong>${patient.name}</strong>
+      <span>
+        ${patient.region || 'Sin región'} · Chat privado
+      </span>
+    </button>
+  `).join('')
+
+  selectedPatientId = patients[0].id
+
+  list
+    .querySelectorAll('.chat-item')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        list
+          .querySelectorAll('.chat-item')
+          .forEach((item) => {
+            item.classList.remove('active')
+          })
+
+        button.classList.add('active')
+
+        const patient =
+          getPatients().find(
+            item => item.id === button.dataset.id
+          )
+
+        if (!patient) return
+
+        selectedPatientId = patient.id
+      })
+    })
+}
+;if(!patients.length){list.innerHTML='<div class="empty">Todavía no hay pacientes. Pulsa “Añadir paciente” para crear el primer chat.</div>';selectedPatientId=null;return}list.innerHTML=patients.map((patient,index)=>`<button class="chat-item ${index===0?'active':''}" data-id="${patient.id}"><strong>${patient.name}</strong><span>${patient.region||'Sin región'} · Chat privado</span></button>`).join('');selectedPatientId=patients[0].id}function savePatientsAndRender(patients){setPatients(patients);renderPatients()}$('addPatientButton').addEventListener('click',()=>{$('patientModal').classList.add('open')});$('closePatientModal').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('cancelPatientButton').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('savePatientButton').addEventListener('click',()=>{const name=$('newPatientName').value.trim();const region=$('newPatientRegion').value.trim();if(!name){showStatus($('patientStatus'),'Escribe el nombre del paciente.','error');return}const patients=getPatients();patients.unshift({id:String(Date.now()),name,region,messages:[],sentVideos:[]});savePatientsAndRender(patients);$('newPatientName').value='';$('newPatientRegion').value='';$('patientModal').classList.remove('open')});populateRegions();renderVideos(regions[0]);renderPatients();
 </script>
 </body>
 </html>
