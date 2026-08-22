@@ -20,27 +20,8 @@
 </style>
 </head>
 <body>
-<div class="auth-corner">
-  <div class="auth-pill" id="loggedOutActions">
-    <button class="ghost-btn" id="openLogin">Iniciar sesión</button>
-    <button class="auth-btn" id="openRegister">Registrarse</button>
-  </div>
-  <div class="auth-pill hidden" id="loggedInActions">
-    <span id="sessionLabel"></span>
-    <button class="ghost-btn" id="logoutBtn">Cerrar sesión</button>
-  </div>
-</div>
-<div class="app-shell">
-<aside class="sidebar" id="sidebar">
-<div class="brand"><div class="brand-mark"><img src="./assets/logo-recovery.svg" alt="Logo Recovery" /></div><div class="brand-text"><h1>Recovery</h1><p>Gestión clínica y contenido terapéutico</p></div></div>
-<nav class="nav"><button class="nav-link active" data-page="pacientes"><span class="nav-icon"></span><span>Pacientes</span></button><button class="nav-link" data-page="videos"><span class="nav-icon"></span><span>Vídeos de rehabilitación</span></button></nav>
-<div class="sidebar-card"><h3>Plataforma Recovery</h3><p>Gestiona tus chats y envía ejercicios terapéuticos desde un único espacio.</p></div>
-</aside>
-<main class="main">
-<header class="topbar"><div style="display:flex;align-items:center;gap:.9rem"><button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">☰</button><div><h2>Recovery</h2><p>Comunicación clínica y rehabilitación</p></div></div><div></div></header>
-<section class="page active" id="pacientes"><article class="panel hero hero-dark"><div><div class="eyebrow">Pacientes</div><h3 class="headline">Chats y ejercicios en un único espacio.</h3><p class="subtext">Selecciona un paciente, entabla una conversación y envíale los vídeos de rehabilitación adecuados a su patología.</p></div><div class="quick-stats"><div class="stat"><strong id="statPatients">0</strong><span>Pacientes activos</span></div><div class="stat"><strong id="statChats">0</strong><span>Chats disponibles</span></div><div class="stat"><strong id="statSentVideos">0</strong><span>Vídeos enviados</span></div></div></article><article class="panel"><div class="section-title"><div><h3>Chats con pacientes</h3><p>Como una conversación privada con cada paciente</p></div></div><div class="add-patient-row"><button class="btn" id="addPatientButton">Añadir paciente</button></div><div class="client-layout"><div class="client-list" id="chatList"></div><div class="chat-panel"><div class="chat-head"><h4 id="chatTitle">Selecciona un paciente</h4><p id="chatSubtitle">Elige un chat para consultar la conversación.</p></div><div class="chat-messages" id="chatMessages"><div class="empty">Selecciona un paciente para abrir el chat.</div></div><div class="chat-compose"><select class="video-select" id="chatVideoSelect"><option value="">Selecciona un vídeo para enviar</option></select><textarea id="chatMessage" placeholder="Escribe un mensaje para el paciente..."></textarea><div class="chat-actions"><button class="btn-secondary" id="sendTextButton">Enviar mensaje</button><button class="btn" id="sendVideoButton">Enviar vídeo</button></div><div class="message" id="chatStatus">El vídeo se enviará al paciente seleccionado.</div></div></div></div></article></section>
-<section class="page" id="videos"><article class="panel"><div class="section-title"><div><h3>Vídeos de rehabilitación</h3><p>Selecciona una región corporal</p></div></div><div class="zones" id="zones"></div></article><article class="panel"><div class="section-title"><div><h3 id="videoSectionTitle">Vídeos de rehabilitación · Abdomen</h3><p>Contenido subido y categorizado por Recovery</p></div></div><div class="video-grid" id="videoGrid"></div></article></section>
-</main></div>
+<div class="auth-corner"><div class="auth-pill" id="loggedOutActions"><button class="ghost-btn" id="openLogin">Iniciar sesión</button><button class="auth-btn" id="openRegister">Registrarse</button></div><div class="auth-pill hidden" id="loggedInActions"><span id="sessionLabel"></span><button class="ghost-btn" id="logoutBtn">Cerrar sesión</button></div></div>
+<div class="app-shell"><aside class="sidebar" id="sidebar"><div class="brand"><div class="brand-mark"><img src="./assets/logo-recovery.svg" alt="Logo Recovery" /></div><div class="brand-text"><h1>Recovery</h1><p>Gestión clínica y contenido terapéutico</p></div></div><nav class="nav"><button class="nav-link active" data-page="pacientes"><span class="nav-icon"></span><span>Pacientes</span></button><button class="nav-link" data-page="videos"><span class="nav-icon"></span><span>Vídeos de rehabilitación</span></button></nav><div class="sidebar-card"><h3>Plataforma Recovery</h3><p>Gestiona tus chats y envía ejercicios terapéuticos desde un único espacio.</p></div></aside><main class="main"><header class="topbar"><div style="display:flex;align-items:center;gap:.9rem"><button class="mobile-toggle" id="mobileToggle" aria-label="Abrir menú">☰</button><div><h2>Recovery</h2><p>Comunicación clínica y rehabilitación</p></div></div></header><section class="page active" id="pacientes"><article class="panel hero hero-dark"><div><div class="eyebrow">Pacientes</div><h3 class="headline">Chats y ejercicios en un único espacio.</h3><p class="subtext">Selecciona un paciente, entabla una conversación y envíale los vídeos de rehabilitación adecuados a su patología.</p></div><div class="quick-stats"><div class="stat"><strong id="statPatients">0</strong><span>Pacientes activos</span></div><div class="stat"><strong id="statChats">0</strong><span>Chats disponibles</span></div><div class="stat"><strong id="statSentVideos">0</strong><span>Vídeos enviados</span></div></div></article><article class="panel"><div class="section-title"><div><h3>Chats con pacientes</h3><p>Como una conversación privada con cada paciente</p></div></div><div class="add-patient-row"><button class="btn" id="addPatientButton">Añadir paciente</button></div><div class="client-layout"><div class="client-list" id="chatList"></div><div class="chat-panel"><div class="chat-head"><h4 id="chatTitle">Selecciona un paciente</h4><p id="chatSubtitle">Elige un chat para consultar la conversación.</p></div><div class="chat-messages" id="chatMessages"><div class="empty">Selecciona un paciente para abrir el chat.</div></div><div class="chat-compose"><select class="video-select" id="chatVideoSelect"><option value="">Selecciona un vídeo para enviar</option></select><textarea id="chatMessage" placeholder="Escribe un mensaje para el paciente..."></textarea><div class="chat-actions"><button class="btn-secondary" id="sendTextButton">Enviar mensaje</button><button class="btn" id="sendVideoButton">Enviar vídeo</button></div><div class="message" id="chatStatus">El vídeo se enviará al paciente seleccionado.</div></div></div></div></article></section><section class="page" id="videos"><article class="panel"><div class="section-title"><div><h3>Vídeos de rehabilitación</h3><p>Selecciona una región corporal</p></div></div><div class="zones" id="zones"></div></article><article class="panel"><div class="section-title"><div><h3 id="videoSectionTitle">Vídeos de rehabilitación · Abdomen</h3><p>Contenido subido y categorizado por Recovery</p></div></div><div class="video-grid" id="videoGrid"></div></article></section></main></div>
 <div class="modal-backdrop" id="patientModal"><div class="modal"><div class="modal-head"><div><h3>Añadir paciente</h3><p class="modal-copy" id="planLimitText">Añade un paciente a tus chats.</p></div><button class="record-action" id="closePatientModal">Cerrar</button></div><div id="patientStatus" class="status"></div><div class="field"><label>Nombre del paciente</label><input id="newPatientName" placeholder="Ej. Laura Martínez" /></div><div class="field"><label>Región / patología</label><input id="newPatientRegion" placeholder="Ej. Cervical" /></div><div class="modal-actions"><button class="btn-secondary" id="cancelPatientButton">Cancelar</button><button class="btn" id="savePatientButton">Añadir paciente</button></div></div></div>
 <div class="modal-backdrop" id="authModalWrap"><div class="modal"><div class="modal-head"><div><h3 id="authTitle">Iniciar sesión</h3><p class="modal-copy">Accede a tu cuenta de Recovery.</p></div><button class="record-action" id="closeAuthModal">Cerrar</button></div><div id="authStatus" class="status"></div><div class="field" id="clinicNameField"><label>Nombre de la clínica</label><input type="text" id="clinicName" placeholder="Ej. Recovery Fisio" /></div><div class="field"><label>Email</label><input type="email" id="authEmail" placeholder="centro@clinica.com" /></div><div class="field"><label>Contraseña</label><input type="password" id="authPassword" placeholder="Mínimo 6 caracteres" /></div><div class="modal-actions"><button class="btn-secondary" id="authCancelBtn">Cancelar</button><button class="btn" id="authSubmitBtn">Continuar</button></div></div></div>
 <script>
@@ -49,144 +30,17 @@ const SUPABASE_KEY='sb_publishable_ad6mFCc8LZN3Ua1yEgMwIA_moH8Ekzk';
 const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const $=id=>document.getElementById(id);
 let authMode='login';
-function showStatus(el,text,type='ok'){if(!el){alert(text);return}el.textContent=text;el.className='status show '+type;setTimeout(()=>el.className='status',3000)}
-function openAuthModal(mode){authMode=mode;$('authTitle').textContent=mode==='login'?'Iniciar sesión':'Registrarse';$('clinicNameField').classList.toggle('hidden',mode==='login');$('authModalWrap').classList.add('open')}
+function showStatus(el,text,type='ok'){if(!el){alert(text);return}el.textContent=text;el.className=`status show ${type}`;setTimeout(()=>el.className='status',3000)}
+function openAuthModal(mode){authMode=mode;$('authTitle').textContent=mode==='login'?'Iniciar sesión':'Registrarse';$('clinicNameField').classList.toggle('hidden',mode==='login');$('authStatus').className='status';$('authModalWrap').classList.add('open')}
 function closeAuthModal(){$('authModalWrap').classList.remove('open')}
-async function registrarConSupabase(){const clinicName=$('clinicName').value.trim();const email=$('authEmail').value.trim().toLowerCase();const password=$('authPassword').value;if(!clinicName||!email||!password){showStatus($('authStatus'),'Completa clínica, email y contraseña.','error');return}const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo: window.location.origin,
-data:{clinic_name:clinicName}}});if(error){showStatus($('authStatus'),error.message,'error');return}if(!data.session){showStatus($('authStatus'),'Cuenta creada. Revisa tu email para confirmar la cuenta.','ok');return}$('loggedOutActions').classList.add('hidden');$('loggedInActions').classList.remove('hidden');$('sessionLabel').textContent=email;closeAuthModal();alert('Cuenta creada correctamente.')}
+async function registrarConSupabase(){const clinicName=$('clinicName').value.trim();const email=$('authEmail').value.trim().toLowerCase();const password=$('authPassword').value;if(!clinicName||!email||!password){showStatus($('authStatus'),'Completa clínica, email y contraseña.','error');return}const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:window.location.origin,data:{clinic_name:clinicName}}});if(error){showStatus($('authStatus'),error.message,'error');return}if(!data.session){showStatus($('authStatus'),'Cuenta creada. Revisa tu email para confirmar la cuenta.','ok');return}$('loggedOutActions').classList.add('hidden');$('loggedInActions').classList.remove('hidden');$('sessionLabel').textContent=email;closeAuthModal();alert('Cuenta creada correctamente.')}
 async function iniciarSesionConSupabase(){const email=$('authEmail').value.trim().toLowerCase();const password=$('authPassword').value;if(!email||!password){showStatus($('authStatus'),'Introduce email y contraseña.','error');return}const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});if(error){showStatus($('authStatus'),error.message,'error');return}$('loggedOutActions').classList.add('hidden');$('loggedInActions').classList.remove('hidden');$('sessionLabel').textContent=email;closeAuthModal();alert('Sesión iniciada correctamente.')}
-$('openLogin').addEventListener('click',()=>openAuthModal('login'));$('openRegister').addEventListener('click',()=>openAuthModal('register'));$('closeAuthModal').addEventListener('click',closeAuthModal);$('authCancelBtn').addEventListener('click',closeAuthModal);$('authSubmitBtn').addEventListener('click',async()=>{if(authMode==='register')await registrarConSupabase();else await iniciarSesionConSupabase()});$('logoutBtn').addEventListener(
-  'click',
-  async () => {
-    const { error } =
-      await supabaseClient.auth.signOut()
-
-    if (error) {
-      alert(
-        'No se pudo cerrar la sesión: ' +
-        error.message
-      )
-
-      return
-    }
-
-    $('loggedOutActions')
-      .classList.remove('hidden')
-
-    $('loggedInActions')
-      .classList.add('hidden')
-
-    $('sessionLabel').textContent = ''
-
-    $('statPatients').textContent = '0'
-    $('statChats').textContent = '0'
-    $('statSentVideos').textContent = '0'
-
-    $('chatList').innerHTML = `
-      <div class="empty">
-        Inicia sesión para ver tus pacientes.
-      </div>
-    `
-
-    selectedPatientId = null
-  }
-)
-
+$('openLogin').addEventListener('click',()=>openAuthModal('login'));$('openRegister').addEventListener('click',()=>openAuthModal('register'));$('closeAuthModal').addEventListener('click',closeAuthModal);$('authCancelBtn').addEventListener('click',closeAuthModal);$('authSubmitBtn').addEventListener('click',async()=>{if(authMode==='register')await registrarConSupabase();else await iniciarSesionConSupabase()});$('logoutBtn').addEventListener('click',async()=>{await supabaseClient.auth.signOut();$('loggedOutActions').classList.remove('hidden');$('loggedInActions').classList.add('hidden');$('sessionLabel').textContent=''})
 async function cargarPacientesDeSupabase(){const {data,error}=await supabaseClient.from('clinic_patients').select('patient_id, patient:profiles!clinic_patients_patient_id_fkey(full_name)');if(error)return;const lista=$('chatList');if(!data||!data.length){lista.innerHTML='<div class="empty">No hay pacientes relacionados.</div>';return}lista.innerHTML=data.map(item=>`<button class="chat-item"><strong>${item.patient?.full_name||'Paciente sin nombre'}</strong><span>Paciente relacionado · Chat privado</span></button>`).join('')}
-supabaseClient.auth.getSession()
-  .then(({ data }) => {
-    if (data.session) {
-      cargarPacientesDeSupabase()
-    }
-  })
-
+supabaseClient.auth.getSession().then(({data})=>{if(data.session)cargarPacientesDeSupabase()});
 </script>
 <script>
-const regions=['Abdomen','Articulaciones miembro inferior','Articulaciones miembro superior','Cervical','Columna','Lumbar','Músculos del dorso','Músculos miembro inferior','Músculos miembro superior','Pectoral','Pubis','Sacroilíaca'];const videoLibrary=regions.flatMap(region=>[{id:`${region}-1`,title:`Ejercicio de ${region}`,region},{id:`${region}-2`,title:`Estiramiento de ${region}`,region}]);let selectedPatientId=null;const nav=document.querySelectorAll('.nav-link');const pages=document.querySelectorAll('.page');const patientsKey='recovery_patients_v1';const planKey='recovery_plan_v1';function getPatients(){try{return JSON.parse(localStorage.getItem(patientsKey)||'[]')}catch{return[]}}function setPatients(value){localStorage.setItem(patientsKey,JSON.stringify(value))}function getPlan(){return localStorage.getItem(planKey)||'premium'}function limitForPlan(){const plan=getPlan();return plan==='standard'?5:plan==='premium'?15:Infinity}function openPage(id){nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));pages.forEach(p=>p.classList.toggle('active',p.id===id));if(innerWidth<=860)$('sidebar').classList.remove('open')}nav.forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));$('mobileToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));function populateRegions(){ $('zones').innerHTML=regions.map((region,i)=>`<button class="zone-btn ${i?'':'active'}" data-region="${region}"><strong>${region}</strong></button>`).join('');document.querySelectorAll('.zone-btn').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.zone-btn').forEach(item=>item.classList.remove('active'));button.classList.add('active');renderVideos(button.dataset.region)}))}function renderVideos(region){$('videoSectionTitle').textContent=`Vídeos de rehabilitación · ${region}`;const videos=videoLibrary.filter(video=>video.region===region);$('videoGrid').innerHTML=videos.map(video=>`<article class="video-card"><div class="video-placeholder"><div class="video-placeholder-inner"><div class="video-placeholder-icon">▶</div><strong>Vídeo pendiente de subida</strong><span>${video.title} aparecerá aquí cuando lo subas.</span></div></div><div class="video-content"><h4>${video.title}</h4><p>Contenido de ${region} categorizado por Recovery.</p></div></article>`).join('')}function renderPatients() {
-  const list = $('chatList')
-
-  const loggedIn =
-    !$('loggedInActions').classList.contains('hidden')
-
-  if (!loggedIn) {
-    $('statPatients').textContent = '0'
-    $('statChats').textContent = '0'
-    $('statSentVideos').textContent = '0'
-
-    list.innerHTML = `
-      <div class="empty">
-        Inicia sesión para ver tus pacientes.
-      </div>
-    `
-
-    selectedPatientId = null
-    return
-  }
-
-  const patients = getPatients()
-
-  $('statPatients').textContent =
-    patients.length
-
-  $('statChats').textContent =
-    patients.length
-
-  $('statSentVideos').textContent =
-    patients.reduce(
-      (total, patient) =>
-        total + (patient.sentVideos?.length || 0),
-      0
-    )
-
-  if (!patients.length) {
-    list.innerHTML = `
-      <div class="empty">
-        Todavía no hay pacientes.
-      </div>
-    `
-
-    selectedPatientId = null
-    return
-  }
-
-  list.innerHTML = patients.map((patient, index) => `
-    <button
-      class="chat-item ${index === 0 ? 'active' : ''}"
-      data-id="${patient.id}"
-    >
-      <strong>${patient.name}</strong>
-      <span>
-        ${patient.region || 'Sin región'} · Chat privado
-      </span>
-    </button>
-  `).join('')
-
-  selectedPatientId = patients[0].id
-
-  list
-    .querySelectorAll('.chat-item')
-    .forEach((button) => {
-      button.addEventListener('click', () => {
-        list
-          .querySelectorAll('.chat-item')
-          .forEach((item) => {
-            item.classList.remove('active')
-          })
-
-        button.classList.add('active')
-
-        const patient =
-          getPatients().find(
-            item => item.id === button.dataset.id
-          )
-
-        if (!patient) return
-
-        selectedPatientId = patient.id
-      })
-    })
-}
-;if(!patients.length){list.innerHTML='<div class="empty">Todavía no hay pacientes. Pulsa “Añadir paciente” para crear el primer chat.</div>';selectedPatientId=null;return}list.innerHTML=patients.map((patient,index)=>`<button class="chat-item ${index===0?'active':''}" data-id="${patient.id}"><strong>${patient.name}</strong><span>${patient.region||'Sin región'} · Chat privado</span></button>`).join('');selectedPatientId=patients[0].id}function savePatientsAndRender(patients){setPatients(patients);renderPatients()}$('addPatientButton').addEventListener('click',()=>{$('patientModal').classList.add('open')});$('closePatientModal').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('cancelPatientButton').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('savePatientButton').addEventListener('click',()=>{const name=$('newPatientName').value.trim();const region=$('newPatientRegion').value.trim();if(!name){showStatus($('patientStatus'),'Escribe el nombre del paciente.','error');return}const patients=getPatients();patients.unshift({id:String(Date.now()),name,region,messages:[],sentVideos:[]});savePatientsAndRender(patients);$('newPatientName').value='';$('newPatientRegion').value='';$('patientModal').classList.remove('open')});populateRegions();renderVideos(regions[0]);renderPatients();
+const regions=['Abdomen','Articulaciones miembro inferior','Articulaciones miembro superior','Cervical','Columna','Lumbar','Músculos del dorso','Músculos miembro inferior','Músculos miembro superior','Pectoral','Pubis','Sacroilíaca'];const videoLibrary=regions.flatMap(region=>[{id:`${region}-1`,title:`Ejercicio de ${region}`,region},{id:`${region}-2`,title:`Estiramiento de ${region}`,region}]);let selectedPatientId=null;const nav=document.querySelectorAll('.nav-link');const pages=document.querySelectorAll('.page');const patientsKey='recovery_patients_v1';const planKey='recovery_plan_v1';function getPatients(){try{return JSON.parse(localStorage.getItem(patientsKey)||'[]')}catch{return[]}}function setPatients(value){localStorage.setItem(patientsKey,JSON.stringify(value))}function getPlan(){return localStorage.getItem(planKey)||'premium'}function limitForPlan(){const plan=getPlan();return plan==='standard'?5:plan==='premium'?15:Infinity}function openPage(id){nav.forEach(b=>b.classList.toggle('active',b.dataset.page===id));pages.forEach(p=>p.classList.toggle('active',p.id===id));if(innerWidth<=860)$('sidebar').classList.remove('open')}nav.forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));$('mobileToggle').addEventListener('click',()=>$('sidebar').classList.toggle('open'));function populateRegions(){ $('zones').innerHTML=regions.map((region,i)=>`<button class="zone-btn ${i?'':'active'}" data-region="${region}"><strong>${region}</strong></button>`).join('');document.querySelectorAll('.zone-btn').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.zone-btn').forEach(item=>item.classList.remove('active'));button.classList.add('active');renderVideos(button.dataset.region)}))}function renderVideos(region){$('videoSectionTitle').textContent=`Vídeos de rehabilitación · ${region}`;const videos=videoLibrary.filter(video=>video.region===region);$('videoGrid').innerHTML=videos.map(video=>`<article class="video-card"><div class="video-placeholder"><div class="video-placeholder-inner"><div class="video-placeholder-icon">▶</div><strong>Vídeo pendiente de subida</strong><span>${video.title} aparecerá aquí cuando lo subas.</span></div></div><div class="video-content"><h4>${video.title}</h4><p>Contenido de ${region} categorizado por Recovery.</p></div></article>`).join('')}function renderPatients(){const patients=getPatients();$('statPatients').textContent=patients.length;$('statChats').textContent=patients.length;$('statSentVideos').textContent=patients.reduce((total,patient)=>total+(patient.sentVideos?.length||0),0);const list=$('chatList');if(!patients.length){list.innerHTML='<div class="empty">Todavía no hay pacientes. Pulsa “Añadir paciente” para crear el primer chat.</div>';selectedPatientId=null;return}list.innerHTML=patients.map((patient,index)=>`<button class="chat-item ${index===0?'active':''}" data-id="${patient.id}"><strong>${patient.name}</strong><span>${patient.region||'Sin región'} · Chat privado</span></button>`).join('');selectedPatientId=patients[0].id}function savePatientsAndRender(patients){setPatients(patients);renderPatients()}$('addPatientButton').addEventListener('click',()=>{$('patientModal').classList.add('open')});$('closePatientModal').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('cancelPatientButton').addEventListener('click',()=>{$('patientModal').classList.remove('open')});$('savePatientButton').addEventListener('click',()=>{const name=$('newPatientName').value.trim();const region=$('newPatientRegion').value.trim();if(!name){showStatus($('patientStatus'),'Escribe el nombre del paciente.','error');return}const patients=getPatients();patients.unshift({id:String(Date.now()),name,region,messages:[],sentVideos:[]});savePatientsAndRender(patients);$('newPatientName').value='';$('newPatientRegion').value='';$('patientModal').classList.remove('open')});populateRegions();renderVideos(regions[0]);renderPatients();
 </script>
 </body>
 </html>
