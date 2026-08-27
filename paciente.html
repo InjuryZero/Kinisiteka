@@ -6,94 +6,36 @@
 <title>Recovery | Acceso paciente</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#0a0a0a;--surface:#111;--surface2:#181818;--surface3:#202020;--border:#2b2b2b;--text:#f5f5f5;--muted:#a6a6a6;--danger:#ffd7d7;--radius:22px}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;display:grid;place-items:center;padding:1rem}.wrap{width:min(680px,100%);display:grid;gap:1rem}.brand{text-align:center;color:var(--muted);font-size:.9rem;letter-spacing:.12em;text-transform:uppercase}.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:grid;gap:1rem}.card h1{margin:0;font-size:clamp(1.5rem,4vw,2.2rem)}.card h2{margin:0;font-size:1.35rem}.copy{color:var(--muted);margin:0}.field{display:grid;gap:.45rem}.field label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700}.field input,.compose textarea{width:100%;border:1px solid var(--border);background:var(--surface2);color:var(--text);border-radius:14px;padding:1rem;outline:none}.btn{min-height:44px;border-radius:999px;padding:.8rem 1rem;border:1px solid var(--border);background:#fff;color:#000;font-weight:700;cursor:pointer}.btn-secondary{background:transparent;color:var(--text)}.status{display:none;padding:.9rem 1rem;border-radius:14px;border:1px solid var(--border)}.status.show{display:block}.status.error{color:var(--danger);background:rgba(255,215,215,.08)}.chat{display:none}.chat.open{display:grid}.messages{min-height:280px;max-height:50vh;overflow:auto;display:grid;align-content:start;gap:.65rem;padding:.5rem 0}.bubble{max-width:82%;padding:.75rem .9rem;border-radius:15px;background:var(--surface3)}.bubble.patient{justify-self:end;background:#fff;color:#000}.compose{display:grid;gap:.7rem}.compose textarea{min-height:90px;resize:vertical}.chat-top{display:flex;justify-content:space-between;gap:1rem;align-items:start}.logout{font-size:.85rem;color:var(--muted);background:none;border:0;cursor:pointer}.video{border:1px solid var(--border);background:var(--surface2);border-radius:15px;padding:1rem;display:grid;gap:.35rem}.video small{color:var(--muted)}
+:root{--bg:#0a0a0a;--surface:#111;--surface2:#181818;--surface3:#202020;--border:#2b2b2b;--text:#f5f5f5;--muted:#a6a6a6;--danger:#ffd7d7;--radius:22px}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;display:grid;place-items:center;padding:1rem}.wrap{width:min(680px,100%);display:grid;gap:1rem}.brand{text-align:center;color:var(--muted);font-size:.9rem;letter-spacing:.12em;text-transform:uppercase}.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;display:grid;gap:1rem}.card h1{margin:0;font-size:clamp(1.5rem,4vw,2.2rem)}.card h2{margin:0;font-size:1.35rem}.copy{color:var(--muted);margin:0}.field{display:grid;gap:.45rem}.field label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700}.field input,.compose textarea{width:100%;border:1px solid var(--border);background:var(--surface2);color:var(--text);border-radius:14px;padding:1rem;outline:none}.btn{min-height:44px;border-radius:999px;padding:.8rem 1rem;border:1px solid var(--border);background:#fff;color:#000;font-weight:700;cursor:pointer}.btn-secondary{background:transparent;color:var(--text)}.status{display:none;padding:.9rem 1rem;border-radius:14px;border:1px solid var(--border)}.status.show{display:block}.status.error{color:var(--danger);background:rgba(255,215,215,.08)}.chat{display:none}.chat.open{display:grid}.messages{min-height:280px;max-height:50vh;overflow:auto;display:grid;align-content:start;gap:.65rem;padding:.5rem 0}.bubble{max-width:82%;padding:.75rem .9rem;border-radius:15px;background:var(--surface3)}.bubble.patient{justify-self:end;background:#fff;color:#000}.compose{display:grid;gap:.7rem}.compose textarea{min-height:90px;resize:vertical}.chat-top{display:flex;justify-content:space-between;gap:1rem;align-items:start}.logout{font-size:.85rem;color:var(--muted);background:none;border:0;cursor:pointer}.video{border:1px solid var(--border);background:var(--surface2);border-radius:15px;padding:1rem;display:grid;gap:.35rem}.video small{color:var(--muted)}.back-home{position:fixed;top:18px;left:18px;z-index:100;width:42px;height:42px;display:grid;place-items:center;color:var(--text);text-decoration:none;font-size:2rem;line-height:1;border:1px solid rgba(255,255,255,.16);border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.025));box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.12);transition:transform .2s ease,background .2s ease,border-color .2s ease}.back-home:hover{color:#fff;text-decoration:none;transform:translateX(-2px);border-color:rgba(255,255,255,.42);background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.06))}.back-home:active{transform:translateX(0)}
 </style>
 </head>
 <body>
+<a class="back-home" href="index.html" aria-label="Volver al inicio">‹</a>
 <main class="wrap">
 <div class="brand">Recovery</div>
 <section class="card" id="accessCard">
 <h1>Accede a tu chat</h1>
 <p class="copy">Introduce el código proporcionado por tu clínica.</p>
 <div id="accessStatus" class="status"></div>
-<div class="field"><label for="accessCode">C&oacute;digo de acceso</label><input id="accessCode" placeholder="RCV-XXXXXXXXXXXX" autocomplete="one-time-code" /></div>
+<div class="field"><label for="accessCode">Código de acceso</label><input id="accessCode" placeholder="RCV-XXXXXXXXXXXX" autocomplete="one-time-code" /></div>
 <button class="btn" id="accessButton">Acceder</button>
 </section>
 <section class="card chat" id="chatCard">
-<div class="chat-top"><div><h2 id="patientName">Chat con tu cl&iacute;nica</h2><p class="copy" id="clinicName">Recovery</p></div><button class="logout" id="exitButton">Salir</button></div>
-<div class="messages" id="messages"><div class="bubble">Este espacio est&aacute; preparado para conversar con tu cl&iacute;nica.</div></div>
+<div class="chat-top"><div><h2 id="patientName">Chat con tu clínica</h2><p class="copy" id="clinicName">Recovery</p></div><button class="logout" id="exitButton">Salir</button></div>
+<div class="messages" id="messages"><div class="bubble">Este espacio está preparado para conversar con tu clínica.</div></div>
 <div class="compose"><textarea id="messageInput" placeholder="Escribe una respuesta..."></textarea><button class="btn" id="sendButton">Enviar mensaje</button></div>
-<div><h2>V&iacute;deos recibidos</h2><div id="videos"><p class="copy">Todav&iacute;a no hay v&iacute;deos enviados.</p></div></div>
+<div><h2>Vídeos recibidos</h2><div id="videos"><p class="copy">Todavía no hay vídeos enviados.</p></div></div>
 </section>
 </main>
 <script>
-const SUPABASE_URL = 'https://yvkamsbqysxgqycrklkk.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_ad6mFCc8LZN3Ua1yEgMwIA_moH8Ekzk';
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const $ = (id) => document.getElementById(id);
-let currentPatient = null;
-
-function showStatus(text, type = 'error') {
-  const el = $('accessStatus');
-  el.textContent = text;
-  el.className = 'status show ' + type;
-}
-
-function clearStatus() {
-  $('accessStatus').className = 'status';
-}
-
-async function handleAccess() {
-  clearStatus();
-  const code = $('accessCode').value.trim().toUpperCase();
-  if (!code) {
-    showStatus('Introduce el c&oacute;digo de acceso.');
-    return;
-  }
-
-  const { data, error } = await supabaseClient.rpc('validate_patient_access_code', { p_code: code });
-
-  if (error) {
-    showStatus(error.message);
-    return;
-  }
-
-  const patient = Array.isArray(data) ? data[0] : data;
-  if (!patient) {
-    showStatus('C&oacute;digo incorrecto, caducado o revocado.');
-    return;
-  }
-
-  currentPatient = patient;
-  $('accessCard').style.display = 'none';
-  $('chatCard').classList.add('open');
-  $('patientName').textContent = 'Chat con ' + patient.patient_name;
-  $('messages').innerHTML = '<div class="bubble">Este espacio est&aacute; preparado para conversar con tu cl&iacute;nica.</div>';
-}
-
-async function sendMessage() {
-  if (!currentPatient) return;
-  const text = $('messageInput').value.trim();
-  if (!text) return;
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble patient';
-  bubble.textContent = text;
-  $('messages').appendChild(bubble);
-  $('messageInput').value = '';
-}
-
-$('accessButton').addEventListener('click', handleAccess);
-$('accessCode').addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') handleAccess();
-});
-$('sendButton').addEventListener('click', sendMessage);
-$('exitButton').addEventListener('click', () => {
-  currentPatient = null;
-  $('chatCard').classList.remove('open');
-  $('accessCard').style.display = 'grid';
-  $('accessCode').value = '';
-  clearStatus();
-});
+const SUPABASE_URL='https://yvkamsbqysxgqycrklkk.supabase.co';
+const SUPABASE_KEY='sb_publishable_ad6mFCc8LZN3Ua1yEgMwIA_moH8Ekzk';
+const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $=id=>document.getElementById(id);let currentPatient=null;
+function status(text,type='error'){const el=$('accessStatus');el.textContent=text;el.className='status show '+type}function clearStatus(){$('accessStatus').className='status'}
+async function access(){clearStatus();const code=$('accessCode').value.trim().toUpperCase();if(!code){status('Introduce el código de acceso.');return}const {data,error}=await supabaseClient.rpc('validate_patient_access_code',{p_code:code});if(error){status(error.message);return}const patient=Array.isArray(data)?data[0]:data;if(!patient){status('Código incorrecto, caducado o revocado.');return}currentPatient=patient;$('accessCard').style.display='none';$('chatCard').classList.add('open');$('patientName').textContent='Chat con '+patient.patient_name;$('messages').innerHTML='<div class="bubble">Este espacio está preparado para conversar con tu clínica.</div>'}
+async function sendMessage(){if(!currentPatient)return;const text=$('messageInput').value.trim();if(!text)return;const bubble=document.createElement('div');bubble.className='bubble patient';bubble.textContent=text;$('messages').appendChild(bubble);$('messageInput').value=''}
+$('accessButton').addEventListener('click',access);$('accessCode').addEventListener('keydown',e=>{if(e.key==='Enter')access()});$('sendButton').addEventListener('click',sendMessage);$('exitButton').addEventListener('click',()=>{currentPatient=null;$('chatCard').classList.remove('open');$('accessCard').style.display='grid';$('accessCode').value='';clearStatus()});
 </script>
 </body>
 </html>
