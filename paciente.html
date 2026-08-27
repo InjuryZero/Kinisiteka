@@ -16,27 +16,84 @@
 <h1>Accede a tu chat</h1>
 <p class="copy">Introduce el código proporcionado por tu clínica.</p>
 <div id="accessStatus" class="status"></div>
-<div class="field"><label for="accessCode">Código de acceso</label><input id="accessCode" placeholder="RCV-XXXXXXXXXXXX" autocomplete="one-time-code" /></div>
+<div class="field"><label for="accessCode">C&oacute;digo de acceso</label><input id="accessCode" placeholder="RCV-XXXXXXXXXXXX" autocomplete="one-time-code" /></div>
 <button class="btn" id="accessButton">Acceder</button>
 </section>
 <section class="card chat" id="chatCard">
-<div class="chat-top"><div><h2 id="patientName">Chat con tu clínica</h2><p class="copy" id="clinicName">Recovery</p></div><button class="logout" id="exitButton">Salir</button></div>
-<div class="messages" id="messages"><div class="bubble">Este espacio está preparado para conversar con tu clínica.</div></div>
+<div class="chat-top"><div><h2 id="patientName">Chat con tu cl&iacute;nica</h2><p class="copy" id="clinicName">Recovery</p></div><button class="logout" id="exitButton">Salir</button></div>
+<div class="messages" id="messages"><div class="bubble">Este espacio est&aacute; preparado para conversar con tu cl&iacute;nica.</div></div>
 <div class="compose"><textarea id="messageInput" placeholder="Escribe una respuesta..."></textarea><button class="btn" id="sendButton">Enviar mensaje</button></div>
-<div><h2>Vídeos recibidos</h2><div id="videos"><p class="copy">Todavía no hay vídeos enviados.</p></div></div>
+<div><h2>V&iacute;deos recibidos</h2><div id="videos"><p class="copy">Todav&iacute;a no hay v&iacute;deos enviados.</p></div></div>
 </section>
 </main>
 <script>
-const SUPABASE_URL='https://yvkamsbqysxgqycrklkk.supabase.co';
-const SUPABASE_KEY='sb_publishable_ad6mFCc8LZN3Ua1yEgMwIA_moH8Ekzk';
-const supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-const $=id=>document.getElementById(id);
-let currentPatient=null;
-function status(text,type='error'){const el=$('accessStatus');el.textContent=text;el.className='status show '+type}
-function clearStatus(){$('accessStatus').className='status'}
-async function access(){clearStatus();const code=$('accessCode').value.trim().toUpperCase();if(!code){status('Introduce el código de acceso.');return}const {data,error}=await supabaseClient.rpc('validate_patient_access_code',{p_code:code});if(error){status(error.message);return}const patient=Array.isArray(data)?data[0]:data;if(!patient){status('Código incorrecto, caducado o revocado.');return}currentPatient=patient;$('accessCard').style.display='none';$('chatCard').classList.add('open');$('patientName').textContent='Chat con '+patient.patient_name;$('messages').innerHTML='<div class="bubble">Este espacio está preparado para conversar con tu clínica.</div>'}
-async function sendMessage(){if(!currentPatient)return;const text=$('messageInput').value.trim();if(!text)return;const bubble=document.createElement('div');bubble.className='bubble patient';bubble.textContent=text;$('messages').appendChild(bubble);$('messageInput').value=''}
-$('accessButton').addEventListener('click',access);$('accessCode').addEventListener('keydown',e=>{if(e.key==='Enter')access()});$('sendButton').addEventListener('click',sendMessage);$('exitButton').addEventListener('click',()=>{currentPatient=null;$('chatCard').classList.remove('open');$('accessCard').style.display='grid';$('accessCode').value='';clearStatus()});
+const SUPABASE_URL = 'https://yvkamsbqysxgqycrklkk.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_ad6mFCc8LZN3Ua1yEgMwIA_moH8Ekzk';
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const $ = (id) => document.getElementById(id);
+let currentPatient = null;
+
+function showStatus(text, type = 'error') {
+  const el = $('accessStatus');
+  el.textContent = text;
+  el.className = 'status show ' + type;
+}
+
+function clearStatus() {
+  $('accessStatus').className = 'status';
+}
+
+async function handleAccess() {
+  clearStatus();
+  const code = $('accessCode').value.trim().toUpperCase();
+  if (!code) {
+    showStatus('Introduce el c&oacute;digo de acceso.');
+    return;
+  }
+
+  const { data, error } = await supabaseClient.rpc('validate_patient_access_code', { p_code: code });
+
+  if (error) {
+    showStatus(error.message);
+    return;
+  }
+
+  const patient = Array.isArray(data) ? data[0] : data;
+  if (!patient) {
+    showStatus('C&oacute;digo incorrecto, caducado o revocado.');
+    return;
+  }
+
+  currentPatient = patient;
+  $('accessCard').style.display = 'none';
+  $('chatCard').classList.add('open');
+  $('patientName').textContent = 'Chat con ' + patient.patient_name;
+  $('messages').innerHTML = '<div class="bubble">Este espacio est&aacute; preparado para conversar con tu cl&iacute;nica.</div>';
+}
+
+async function sendMessage() {
+  if (!currentPatient) return;
+  const text = $('messageInput').value.trim();
+  if (!text) return;
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble patient';
+  bubble.textContent = text;
+  $('messages').appendChild(bubble);
+  $('messageInput').value = '';
+}
+
+$('accessButton').addEventListener('click', handleAccess);
+$('accessCode').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') handleAccess();
+});
+$('sendButton').addEventListener('click', sendMessage);
+$('exitButton').addEventListener('click', () => {
+  currentPatient = null;
+  $('chatCard').classList.remove('open');
+  $('accessCard').style.display = 'grid';
+  $('accessCode').value = '';
+  clearStatus();
+});
 </script>
 </body>
 </html>
